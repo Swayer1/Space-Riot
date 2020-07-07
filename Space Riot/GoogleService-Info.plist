@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>815512353147-fghtdtrp5gpq48h0t7ccf3e5t93e5qgr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.815512353147-fghtdtrp5gpq48h0t7ccf3e5t93e5qgr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAqtED7aSOBXZHn8fDd5DDqWVDQ8EKAJKQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>815512353147</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.universe.Space-Riot</string>
+	<key>PROJECT_ID</key>
+	<string>space-riot</string>
+	<key>STORAGE_BUCKET</key>
+	<string>space-riot.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:815512353147:ios:2e4c8da88beabad956e5de</string>
+	<key>DATABASE_URL</key>
+	<string>https://space-riot.firebaseio.com</string>
+</dict>
+</plist>
