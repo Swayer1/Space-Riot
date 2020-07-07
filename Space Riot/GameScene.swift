@@ -625,7 +625,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
         let enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
         enemy.name = "EnemyBlue"
-        enemy.setScale(GameMode.enemyScale)
+        enemy.setScale(GameMode.enemyScale)        
         enemy.zPosition = 2
         enemy.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         enemy.physicsBody!.affectedByGravity = false
