@@ -26,11 +26,7 @@ class LoginWindow: SKScene{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        print("test deinit LoginWindow")
-    }
-    
+        
     override func didMove(to view: SKView) {
                         
         scene?.name = "LoginWindow"

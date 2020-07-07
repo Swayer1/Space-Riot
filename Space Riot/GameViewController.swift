@@ -20,11 +20,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         super.init(coder: coder)
         print("test init UIViewController")
     }
-    
-    deinit {
-        print("test deinit UIViewController")
-    }
-    
+        
     var backingAudio: AVAudioPlayer!
     
     // Facebook login
