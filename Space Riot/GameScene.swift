@@ -46,14 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let CleaningWave: UInt32 = 0b0110 //6
         static let enemyBullet: UInt32 = 0b0111 //7
     }
-    
-    struct PhysicBodyShape {
-        static let player:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "Normal/player", ofType: "json"))
-        static let playerBullet:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "Normal/playerbullet", ofType: "json"))
-        static let enemy:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "Normal/enemy", ofType: "json"))
-        static let enemyBullet:SKPhysicsBody = SKPhysicsBody()
-    }
-    
+        
     static func GetInstance(InstanceSize: CGSize)->GameScene{
         if(instance == nil){
             instance = GameScene(size: InstanceSize)
@@ -96,6 +89,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         GameMode.modeChangeLoopCounter = 0
         
+        GameMode.mode = "Normal"
+        
         let callFunction = SKAction.run({self.fireBullet()})
         let fireWait = SKAction.wait(forDuration: 0.2)
         let fireSequence = SKAction.sequence([callFunction, fireWait])
@@ -133,7 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.setScale(5)
         player.position = CGPoint(x: self.size.width/2, y:  self.size.height * 0.2)
         player.zPosition = 2
-        player.physicsBody = PhysicBodyShape.player
+        player.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/player", ofType: "json"))
         player.physicsBody!.affectedByGravity = false
         player.physicsBody!.categoryBitMask = PhysicsCatecories.Player
         player.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -592,7 +587,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.setScale(GameMode.bulletScale)
         bullet.position = player.position
         bullet.zPosition = 1
-        bullet.physicsBody = PhysicBodyShape.playerBullet.copy() as! SKPhysicsBody
+        bullet.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/playerbullet", ofType: "json"))
         bullet.physicsBody!.affectedByGravity = false
         bullet.physicsBody!.categoryBitMask = PhysicsCatecories.Bullet
         bullet.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -633,7 +628,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.name = "EnemyBlue"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width/2, center: CGPoint(x: 0, y: enemy.size.height * GameMode.BodyCenterPointPercentage))
+        enemy.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -657,7 +652,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.name = "EnemyRed"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width/2, center: CGPoint(x: 0, y: enemy.size.height * GameMode.BodyCenterPointPercentage))
+        enemy.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -681,7 +676,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.name = "EnemyGreen"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width/2, center: CGPoint(x: 0, y: enemy.size.height * GameMode.BodyCenterPointPercentage))
+        enemy.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -705,7 +700,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.name = "Enemy"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
-        enemy.physicsBody = PhysicBodyShape.enemy.copy() as! SKPhysicsBody
+        enemy.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -733,7 +728,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.name = "Enemy"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width/2, center: CGPoint(x: 0, y: enemy.size.height * GameMode.BodyCenterPointPercentage))
+        enemy.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -759,7 +754,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         meteor.position = CGPoint(x: randomX, y: self.size.height + meteor.frame.height)
         meteor.zPosition = 2
         meteor.name = "Enemy"
-        meteor.physicsBody = SKPhysicsBody(circleOfRadius: meteor.size.width/2.9, center: CGPoint(x: 0, y: meteor.size.height * GameMode.BodyCenterPointPercentage))
+        meteor.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
         meteor.physicsBody!.affectedByGravity = false
         meteor.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         meteor.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -793,7 +788,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.setScale(GameMode.bulletScale + 2)
         bullet.position = position
         bullet.zPosition = 2
-        bullet.physicsBody = SKPhysicsBody(circleOfRadius: bullet.size.width/2)
+        bullet.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemybullet", ofType: "json"))
         bullet.physicsBody!.affectedByGravity = false
         bullet.physicsBody!.categoryBitMask = PhysicsCatecories.enemyBullet
         bullet.physicsBody!.collisionBitMask = PhysicsCatecories.None
