@@ -13,8 +13,7 @@ class GameOverScene: SKScene{
     
     override init(size: CGSize) {
         super.init(size: size)
-        scene?.name = "GameOverScene"
-        print("test init GameOverScene")
+        scene?.name = "GameOverScene"        
         GameMode.showAds = true        
     }
     

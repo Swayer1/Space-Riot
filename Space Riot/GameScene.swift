@@ -48,9 +48,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     struct PhysicBodyShape {
-        static let player:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "player", ofType: "json"))
-        static let playerBullet:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "playerbullet", ofType: "json"))
-        static let enemy:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "enemy", ofType: "json"))
+        static let player:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "Normal/player", ofType: "json"))
+        static let playerBullet:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "Normal/playerbullet", ofType: "json"))
+        static let enemy:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "Normal/enemy", ofType: "json"))
         static let enemyBullet:SKPhysicsBody = SKPhysicsBody()
     }
     

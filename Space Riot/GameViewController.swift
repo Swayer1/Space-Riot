@@ -17,8 +17,7 @@ import FirebaseDatabase
 class GameViewController: UIViewController, LoginButtonDelegate {
             
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print("test init UIViewController")
+        super.init(coder: coder)        
     }
         
     var backingAudio: AVAudioPlayer!

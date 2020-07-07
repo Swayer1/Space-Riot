@@ -20,7 +20,6 @@ class LoginWindow: SKScene{
     
     override init(size: CGSize) {
         super.init(size: size)
-        print("test init LoginWindow")
     }
     
     required init?(coder aDecoder: NSCoder) {
