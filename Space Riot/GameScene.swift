@@ -71,8 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private override init(size: CGSize) {
         GameArea = CGRect(x: (player.frame.width * 0.2) / 2, y: 0, width: size.width - (player.frame.width * 0.2), height: size.height)
         super.init(size:size)
-        scene?.name = "GameScene"
-        print("test init GameScene")
+        scene?.name = "GameScene"        
     }
     
     required init?(coder aDecoder: NSCoder) {
