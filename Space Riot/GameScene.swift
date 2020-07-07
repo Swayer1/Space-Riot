@@ -753,7 +753,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         meteor.position = CGPoint(x: randomX, y: self.size.height + meteor.frame.height)
         meteor.zPosition = 2
         meteor.name = "Enemy"
-        meteor.physicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "\(GameMode.mode)/enemy", ofType: "json"))
+        meteor.physicsBody = SKPhysicsBody(circleOfRadius: meteor.size.width / 3.2)
         meteor.physicsBody!.affectedByGravity = false
         meteor.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         meteor.physicsBody!.collisionBitMask = PhysicsCatecories.None
