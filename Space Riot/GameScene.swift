@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import Foundation
+import SKImport
 
 var gameScorePlayer: Int = 0
 var roundLabel: Int = 10
@@ -46,6 +47,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let enemyBullet: UInt32 = 0b0111 //7
     }
     
+    struct PhysicBodyShape {
+        static let player:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "player", ofType: "json"))
+        static let playerBullet:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "playerbullet", ofType: "json"))
+        static let enemy:SKPhysicsBody = SKPhysicsBody(file: Bundle.main.path(forResource: "enemy", ofType: "json"))
+        static let enemyBullet:SKPhysicsBody = SKPhysicsBody()
+    }
+    
     static func GetInstance(InstanceSize: CGSize)->GameScene{
         if(instance == nil){
             instance = GameScene(size: InstanceSize)
@@ -77,7 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+    
     override func didMove(to view: SKView) {                
         
         gameScorePlayer = 0
@@ -125,7 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.setScale(5)
         player.position = CGPoint(x: self.size.width/2, y:  self.size.height * 0.2)
         player.zPosition = 2
-        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.width/2)
+        player.physicsBody = PhysicBodyShape.player
         player.physicsBody!.affectedByGravity = false
         player.physicsBody!.categoryBitMask = PhysicsCatecories.Player
         player.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -584,7 +592,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.setScale(GameMode.bulletScale)
         bullet.position = player.position
         bullet.zPosition = 1
-        bullet.physicsBody = SKPhysicsBody(circleOfRadius: bullet.size.width/2)
+        bullet.physicsBody = PhysicBodyShape.playerBullet.copy() as! SKPhysicsBody
         bullet.physicsBody!.affectedByGravity = false
         bullet.physicsBody!.categoryBitMask = PhysicsCatecories.Bullet
         bullet.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -697,7 +705,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.name = "Enemy"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width/2, center: CGPoint(x: 0, y: enemy.size.height * GameMode.BodyCenterPointPercentage))
+        enemy.physicsBody = PhysicBodyShape.enemy.copy() as! SKPhysicsBody
         enemy.physicsBody!.affectedByGravity = false
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
@@ -809,7 +817,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         for touch: AnyObject in touches{
             let pointOfTouch = touch.location(in: self)
-            let nodeITapped = nodes(at: pointOfTouch)
+            _ = nodes(at: pointOfTouch)
         }
         if(currentGameState == gameState.preGame){
             startGame()

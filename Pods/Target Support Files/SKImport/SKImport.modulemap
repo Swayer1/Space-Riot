@@ -1,0 +1,6 @@
+framework module SKImport {
+  umbrella header "SKImport-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -94,6 +94,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - SKImport (1.0.0)
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -104,6 +105,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Google-Mobile-Ads-SDK
+  - SKImport
 
 SPEC REPOS:
   trunk:
@@ -127,6 +129,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SKImport
 
 SPEC CHECKSUMS:
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
@@ -149,7 +152,8 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  SKImport: 8e630a47252eb6fb1aa0227b043a380efb1bd956
 
-PODFILE CHECKSUM: 97dae3c418a9cd209a74ce20810177ba2e31ec04
+PODFILE CHECKSUM: 2956529ddd24d255d2a77fd912bc6d51d367267f
 
 COCOAPODS: 1.9.3

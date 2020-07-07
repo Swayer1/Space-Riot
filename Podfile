@@ -7,6 +7,9 @@ target 'Space Riot' do
 
   # Pods for Space Riot
 
+  # SKPhyscisBody tool
+  pod 'SKImport'
+  
  # Google dependicies
   pod 'Google-Mobile-Ads-SDK'
   pod 'Firebase/Core'
