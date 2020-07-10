@@ -16,7 +16,7 @@ import UIKit
 import GoogleMobileAds
 import FBSDKLoginKit
 
-class LoginWindow: SKScene{
+class MainMenu: SKScene{
     
     override init(size: CGSize) {
         super.init(size: size)
