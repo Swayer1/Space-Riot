@@ -108,7 +108,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             let height = width * DeviceAspectRatio
             
             // Load the SKScene from 'LoginWindow' width: 1536, height: 2048
-            let scene = MainMenu(size: CGSize(width: width, height: height))
+            let scene = Menu(size: CGSize(width: width, height: height), form: "welcome")
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
             
