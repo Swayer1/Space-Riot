@@ -13,15 +13,14 @@ import AVFoundation
 import Foundation
 import FBSDKLoginKit
 import FirebaseDatabase
+import GoogleMobileAds
 
 class GameViewController: UIViewController, LoginButtonDelegate {
-            
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)        
-    }
-        
+
     var backingAudio: AVAudioPlayer!
-    
+    static var bannerViewTop: GADBannerView!
+    static var bannerViewBottom: GADBannerView!
+
     // Facebook login
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
@@ -62,7 +61,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Firebase start
         
         let ref = Database.database().reference()
@@ -106,6 +105,30 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             
             let width = 1536.0
             let height = width * DeviceAspectRatio
+
+            //        Google ads
+
+            GameViewController.bannerViewTop = GADBannerView(adSize: kGADAdSizeBanner)
+            GameViewController.bannerViewTop.adUnitID = "ca-app-pub-3940256099942544/6300978111"
+            GameViewController.bannerViewTop.rootViewController = self
+            GameViewController.bannerViewTop.load(GADRequest())
+            view.addSubview(GameViewController.bannerViewTop)
+            GameViewController.bannerViewTop.translatesAutoresizingMaskIntoConstraints = false
+            GameViewController.bannerViewTop.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
+            GameViewController.bannerViewTop.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
+            GameViewController.bannerViewTop.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
+
+            GameViewController.bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
+            GameViewController.bannerViewBottom.adUnitID = "ca-app-pub-3940256099942544/6300978111"
+            GameViewController.bannerViewBottom.rootViewController = self
+            GameViewController.bannerViewBottom.load(GADRequest())
+            view.addSubview(GameViewController.bannerViewBottom)
+            GameViewController.bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
+            GameViewController.bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
+            GameViewController.bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
+            GameViewController.bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
+
+            //        Google ads
             
             // Load the SKScene from 'LoginWindow' width: 1536, height: 2048
             let scene = Menu(size: CGSize(width: width, height: height), form: "welcome")

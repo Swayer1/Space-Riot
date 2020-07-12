@@ -13,10 +13,8 @@
 import Foundation
 import SpriteKit
 import UIKit
-import GoogleMobileAds
-import FBSDKLoginKit
 
-class Menu: SKScene{
+class Menu: SKScene {
 
     let background: SKSpriteNode
     let gameBy: SKLabelNode
@@ -25,11 +23,8 @@ class Menu: SKScene{
     let startGame: SKLabelNode
     let gameOverLabel: SKLabelNode
     let scoreLabel: SKLabelNode
-    let loginButton: FBLoginButton
     let highScoreLabel: SKLabelNode
     let restartLabel: SKLabelNode
-
-
 
     init(size: CGSize, form: String) {
 
@@ -48,7 +43,6 @@ class Menu: SKScene{
         self.startGame = SKLabelNode()
         gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
-        loginButton = FBLoginButton()
         highScoreLabel = SKLabelNode()
         restartLabel = SKLabelNode()
 
@@ -102,8 +96,6 @@ class Menu: SKScene{
         scoreLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.55)
         scoreLabel.zPosition = 1
 
-        loginButton.center = CGPoint(x: self.size.width*0.5, y: self.size.height*0.2)
-
         highScoreLabel.text = "High Score: \(highScoreNumber)"
         highScoreLabel.fontSize = 125
         highScoreLabel.fontColor = SKColor.white
@@ -139,6 +131,8 @@ class Menu: SKScene{
         self.addChild(gameName1)
         self.addChild(gameName2)
         self.addChild(startGame)
+        GameViewController.bannerViewTop.isHidden = false
+        GameViewController.bannerViewBottom.isHidden = false
     }
 
     func gameOverForm(){
@@ -147,6 +141,8 @@ class Menu: SKScene{
         self.addChild(scoreLabel)
         self.addChild(highScoreLabel)
         self.addChild(restartLabel)
+        GameViewController.bannerViewTop.isHidden = false
+        GameViewController.bannerViewBottom.isHidden = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -154,12 +150,16 @@ class Menu: SKScene{
             let pointOfTouch = touch.location(in: self)
             let nodeITapped = nodes(at: pointOfTouch)
             if(nodeITapped[0].name == "Start Game"){
+                GameViewController.bannerViewTop.isHidden = true
+                GameViewController.bannerViewBottom.isHidden = true
                 let sceneMoveTo = GameScene.getInstance(size: self.size)
                 sceneMoveTo.scaleMode = self.scaleMode
                 let myTransion = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneMoveTo, transition: myTransion)
             }
             else if(restartLabel.contains(pointOfTouch)){
+                GameViewController.bannerViewTop.isHidden = true
+                GameViewController.bannerViewBottom.isHidden = true
                 let sceneToMoveTo = GameScene.getInstance(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fade(withDuration: 0.5)
