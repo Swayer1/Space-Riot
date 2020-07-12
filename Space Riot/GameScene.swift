@@ -47,9 +47,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let enemyBullet: UInt32 = 0b0111 //7
     }
         
-    static func GetInstance(InstanceSize: CGSize)->GameScene{
+    static func getInstance(size: CGSize)->GameScene{
         if(instance == nil){
-            instance = GameScene(size: InstanceSize)
+            instance = GameScene(size: size)
         }
         return instance!
     }

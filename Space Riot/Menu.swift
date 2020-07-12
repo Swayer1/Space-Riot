@@ -154,13 +154,13 @@ class Menu: SKScene{
             let pointOfTouch = touch.location(in: self)
             let nodeITapped = nodes(at: pointOfTouch)
             if(nodeITapped[0].name == "Start Game"){
-                let sceneMoveTo = GameScene.GetInstance(InstanceSize: self.size)
+                let sceneMoveTo = GameScene.getInstance(size: self.size)
                 sceneMoveTo.scaleMode = self.scaleMode
                 let myTransion = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneMoveTo, transition: myTransion)
             }
             else if(restartLabel.contains(pointOfTouch)){
-                let sceneToMoveTo = GameScene.GetInstance(InstanceSize: self.size)
+                let sceneToMoveTo = GameScene.getInstance(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
