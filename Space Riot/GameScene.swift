@@ -395,6 +395,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func runGameOver(){
+        if GameViewController.interstitial.isReady {
+            GameViewController.interstitial.present(fromRootViewController: (self.view?.window?.rootViewController)!)
+        } else {
+          print("Ad wasn't ready")
+        }
         currentGameState = gameState.afterGame
         GameMode.gameSpeed = 2.75
         stopGameForeverRepeats()
