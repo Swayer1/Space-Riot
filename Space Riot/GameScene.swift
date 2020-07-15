@@ -434,6 +434,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sceneToMoveTo.scaleMode = self.scaleMode
         let transition = SKTransition.fade(withDuration: 0.5)
         self.view!.presentScene(sceneToMoveTo, transition: transition)
+        GameViewController.loadAds()
     }
     
     func stopGameForeverRepeats(){

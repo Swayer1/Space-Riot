@@ -25,6 +25,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     static var bannerViewTop: GADBannerView!
     static var bannerViewBottom: GADBannerView!
     static var interstitial: GADInterstitial!
+    static let request = GADRequest()
 
     // Facebook login
     
@@ -133,10 +134,8 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             GameViewController.bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
             GameViewController.bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
 
-            GameViewController.interstitial = GADInterstitial(adUnitID: interstitialId )
-            let request = GADRequest()
-            GameViewController.interstitial.load(request)
-            
+            GameViewController.loadAds()
+
             //        Google ads
             
             // Load the SKScene from 'LoginWindow' width: 1536, height: 2048
@@ -152,6 +151,11 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             view.showsNodeCount = true
             view.showsPhysics = true
         }
+    }
+
+    static func loadAds(){
+        GameViewController.interstitial = GADInterstitial(adUnitID: interstitialId )
+        GameViewController.interstitial.load(GameViewController.request)
     }
         
     override var shouldAutorotate: Bool {
