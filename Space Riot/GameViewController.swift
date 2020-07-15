@@ -15,6 +15,10 @@ import FBSDKLoginKit
 import FirebaseDatabase
 import GoogleMobileAds
 
+let bannerAdsTopId: String = "ca-app-pub-3940256099942544/6300978111"
+let bannerAdsBottomId: String = "ca-app-pub-3940256099942544/6300978111"
+let interstitialId: String = "ca-app-pub-3940256099942544/4411468910"
+
 class GameViewController: UIViewController, LoginButtonDelegate {
 
     var backingAudio: AVAudioPlayer!
@@ -110,7 +114,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             //        Google ads
 
             GameViewController.bannerViewTop = GADBannerView(adSize: kGADAdSizeBanner)
-            GameViewController.bannerViewTop.adUnitID = "ca-app-pub-3940256099942544/6300978111"
+            GameViewController.bannerViewTop.adUnitID = bannerAdsTopId
             GameViewController.bannerViewTop.rootViewController = self
             GameViewController.bannerViewTop.load(GADRequest())
             view.addSubview(GameViewController.bannerViewTop)
@@ -120,7 +124,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             GameViewController.bannerViewTop.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
 
             GameViewController.bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
-            GameViewController.bannerViewBottom.adUnitID = "ca-app-pub-3940256099942544/6300978111"
+            GameViewController.bannerViewBottom.adUnitID = bannerAdsBottomId
             GameViewController.bannerViewBottom.rootViewController = self
             GameViewController.bannerViewBottom.load(GADRequest())
             view.addSubview(GameViewController.bannerViewBottom)
@@ -129,7 +133,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             GameViewController.bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
             GameViewController.bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
 
-            GameViewController.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+            GameViewController.interstitial = GADInterstitial(adUnitID: interstitialId )
             let request = GADRequest()
             GameViewController.interstitial.load(request)
             
