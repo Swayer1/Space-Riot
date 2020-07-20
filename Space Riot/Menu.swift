@@ -19,6 +19,7 @@ class Menu: SKScene {
     let background: SKSpriteNode
     let gameName: SKSpriteNode
     let startGame: SKSpriteNode
+    let options: SKSpriteNode
     let gameOverLabel: SKLabelNode
     let scoreLabel: SKLabelNode
     let highScoreLabel: SKLabelNode
@@ -37,6 +38,7 @@ class Menu: SKScene {
         self.background = SKSpriteNode(imageNamed: "Normal/background1")
         self.gameName = SKSpriteNode(imageNamed: "assets/name")
         self.startGame = SKSpriteNode(imageNamed: "assets/start")
+        self.options = SKSpriteNode(imageNamed: "assets/settings")
         gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
         highScoreLabel = SKLabelNode()
@@ -53,6 +55,11 @@ class Menu: SKScene {
         self.gameName.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.75)
         self.gameName.zPosition = 1
         self.gameName.setScale(0.30)
+
+        self.options.name = "Game name"
+        self.options.position = CGPoint(x: self.size.width*0.87, y: self.size.height*0.92)
+        self.options.zPosition = 1
+        self.options.setScale(0.30)
 
         self.startGame.name = "Start Game"
         self.startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.4)
@@ -106,6 +113,7 @@ class Menu: SKScene {
         self.addChild(background)
         self.addChild(gameName)
         self.addChild(startGame)
+        self.addChild(options)
         GameViewController.bannerViewBottom.isHidden = false
     }
 

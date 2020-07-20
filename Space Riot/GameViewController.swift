@@ -65,7 +65,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     // Facebook login end
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
 
         // Firebase start
         
