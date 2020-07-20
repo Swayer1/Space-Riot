@@ -17,10 +17,8 @@ import UIKit
 class Menu: SKScene {
 
     let background: SKSpriteNode
-    let gameBy: SKLabelNode
-    let gameName1: SKLabelNode
-    let gameName2: SKLabelNode
-    let startGame: SKLabelNode
+    let gameName: SKSpriteNode
+    let startGame: SKSpriteNode
     let gameOverLabel: SKLabelNode
     let scoreLabel: SKLabelNode
     let highScoreLabel: SKLabelNode
@@ -37,10 +35,8 @@ class Menu: SKScene {
         }
 
         self.background = SKSpriteNode(imageNamed: "Normal/background1")
-        self.gameBy = SKLabelNode()
-        self.gameName1 = SKLabelNode()
-        self.gameName2 = SKLabelNode()
-        self.startGame = SKLabelNode()
+        self.gameName = SKSpriteNode(imageNamed: "assets/name")
+        self.startGame = SKSpriteNode(imageNamed: "assets/start")
         gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
         highScoreLabel = SKLabelNode()
@@ -53,34 +49,15 @@ class Menu: SKScene {
         self.background.setScale(1)
         self.background.size = self.size
 
-        self.gameBy.text = "Alex's production"
-        self.gameBy.fontSize = 50
-        self.gameBy.fontColor = SKColor.white
-        self.gameBy.fontName = "AvenirNext-Bold"
-        self.gameBy.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.78)
-        self.gameBy.zPosition = 1
+        self.gameName.name = "Game name"
+        self.gameName.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.75)
+        self.gameName.zPosition = 1
+        self.gameName.setScale(0.30)
 
-        self.gameName1.text = "Solo"
-        self.gameName1.fontSize = 200
-        self.gameName1.fontColor = SKColor.white
-        self.gameName1.fontName = "AvenirNext-Bold"
-        self.gameName1.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.7)
-        self.gameName1.zPosition = 1
-
-        self.gameName2.text = "Mission"
-        self.gameName2.fontSize = 200
-        self.gameName2.fontColor = SKColor.white
-        self.gameName2.fontName = "AvenirNext-Bold"
-        self.gameName2.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.625)
-        self.gameName2.zPosition = 1
-
-        self.startGame.text = "Start Game"
         self.startGame.name = "Start Game"
-        self.startGame.fontSize = 150
-        self.startGame.fontColor = SKColor.white
-        self.startGame.fontName = "AvenirNext-Bold"
         self.startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.4)
         self.startGame.zPosition = 1
+        self.startGame.setScale(0.25)
 
         self.gameOverLabel.text = "Game Over"
         self.gameOverLabel.fontSize = 200
@@ -127,11 +104,8 @@ class Menu: SKScene {
 
     func welcomeForm(){
         self.addChild(background)
-        self.addChild(gameBy)
-        self.addChild(gameName1)
-        self.addChild(gameName2)
+        self.addChild(gameName)
         self.addChild(startGame)
-        GameViewController.bannerViewTop.isHidden = false
         GameViewController.bannerViewBottom.isHidden = false
     }
 
@@ -141,7 +115,6 @@ class Menu: SKScene {
         self.addChild(scoreLabel)
         self.addChild(highScoreLabel)
         self.addChild(restartLabel)
-        GameViewController.bannerViewTop.isHidden = false
         GameViewController.bannerViewBottom.isHidden = false
     }
 
@@ -150,7 +123,6 @@ class Menu: SKScene {
             let pointOfTouch = touch.location(in: self)
             let nodeITapped = nodes(at: pointOfTouch)
             if(nodeITapped[0].name == "Start Game"){
-                GameViewController.bannerViewTop.isHidden = true
                 GameViewController.bannerViewBottom.isHidden = true
                 let sceneMoveTo = GameScene.getInstance(size: self.size)
                 sceneMoveTo.scaleMode = self.scaleMode
@@ -158,7 +130,6 @@ class Menu: SKScene {
                 self.view!.presentScene(sceneMoveTo, transition: myTransion)
             }
             else if(restartLabel.contains(pointOfTouch)){
-                GameViewController.bannerViewTop.isHidden = true
                 GameViewController.bannerViewBottom.isHidden = true
                 let sceneToMoveTo = GameScene.getInstance(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode

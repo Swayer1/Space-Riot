@@ -22,7 +22,6 @@ let interstitialId: String = "ca-app-pub-3940256099942544/4411468910"
 class GameViewController: UIViewController, LoginButtonDelegate {
 
     var backingAudio: AVAudioPlayer!
-    static var bannerViewTop: GADBannerView!
     static var bannerViewBottom: GADBannerView!
     static var interstitial: GADInterstitial!
     static let request = GADRequest()
@@ -113,16 +112,6 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             let height = width * DeviceAspectRatio
 
             //        Google ads
-
-            GameViewController.bannerViewTop = GADBannerView(adSize: kGADAdSizeBanner)
-            GameViewController.bannerViewTop.adUnitID = bannerAdsTopId
-            GameViewController.bannerViewTop.rootViewController = self
-            GameViewController.bannerViewTop.load(GADRequest())
-            view.addSubview(GameViewController.bannerViewTop)
-            GameViewController.bannerViewTop.translatesAutoresizingMaskIntoConstraints = false
-            GameViewController.bannerViewTop.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
-            GameViewController.bannerViewTop.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
-            GameViewController.bannerViewTop.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
 
             GameViewController.bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
             GameViewController.bannerViewBottom.adUnitID = bannerAdsBottomId
