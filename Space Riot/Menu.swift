@@ -72,7 +72,7 @@ class Menu: SKScene {
         self.options.name = "Game options"
         self.options.position = CGPoint(x: self.size.width*0.87, y: self.size.height*0.92)
         self.options.zPosition = 1
-        self.options.setScale(0.30)
+        self.options.setScale(0.35)
 
         self.startGame.name = "Start Game"
         self.startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
@@ -82,22 +82,22 @@ class Menu: SKScene {
         self.facebookButton.name = "facebook button"
         self.facebookButton.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.2)
         self.facebookButton.zPosition = 1
-        self.facebookButton.setScale(0.3)
+        self.facebookButton.setScale(0.35)
 
         self.ranklistButton.name = "ranklist button"
         self.ranklistButton.position = CGPoint(x: self.size.width*0.4, y: self.size.height*0.2)
         self.ranklistButton.zPosition = 1
-        self.ranklistButton.setScale(0.3)
+        self.ranklistButton.setScale(0.35)
 
         self.shopButton.name = "shop button"
         self.shopButton.position = CGPoint(x: self.size.width*0.6, y: self.size.height*0.2)
         self.shopButton.zPosition = 1
-        self.shopButton.setScale(0.3)
+        self.shopButton.setScale(0.35)
 
         self.credits.name = "Game credits"
         self.credits.position = CGPoint(x: self.size.width*0.8, y: self.size.height*0.2)
         self.credits.zPosition = 1
-        self.credits.setScale(0.30)
+        self.credits.setScale(0.35)
 
         self.gameOverLabel.text = "Game Over"
         self.gameOverLabel.fontSize = 200
@@ -180,35 +180,35 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "facebook button"){
                 ButtonAction = SKAction.run{
-                    print("facebook button")
+
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "shop button"){
                 ButtonAction = SKAction.run{
-                    print("shop button")
+
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "ranklist button"){
                 ButtonAction = SKAction.run{
-                    print("ranklist button")
+
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "Game options"){
                 ButtonAction = SKAction.run{
-                    print("Game options")
+
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "Game credits"){
                 ButtonAction = SKAction.run{
-                    print("Game credits")
+
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
