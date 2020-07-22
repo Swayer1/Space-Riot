@@ -165,10 +165,38 @@ class Menu: SKScene {
                     sceneMoveTo.scaleMode = self.scaleMode
                     let myTransion = SKTransition.fade(withDuration: 0.5)
                     self.view!.presentScene(sceneMoveTo, transition: myTransion)
+                    GameViewController.bannerViewBottom.isHidden = true
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
-                GameViewController.bannerViewBottom.isHidden = true
+            }
+            else if(nodeITapped[0].name == "facebook button"){
+                ButtonAction = SKAction.run{
+                    print("facebook button")
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "shop button"){
+                ButtonAction = SKAction.run{
+                    print("shop button")
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "ranklist button"){
+                ButtonAction = SKAction.run{
+                    print("ranklist button")
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "Game options"){
+                ButtonAction = SKAction.run{
+                    print("Game options")
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
             }
             else if(restartLabel.contains(pointOfTouch)){
                 GameViewController.bannerViewBottom.isHidden = true
