@@ -23,6 +23,7 @@ class Menu: SKScene {
     let ranklistButton: SKSpriteNode
     let shopButton: SKSpriteNode
     let options: SKSpriteNode
+    let credits: SKSpriteNode
     let gameOverLabel: SKLabelNode
     let scoreLabel: SKLabelNode
     let highScoreLabel: SKLabelNode
@@ -47,6 +48,7 @@ class Menu: SKScene {
         self.gameName = SKSpriteNode(imageNamed: "assets/name")
         self.startGame = SKSpriteNode(imageNamed: "assets/start")
         self.options = SKSpriteNode(imageNamed: "assets/settings")
+        self.credits = SKSpriteNode(imageNamed: "assets/credits")
         self.facebookButton = SKSpriteNode(imageNamed: "assets/facebook")
         self.ranklistButton = SKSpriteNode(imageNamed: "assets/ranklist")
         self.shopButton = SKSpriteNode(imageNamed: "assets/shop")
@@ -78,19 +80,24 @@ class Menu: SKScene {
         self.startGame.setScale(0.25)
 
         self.facebookButton.name = "facebook button"
-        self.facebookButton.position = CGPoint(x: self.size.width*0.25, y: self.size.height*0.2)
+        self.facebookButton.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.2)
         self.facebookButton.zPosition = 1
         self.facebookButton.setScale(0.3)
 
         self.ranklistButton.name = "ranklist button"
-        self.ranklistButton.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.2)
+        self.ranklistButton.position = CGPoint(x: self.size.width*0.4, y: self.size.height*0.2)
         self.ranklistButton.zPosition = 1
         self.ranklistButton.setScale(0.3)
 
         self.shopButton.name = "shop button"
-        self.shopButton.position = CGPoint(x: self.size.width*0.75, y: self.size.height*0.2)
+        self.shopButton.position = CGPoint(x: self.size.width*0.6, y: self.size.height*0.2)
         self.shopButton.zPosition = 1
         self.shopButton.setScale(0.3)
+
+        self.credits.name = "Game credits"
+        self.credits.position = CGPoint(x: self.size.width*0.8, y: self.size.height*0.2)
+        self.credits.zPosition = 1
+        self.credits.setScale(0.30)
 
         self.gameOverLabel.text = "Game Over"
         self.gameOverLabel.fontSize = 200
@@ -143,6 +150,7 @@ class Menu: SKScene {
         self.addChild(facebookButton)
         self.addChild(ranklistButton)
         self.addChild(shopButton)
+        self.addChild(credits)
         GameViewController.bannerViewBottom.isHidden = false
     }
 
@@ -194,6 +202,13 @@ class Menu: SKScene {
             else if(nodeITapped[0].name == "Game options"){
                 ButtonAction = SKAction.run{
                     print("Game options")
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "Game credits"){
+                ButtonAction = SKAction.run{
+                    print("Game credits")
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
