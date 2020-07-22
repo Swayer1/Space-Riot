@@ -29,18 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             FirebaseApp.configure()
 
-        let imageView = UIImageView.init(image: UIImage(named: "assets/Ares"))
-        imageView.frame = UIScreen.main.bounds
-
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
-        window?.rootViewController?.view.addSubview(imageView)
-        window?.rootViewController?.view.bringSubviewToFront(imageView)
-        window?.makeKeyAndVisible()
-
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        }
+//        let imageView = UIImageView.init(image: UIImage(named: "assets/Ares"))
+//        imageView.frame = UIScreen.main.bounds
+//
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
+//        window?.rootViewController?.view.addSubview(imageView)
+//        window?.rootViewController?.view.bringSubviewToFront(imageView)
+//        window?.makeKeyAndVisible()
+//
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+//            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+//        }
 
         return true
     }

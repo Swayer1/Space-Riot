@@ -28,6 +28,11 @@ class Menu: SKScene {
     let highScoreLabel: SKLabelNode
     let restartLabel: SKLabelNode
 
+    let changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
+    let changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
+    var ButtonAction = SKAction()
+    var changeScaleSequence = SKAction()
+
     init(size: CGSize, form: String) {
 
         let defaults = UserDefaults()
@@ -155,11 +160,15 @@ class Menu: SKScene {
             let pointOfTouch = touch.location(in: self)
             let nodeITapped = nodes(at: pointOfTouch)
             if(nodeITapped[0].name == "Start Game"){
+                ButtonAction = SKAction.run{
+                    let sceneMoveTo = GameScene.getInstance(size: self.size)
+                    sceneMoveTo.scaleMode = self.scaleMode
+                    let myTransion = SKTransition.fade(withDuration: 0.5)
+                    self.view!.presentScene(sceneMoveTo, transition: myTransion)
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
                 GameViewController.bannerViewBottom.isHidden = true
-                let sceneMoveTo = GameScene.getInstance(size: self.size)
-                sceneMoveTo.scaleMode = self.scaleMode
-                let myTransion = SKTransition.fade(withDuration: 0.5)
-                self.view!.presentScene(sceneMoveTo, transition: myTransion)
             }
             else if(restartLabel.contains(pointOfTouch)){
                 GameViewController.bannerViewBottom.isHidden = true
