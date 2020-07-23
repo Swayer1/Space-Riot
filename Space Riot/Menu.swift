@@ -22,6 +22,7 @@ class Menu: SKScene {
     let facebookButton: SKSpriteNode
     let ranklistButton: SKSpriteNode
     let shopButton: SKSpriteNode
+    let exitButton: SKLabelNode
     let options: SKSpriteNode
     let optionsWindow: SKSpriteNode
     let credits: SKSpriteNode
@@ -30,6 +31,8 @@ class Menu: SKScene {
     let highScoreLabel: SKLabelNode
     let restartLabel: SKLabelNode
     let optionsWindowLabel: SKLabelNode
+
+    var windowsShow: Bool = false
 
     let changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
     let changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
@@ -55,6 +58,7 @@ class Menu: SKScene {
         self.facebookButton = SKSpriteNode(imageNamed: "assets/facebook")
         self.ranklistButton = SKSpriteNode(imageNamed: "assets/ranklist")
         self.shopButton = SKSpriteNode(imageNamed: "assets/shop")
+        self.exitButton = SKLabelNode()
         gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
         highScoreLabel = SKLabelNode()
@@ -80,9 +84,16 @@ class Menu: SKScene {
 
         self.optionsWindow.name = "Game options window"
         self.optionsWindow.size.height = self.size.height * 0.48
-        self.optionsWindow.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
+        self.optionsWindow.position = CGPoint(x: self.size.width*0.5, y: self.size.height+optionsWindow.size.height)
         self.optionsWindow.zPosition = 99
         self.optionsWindow.setScale(1.5)
+
+        exitButton.text = "Save"
+        exitButton.fontSize = 70
+        exitButton.fontColor = SKColor.white
+        exitButton.fontName = "AvenirNext-Bold"
+        exitButton.zPosition = 99
+        exitButton.position = CGPoint(x: 0, y: -self.size.height*0.2)
 
         self.startGame.name = "Start Game"
         self.startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
@@ -142,7 +153,7 @@ class Menu: SKScene {
         optionsWindowLabel.fontColor = SKColor.white
         optionsWindowLabel.fontName = "AvenirNext-Bold"
         optionsWindowLabel.zPosition = 99
-        optionsWindowLabel.position = CGPoint(x: 0, y: optionsWindow.size.height*0.275)
+        optionsWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
 
         switch form {
             case "welcome":
@@ -181,8 +192,11 @@ class Menu: SKScene {
     }
 
     func gameOptions(){
+        let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
         optionsWindow.addChild(optionsWindowLabel)
+        optionsWindow.addChild(exitButton)
         self.addChild(optionsWindow)
+        optionsWindow.run(scale)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -223,7 +237,10 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "Game options"){
                 ButtonAction = SKAction.run{
-                    self.gameOptions()
+                    if(!self.windowsShow){
+                        self.gameOptions()
+                        self.windowsShow = true
+                    }
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
