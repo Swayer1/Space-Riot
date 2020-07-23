@@ -89,6 +89,7 @@ class Menu: SKScene {
         self.optionsWindow.setScale(1.5)
 
         exitButton.text = "Save"
+        exitButton.name = "Option save"
         exitButton.fontSize = 70
         exitButton.fontColor = SKColor.white
         exitButton.fontName = "AvenirNext-Bold"
@@ -199,6 +200,15 @@ class Menu: SKScene {
         optionsWindow.run(scale)
     }
 
+    func saveOptions(){
+        let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
+        let delete = SKAction.removeFromParent()
+        let deleteChildren = SKAction.run{self.optionsWindow.removeAllChildren()}
+        let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
+        optionsWindow.run(deleteSequence)
+        self.windowsShow = false
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches{
             let pointOfTouch = touch.location(in: self)
@@ -248,6 +258,13 @@ class Menu: SKScene {
             else if(nodeITapped[0].name == "Game credits"){
                 ButtonAction = SKAction.run{
 
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "Option save"){
+                ButtonAction = SKAction.run{
+                    self.saveOptions()
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
