@@ -31,6 +31,7 @@ class Menu: SKScene {
     let highScoreLabel: SKLabelNode
     let restartLabel: SKLabelNode
     let optionsWindowLabel: SKLabelNode
+    let optionSlider: UISlider
 
     var windowsShow: Bool = false
 
@@ -59,6 +60,7 @@ class Menu: SKScene {
         self.ranklistButton = SKSpriteNode(imageNamed: "assets/ranklist")
         self.shopButton = SKSpriteNode(imageNamed: "assets/shop")
         self.exitButton = SKLabelNode()
+        self.optionSlider = UISlider()
         gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
         highScoreLabel = SKLabelNode()
@@ -87,6 +89,8 @@ class Menu: SKScene {
         self.optionsWindow.position = CGPoint(x: self.size.width*0.5, y: self.size.height+optionsWindow.size.height)
         self.optionsWindow.zPosition = 99
         self.optionsWindow.setScale(1.5)
+
+        self.optionSlider.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
 
         exitButton.text = "Save"
         exitButton.name = "Option save"
@@ -196,6 +200,7 @@ class Menu: SKScene {
         let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
         optionsWindow.addChild(optionsWindowLabel)
         optionsWindow.addChild(exitButton)
+        self.view?.addSubview(optionSlider)
         self.addChild(optionsWindow)
         optionsWindow.run(scale)
     }
@@ -203,7 +208,10 @@ class Menu: SKScene {
     func saveOptions(){
         let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         let delete = SKAction.removeFromParent()
-        let deleteChildren = SKAction.run{self.optionsWindow.removeAllChildren()}
+        let deleteChildren = SKAction.run{
+            self.optionsWindow.removeAllChildren()
+            self.optionSlider.removeFromSuperview()
+        }
         let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
         optionsWindow.run(deleteSequence)
         self.windowsShow = false
