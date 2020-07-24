@@ -16,29 +16,60 @@ import UIKit
 
 class Menu: SKScene {
 
+//    main view
     let background: SKSpriteNode
     let gameName: SKSpriteNode
     let startGame: SKSpriteNode
     let facebookButton: SKSpriteNode
     let ranklistButton: SKSpriteNode
     let shopButton: SKSpriteNode
-    let exitButton: SKLabelNode
     let options: SKSpriteNode
-    let optionsWindow: SKSpriteNode
     let credits: SKSpriteNode
+
+//    restart view
     let gameOverLabel: SKLabelNode
     let scoreLabel: SKLabelNode
     let highScoreLabel: SKLabelNode
     let restartLabel: SKLabelNode
+
+//    Option view
+    let exitButton: SKLabelNode
+    let optionsWindow: SKSpriteNode
     let optionsWindowLabel: SKLabelNode
-    let optionSlider: UISlider
+    let slider: SKSlider
 
-    var windowsShow: Bool = false
-
+//    Actions
     let changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
     let changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
     var ButtonAction = SKAction()
     var changeScaleSequence = SKAction()
+
+// Custom elements
+    class SKSlider: SKNode {        
+        override init() {
+            let backgoround = SKSpriteNode(imageNamed: "assets/loadinbarempty")
+            let backgoroundBorder = SKSpriteNode(imageNamed: "assets/loadinbarborder")
+            let backgoroundFill = SKSpriteNode(imageNamed: "assets/loadinbarfinish")
+            super.init()
+            backgoround.position = self.position
+            backgoround.anchorPoint = .zero
+            backgoround.zPosition = self.zPosition
+            backgoroundBorder.position = self.position
+            backgoroundBorder.anchorPoint = .zero
+            backgoroundBorder.zPosition = self.zPosition + CGFloat(2)
+            backgoroundFill.position = self.position
+            backgoroundFill.anchorPoint = .zero
+            backgoroundFill.zPosition = self.zPosition + CGFloat(1)
+            backgoroundFill.size.width *= 0.5
+            self.addChild(backgoround)
+            self.addChild(backgoroundBorder)
+            self.addChild(backgoroundFill)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
 
     init(size: CGSize, form: String) {
 
@@ -50,47 +81,78 @@ class Menu: SKScene {
             defaults.set(highScoreNumber, forKey: "highScoreSaved")
         }
 
-        self.background = SKSpriteNode(imageNamed: "Normal/background1")
-        self.gameName = SKSpriteNode(imageNamed: "assets/name")
-        self.startGame = SKSpriteNode(imageNamed: "assets/start")
-        self.options = SKSpriteNode(imageNamed: "assets/settings")
-        self.optionsWindow = SKSpriteNode(imageNamed: "assets/optionsWindow")
-        self.credits = SKSpriteNode(imageNamed: "assets/credits")
-        self.facebookButton = SKSpriteNode(imageNamed: "assets/facebook")
-        self.ranklistButton = SKSpriteNode(imageNamed: "assets/ranklist")
-        self.shopButton = SKSpriteNode(imageNamed: "assets/shop")
-        self.exitButton = SKLabelNode()
-        self.optionSlider = UISlider()
+        //    main view
+        background = SKSpriteNode(imageNamed: "Normal/background1")
+        gameName = SKSpriteNode(imageNamed: "assets/name")
+        startGame = SKSpriteNode(imageNamed: "assets/start")
+        options = SKSpriteNode(imageNamed: "assets/settings")
+        credits = SKSpriteNode(imageNamed: "assets/credits")
+        facebookButton = SKSpriteNode(imageNamed: "assets/facebook")
+        ranklistButton = SKSpriteNode(imageNamed: "assets/ranklist")
+        shopButton = SKSpriteNode(imageNamed: "assets/shop")
+
+        //    restart view
         gameOverLabel = SKLabelNode()
         scoreLabel = SKLabelNode()
         highScoreLabel = SKLabelNode()
         restartLabel = SKLabelNode()
+
+        //    Option view
+        optionsWindow = SKSpriteNode(imageNamed: "assets/optionsWindow")
+        exitButton = SKLabelNode()
         optionsWindowLabel = SKLabelNode()
+        slider = SKSlider()
 
         super.init(size: size)
 
-        self.background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
-        self.background.zPosition = 0
-        self.background.setScale(1)
-        self.background.size = self.size
 
-        self.gameName.name = "Game name"
-        self.gameName.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.75)
-        self.gameName.zPosition = 1
-        self.gameName.setScale(0.30)
+        //    main view
+        background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        background.zPosition = 0
+        background.setScale(1)
+        background.size = self.size
 
-        self.options.name = "Game options"
-        self.options.position = CGPoint(x: self.size.width*0.87, y: self.size.height*0.92)
-        self.options.zPosition = 1
-        self.options.setScale(0.35)
+        gameName.name = "Game name"
+        gameName.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.75)
+        gameName.zPosition = 1
+        gameName.setScale(0.30)
 
-        self.optionsWindow.name = "Game options window"
-        self.optionsWindow.size.height = self.size.height * 0.48
-        self.optionsWindow.position = CGPoint(x: self.size.width*0.5, y: self.size.height+optionsWindow.size.height)
-        self.optionsWindow.zPosition = 99
-        self.optionsWindow.setScale(1.5)
+        options.name = "Game options"
+        options.position = CGPoint(x: self.size.width*0.87, y: self.size.height*0.92)
+        options.zPosition = 1
+        options.setScale(0.35)
 
-        self.optionSlider.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
+        startGame.name = "Start Game"
+        startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
+        startGame.zPosition = 1
+        startGame.setScale(0.25)
+
+        facebookButton.name = "facebook button"
+        facebookButton.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.2)
+        facebookButton.zPosition = 1
+        facebookButton.setScale(0.35)
+
+        ranklistButton.name = "ranklist button"
+        ranklistButton.position = CGPoint(x: self.size.width*0.4, y: self.size.height*0.2)
+        ranklistButton.zPosition = 1
+        ranklistButton.setScale(0.35)
+
+        shopButton.name = "shop button"
+        shopButton.position = CGPoint(x: self.size.width*0.6, y: self.size.height*0.2)
+        shopButton.zPosition = 1
+        shopButton.setScale(0.35)
+
+        credits.name = "Game credits"
+        credits.position = CGPoint(x: self.size.width*0.8, y: self.size.height*0.2)
+        credits.zPosition = 1
+        credits.setScale(0.35)
+
+        //    Option view
+        optionsWindow.name = "Game options window"
+        optionsWindow.size.height = self.size.height * 0.48
+        optionsWindow.position = CGPoint(x: self.size.width*0.5, y: self.size.height+optionsWindow.size.height)
+        optionsWindow.zPosition = 99
+        optionsWindow.setScale(1.5)
 
         exitButton.text = "Save"
         exitButton.name = "Option save"
@@ -100,37 +162,24 @@ class Menu: SKScene {
         exitButton.zPosition = 99
         exitButton.position = CGPoint(x: 0, y: -self.size.height*0.2)
 
-        self.startGame.name = "Start Game"
-        self.startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
-        self.startGame.zPosition = 1
-        self.startGame.setScale(0.25)
+        optionsWindowLabel.text = "Options"
+        optionsWindowLabel.fontSize = 90
+        optionsWindowLabel.fontColor = SKColor.white
+        optionsWindowLabel.fontName = "AvenirNext-Bold"
+        optionsWindowLabel.zPosition = 99
+        optionsWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
 
-        self.facebookButton.name = "facebook button"
-        self.facebookButton.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.2)
-        self.facebookButton.zPosition = 1
-        self.facebookButton.setScale(0.35)
+        slider.position = CGPoint(x: -409, y: 0)
+        slider.zPosition = 99
+        slider.setScale(0.2)
 
-        self.ranklistButton.name = "ranklist button"
-        self.ranklistButton.position = CGPoint(x: self.size.width*0.4, y: self.size.height*0.2)
-        self.ranklistButton.zPosition = 1
-        self.ranklistButton.setScale(0.35)
-
-        self.shopButton.name = "shop button"
-        self.shopButton.position = CGPoint(x: self.size.width*0.6, y: self.size.height*0.2)
-        self.shopButton.zPosition = 1
-        self.shopButton.setScale(0.35)
-
-        self.credits.name = "Game credits"
-        self.credits.position = CGPoint(x: self.size.width*0.8, y: self.size.height*0.2)
-        self.credits.zPosition = 1
-        self.credits.setScale(0.35)
-
-        self.gameOverLabel.text = "Game Over"
-        self.gameOverLabel.fontSize = 200
-        self.gameOverLabel.fontColor = SKColor.white
-        self.gameOverLabel.fontName = "AvenirNext-Bold"
-        self.gameOverLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.7)
-        self.gameOverLabel.zPosition = 1
+        //    restart view
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.fontSize = 200
+        gameOverLabel.fontColor = SKColor.white
+        gameOverLabel.fontName = "AvenirNext-Bold"
+        gameOverLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.7)
+        gameOverLabel.zPosition = 1
 
         scoreLabel.text = "Score: \(gameScorePlayer)"
         scoreLabel.fontSize = 125
@@ -152,13 +201,6 @@ class Menu: SKScene {
         restartLabel.fontName = "AvenirNext-Bold"
         restartLabel.zPosition = 1
         restartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height*0.3)
-
-        optionsWindowLabel.text = "Options"
-        optionsWindowLabel.fontSize = 90
-        optionsWindowLabel.fontColor = SKColor.white
-        optionsWindowLabel.fontName = "AvenirNext-Bold"
-        optionsWindowLabel.zPosition = 99
-        optionsWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
 
         switch form {
             case "welcome":
@@ -200,7 +242,7 @@ class Menu: SKScene {
         let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
         optionsWindow.addChild(optionsWindowLabel)
         optionsWindow.addChild(exitButton)
-        self.view?.addSubview(optionSlider)
+        optionsWindow.addChild(slider)
         self.addChild(optionsWindow)
         optionsWindow.run(scale)
     }
@@ -210,11 +252,9 @@ class Menu: SKScene {
         let delete = SKAction.removeFromParent()
         let deleteChildren = SKAction.run{
             self.optionsWindow.removeAllChildren()
-            self.optionSlider.removeFromSuperview()
         }
         let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
         optionsWindow.run(deleteSequence)
-        self.windowsShow = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -255,9 +295,8 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "Game options"){
                 ButtonAction = SKAction.run{
-                    if(!self.windowsShow){
+                    if(self.optionsWindow.position.y > self.size.height){
                         self.gameOptions()
-                        self.windowsShow = true
                     }
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
