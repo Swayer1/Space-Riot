@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "loadinbarempty.png",
+      "filename" : "piece.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

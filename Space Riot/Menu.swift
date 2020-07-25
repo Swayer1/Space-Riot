@@ -36,6 +36,8 @@ class Menu: SKScene {
     let exitButton: SKLabelNode
     let optionsWindow: SKSpriteNode
     let optionsWindowLabel: SKLabelNode
+    let SensibilityLabel: SKLabelNode
+    let Music: SKSpriteNode
     let slider: SKSlider
 
 //    Actions
@@ -45,25 +47,38 @@ class Menu: SKScene {
     var changeScaleSequence = SKAction()
 
 // Custom elements
-    class SKSlider: SKNode {        
+    class SKSlider: SKNode {
+        let table: SKSpriteNode        
+        let piece: SKSpriteNode
+        var height: CGFloat? {
+            willSet(value){
+                table.size.height = value!
+                piece.size.height = value!
+            }
+        }
+        var width: CGFloat? {
+            willSet(value){
+                table.size.width = value!
+            }
+        }
+        override var zPosition: CGFloat{
+            willSet{
+                table.zPosition = self.zPosition
+                piece.zPosition = self.zPosition + 1
+            }
+        }
+        var currentValue: CGFloat{
+            willSet{
+
+            }
+        }
         override init() {
-            let backgoround = SKSpriteNode(imageNamed: "assets/loadinbarempty")
-            let backgoroundBorder = SKSpriteNode(imageNamed: "assets/loadinbarborder")
-            let backgoroundFill = SKSpriteNode(imageNamed: "assets/loadinbarfinish")
+            table = SKSpriteNode(imageNamed: "assets/Table")
+            piece = SKSpriteNode(imageNamed: "assets/piece")
+            currentValue = 0
             super.init()
-            backgoround.position = self.position
-            backgoround.anchorPoint = .zero
-            backgoround.zPosition = self.zPosition
-            backgoroundBorder.position = self.position
-            backgoroundBorder.anchorPoint = .zero
-            backgoroundBorder.zPosition = self.zPosition + CGFloat(2)
-            backgoroundFill.position = self.position
-            backgoroundFill.anchorPoint = .zero
-            backgoroundFill.zPosition = self.zPosition + CGFloat(1)
-            backgoroundFill.size.width *= 0.5
-            self.addChild(backgoround)
-            self.addChild(backgoroundBorder)
-            self.addChild(backgoroundFill)
+            self.addChild(table)
+            self.addChild(piece)
         }
 
         required init?(coder aDecoder: NSCoder) {
@@ -102,6 +117,8 @@ class Menu: SKScene {
         exitButton = SKLabelNode()
         optionsWindowLabel = SKLabelNode()
         slider = SKSlider()
+        Music = SKSpriteNode()
+        SensibilityLabel = SKLabelNode()
 
         super.init(size: size)
 
@@ -151,7 +168,7 @@ class Menu: SKScene {
         optionsWindow.name = "Game options window"
         optionsWindow.size.height = self.size.height * 0.48
         optionsWindow.position = CGPoint(x: self.size.width*0.5, y: self.size.height+optionsWindow.size.height)
-        optionsWindow.zPosition = 99
+        optionsWindow.zPosition = 2
         optionsWindow.setScale(1.5)
 
         exitButton.text = "Save"
@@ -169,9 +186,26 @@ class Menu: SKScene {
         optionsWindowLabel.zPosition = 99
         optionsWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
 
-        slider.position = CGPoint(x: -409, y: 0)
-        slider.zPosition = 99
-        slider.setScale(0.2)
+        slider.position = CGPoint(x: 0, y: 0)
+        slider.table.name = "sliderbar"
+        slider.piece.name = "sliderbar piece"
+        slider.width = 800
+        slider.height = 50
+        slider.zPosition = 2
+        slider.setScale(1)
+
+        SensibilityLabel.text = "Sensibility"
+        SensibilityLabel.fontSize = 20
+        SensibilityLabel.fontColor = SKColor.white
+        SensibilityLabel.fontName = "AvenirNext-Bold"
+        SensibilityLabel.zPosition = 99
+        SensibilityLabel.position = CGPoint(x: 0, y: 0)
+
+        Music.name = "Music checkbox"
+        Music.size.height = self.size.height * 0.48
+        Music.position = CGPoint(x: self.size.width*0.5, y: 0)
+        Music.zPosition = 2
+        Music.setScale(1.5)
 
         //    restart view
         gameOverLabel.text = "Game Over"
@@ -243,6 +277,8 @@ class Menu: SKScene {
         optionsWindow.addChild(optionsWindowLabel)
         optionsWindow.addChild(exitButton)
         optionsWindow.addChild(slider)
+        optionsWindow.addChild(Music)
+        optionsWindow.addChild(SensibilityLabel)
         self.addChild(optionsWindow)
         optionsWindow.run(scale)
     }
@@ -308,6 +344,12 @@ class Menu: SKScene {
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "sliderbar piece"){
+                let pointOfTouch = touch.location(in: self)
+                print(slider.table.frame.minX)
+                print(slider.table.frame.maxX)
+                slider.piece.position.x = -370
             }
             else if(nodeITapped[0].name == "Option save"){
                 ButtonAction = SKAction.run{
