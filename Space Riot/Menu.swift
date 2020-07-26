@@ -16,7 +16,7 @@ import UIKit
 
 class Menu: SKScene {
 
-//    main view
+    //    main view
     let background: SKSpriteNode
     let gameName: SKSpriteNode
     let startGame: SKSpriteNode
@@ -26,13 +26,13 @@ class Menu: SKScene {
     let options: SKSpriteNode
     let credits: SKSpriteNode
 
-//    restart view
+    //    restart view
     let gameOverLabel: SKLabelNode
     let scoreLabel: SKLabelNode
     let highScoreLabel: SKLabelNode
     let restartLabel: SKLabelNode
 
-//    Option view
+    //    Option view
     let exitButton: SKLabelNode
     let optionsWindow: SKSpriteNode
     let optionsWindowLabel: SKLabelNode
@@ -40,20 +40,20 @@ class Menu: SKScene {
     let Music: SKSpriteNode
     let slider: SKSlider
 
-//    Actions
+    //    Actions
     let changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
     let changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
     var ButtonAction = SKAction()
     var changeScaleSequence = SKAction()
 
-// Custom elements
+    // Custom elements
     class SKSlider: SKNode {
         let table: SKSpriteNode        
         let piece: SKSpriteNode
         var height: CGFloat? {
             willSet(value){
                 table.size.height = value!
-                piece.size.height = value!
+                piece.size.height = value! * 2
             }
         }
         var width: CGFloat? {
@@ -77,6 +77,7 @@ class Menu: SKScene {
             piece = SKSpriteNode(imageNamed: "assets/piece")
             currentValue = 0
             super.init()
+            piece.position.x = -370
             self.addChild(table)
             self.addChild(piece)
         }
@@ -186,20 +187,20 @@ class Menu: SKScene {
         optionsWindowLabel.zPosition = 99
         optionsWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
 
-        slider.position = CGPoint(x: 0, y: 0)
+        slider.position = CGPoint(x: 0, y: 200)
         slider.table.name = "sliderbar"
         slider.piece.name = "sliderbar piece"
         slider.width = 800
-        slider.height = 50
+        slider.height = 40
         slider.zPosition = 2
         slider.setScale(1)
 
         SensibilityLabel.text = "Sensibility"
-        SensibilityLabel.fontSize = 20
+        SensibilityLabel.fontSize = 50
         SensibilityLabel.fontColor = SKColor.white
         SensibilityLabel.fontName = "AvenirNext-Bold"
         SensibilityLabel.zPosition = 99
-        SensibilityLabel.position = CGPoint(x: 0, y: 0)
+        SensibilityLabel.position = CGPoint(x: 0, y: 290)
 
         Music.name = "Music checkbox"
         Music.size.height = self.size.height * 0.48
@@ -276,9 +277,9 @@ class Menu: SKScene {
         let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
         optionsWindow.addChild(optionsWindowLabel)
         optionsWindow.addChild(exitButton)
-        optionsWindow.addChild(slider)
         optionsWindow.addChild(Music)
         optionsWindow.addChild(SensibilityLabel)
+        optionsWindow.addChild(slider)
         self.addChild(optionsWindow)
         optionsWindow.run(scale)
     }
@@ -345,11 +346,9 @@ class Menu: SKScene {
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
-            else if(nodeITapped[0].name == "sliderbar piece"){
-                let pointOfTouch = touch.location(in: self)
-                print(slider.table.frame.minX)
-                print(slider.table.frame.maxX)
-                slider.piece.position.x = -370
+            else if(nodeITapped[0].name == "sliderbar"){
+                let pointOfTouch = touch.location(in: optionsWindow)
+                slider.piece.position.x = pointOfTouch.x
             }
             else if(nodeITapped[0].name == "Option save"){
                 ButtonAction = SKAction.run{
@@ -364,6 +363,16 @@ class Menu: SKScene {
                 sceneToMoveTo.scaleMode = self.scaleMode
                 let myTransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+            }
+        }
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch:AnyObject in touches{
+            let pointOfTouch = touch.location(in: optionsWindow)
+            let range = slider.table.frame.minX...slider.table.frame.maxX
+            if(range.contains(pointOfTouch.x)){
+                slider.piece.position.x = pointOfTouch.x
             }
         }
     }
