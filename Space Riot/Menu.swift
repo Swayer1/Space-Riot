@@ -37,7 +37,8 @@ class Menu: SKScene {
     let optionsWindow: SKSpriteNode
     let optionsWindowLabel: SKLabelNode
     let SensibilityLabel: SKLabelNode
-    let Music: SKSpriteNode
+    let Music: SKCheckBox
+    let MusicLabel: SKLabelNode
     let slider: SKSlider
 
     //    Actions
@@ -47,6 +48,69 @@ class Menu: SKScene {
     var changeScaleSequence = SKAction()
 
     // Custom elements
+
+    class SKCheckBox: SKNode {
+        let onSprite: SKSpriteNode
+        let offSprite: SKSpriteNode
+        var size: CGSize{
+            willSet{
+                onSprite.size = newValue
+                offSprite.size = newValue
+            }
+        }
+
+        override var zPosition: CGFloat{
+            willSet{
+                onSprite.zPosition = newValue
+                offSprite.zPosition = newValue
+            }
+        }
+
+        override var name: String?{
+            willSet{
+                onSprite.name = self.name
+                offSprite.name = self.name
+            }
+        }
+
+        var on: Bool{
+            willSet{
+                if(newValue){
+                    onSprite.zPosition = self.zPosition + 1
+                    offSprite.zPosition = self.zPosition
+                }
+                else{
+                    onSprite.zPosition = self.zPosition
+                    offSprite.zPosition = self.zPosition + 1
+                }
+            }
+        }
+
+        override init() {
+            onSprite = SKSpriteNode(imageNamed: "assets/Ok_BTN")
+            offSprite = SKSpriteNode(imageNamed: "assets/Close_BTN")
+            self.size = .zero
+            self.on = true
+            super.init()
+            onSprite.zPosition = self.zPosition
+            offSprite.zPosition = self.zPosition
+            self.addChild(onSprite)
+            self.addChild(offSprite)
+        }
+
+        override var position: CGPoint{
+            willSet{
+                onSprite.position = newValue
+                offSprite.position = newValue
+            }
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+
+
     class SKSlider: SKNode {
         let table: SKSpriteNode        
         let piece: SKSpriteNode
@@ -120,7 +184,8 @@ class Menu: SKScene {
         exitButton = SKLabelNode()
         optionsWindowLabel = SKLabelNode()
         slider = SKSlider()
-        Music = SKSpriteNode()
+        Music = SKCheckBox()
+        MusicLabel = SKLabelNode()
         SensibilityLabel = SKLabelNode()
 
         super.init(size: size)
@@ -197,18 +262,25 @@ class Menu: SKScene {
         slider.zPosition = 2
         slider.setScale(1)
 
-        SensibilityLabel.text = "Sensibility"
+        SensibilityLabel.text = "Touch"
         SensibilityLabel.fontSize = 50
         SensibilityLabel.fontColor = SKColor.white
         SensibilityLabel.fontName = "AvenirNext-Bold"
         SensibilityLabel.zPosition = 99
         SensibilityLabel.position = CGPoint(x: 0, y: 290)
 
+        MusicLabel.text = "Music"
+        MusicLabel.fontSize = 50
+        MusicLabel.fontColor = SKColor.white
+        MusicLabel.fontName = "AvenirNext-Bold"
+        MusicLabel.zPosition = 99
+        MusicLabel.position = CGPoint(x: 0, y: -120)
+
+
         Music.name = "Music checkbox"
-        Music.size.height = self.size.height * 0.48
-        Music.position = CGPoint(x: self.size.width*0.5, y: 0)
+        Music.position = CGPoint(x: 0, y: 0)
         Music.zPosition = 2
-        Music.setScale(1.5)
+        Music.setScale(0.5)
 
         //    restart view
         gameOverLabel.text = "Game Over"
@@ -280,6 +352,7 @@ class Menu: SKScene {
         optionsWindow.addChild(optionsWindowLabel)
         optionsWindow.addChild(exitButton)
         optionsWindow.addChild(Music)
+        optionsWindow.addChild(MusicLabel)
         optionsWindow.addChild(SensibilityLabel)
         optionsWindow.addChild(slider)
         self.addChild(optionsWindow)
@@ -349,8 +422,12 @@ class Menu: SKScene {
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "sliderbar"){
-                let pointOfTouch = touch.location(in: optionsWindow)
+                let pointOfTouch = touch.location(in: self)
                 slider.piece.position.x = pointOfTouch.x
+            }
+            else if(nodeITapped[0].name == "Music checkbox"){
+                let pointOfTouch = touch.location(in: self)
+                Music.on = !Music.on
             }
             else if(nodeITapped[0].name == "Option save"){
                 ButtonAction = SKAction.run{
