@@ -51,14 +51,14 @@ class Menu: SKScene {
         let table: SKSpriteNode        
         let piece: SKSpriteNode
         var height: CGFloat? {
-            willSet(value){
-                table.size.height = value!
-                piece.size.height = value! * 2
+            willSet{
+                table.size.height = newValue!
+                piece.size.height = newValue! * 2
             }
         }
         var width: CGFloat? {
-            willSet(value){
-                table.size.width = value!
+            willSet{
+                table.size.width = newValue!
             }
         }
         override var zPosition: CGFloat{
@@ -67,17 +67,19 @@ class Menu: SKScene {
                 piece.zPosition = self.zPosition + 1
             }
         }
-        var currentValue: CGFloat{
+        override var position: CGPoint{
             willSet{
-
+                table.position = newValue
+                piece.position = newValue
             }
         }
         override init() {
             table = SKSpriteNode(imageNamed: "assets/Table")
             piece = SKSpriteNode(imageNamed: "assets/piece")
-            currentValue = 0
             super.init()
             piece.position.x = -370
+            table.position = self.position
+            piece.position = self.position
             self.addChild(table)
             self.addChild(piece)
         }
@@ -369,9 +371,8 @@ class Menu: SKScene {
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch:AnyObject in touches{
-            let pointOfTouch = touch.location(in: optionsWindow)
-            let range = slider.table.frame.minX...slider.table.frame.maxX
-            if(range.contains(pointOfTouch.x)){
+            let pointOfTouch = touch.location(in: slider)
+            if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
             }
         }
