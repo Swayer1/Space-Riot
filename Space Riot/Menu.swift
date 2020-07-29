@@ -96,6 +96,7 @@ class Menu: SKScene {
             super.init()
             onSprite.zPosition = self.zPosition
             offSprite.zPosition = self.zPosition
+            offSprite.setScale(0)
             self.addChild(onSprite)
             self.addChild(offSprite)
         }
