@@ -68,20 +68,22 @@ class Menu: SKScene {
 
         override var name: String?{
             willSet{
-                onSprite.name = self.name
-                offSprite.name = self.name
+                onSprite.name = newValue
+                offSprite.name = newValue
             }
         }
 
         var on: Bool{
             willSet{
+                let scaleOut = SKAction.scale(to: 0, duration: 0.2)
+                let scaleIn = SKAction.scale(to: 1, duration: 0.2)
                 if(newValue){
-                    onSprite.zPosition = self.zPosition + 1
-                    offSprite.zPosition = self.zPosition
+                    offSprite.run(scaleOut)
+                    onSprite.run(scaleIn)
                 }
                 else{
-                    onSprite.zPosition = self.zPosition
-                    offSprite.zPosition = self.zPosition + 1
+                    onSprite.run(scaleOut)
+                    offSprite.run(scaleIn)
                 }
             }
         }
@@ -426,7 +428,6 @@ class Menu: SKScene {
                 slider.piece.position.x = pointOfTouch.x
             }
             else if(nodeITapped[0].name == "Music checkbox"){
-                let pointOfTouch = touch.location(in: self)
                 Music.on = !Music.on
             }
             else if(nodeITapped[0].name == "Option save"){
