@@ -117,15 +117,11 @@ class Menu: SKScene {
     class SKSlider: SKNode {
         let table: SKSpriteNode        
         let piece: SKSpriteNode
-        var height: CGFloat? {
+        var size: CGSize{
             willSet{
-                table.size.height = newValue!
-                piece.size.height = newValue! * 2
-            }
-        }
-        var width: CGFloat? {
-            willSet{
-                table.size.width = newValue!
+                table.size.height = newValue.height
+                table.size.width = newValue.width
+                piece.size.height = newValue.height * 2
             }
         }
         override var zPosition: CGFloat{
@@ -143,6 +139,7 @@ class Menu: SKScene {
         override init() {
             table = SKSpriteNode(imageNamed: "assets/Table")
             piece = SKSpriteNode(imageNamed: "assets/piece")
+            self.size = .zero
             super.init()
             piece.position.x = -370
             table.position = self.position
@@ -260,8 +257,8 @@ class Menu: SKScene {
         slider.position = CGPoint(x: 0, y: 200)
         slider.table.name = "sliderbar"
         slider.piece.name = "sliderbar piece"
-        slider.width = 800
-        slider.height = 40
+        slider.size.width = 800
+        slider.size.height = 40
         slider.zPosition = 2
         slider.setScale(1)
 
@@ -269,7 +266,7 @@ class Menu: SKScene {
         SensibilityLabel.fontSize = 50
         SensibilityLabel.fontColor = SKColor.white
         SensibilityLabel.fontName = "AvenirNext-Bold"
-        SensibilityLabel.zPosition = 99
+        SensibilityLabel.zPosition = 2
         SensibilityLabel.position = CGPoint(x: 0, y: 290)
 
         MusicLabel.text = "Music"
