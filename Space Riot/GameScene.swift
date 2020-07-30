@@ -395,8 +395,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func runGameOver(){
-        if GameViewController.interstitial.isReady {
-            GameViewController.interstitial.present(fromRootViewController: (self.view?.window?.rootViewController)!)
+        if GameViewController.instance.interstitial.isReady {
+            GameViewController.instance.interstitial.present(fromRootViewController: GameViewController.instance)
         } else {
           print("Ad wasn't ready")
         }
@@ -434,7 +434,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sceneToMoveTo.scaleMode = self.scaleMode
         let transition = SKTransition.fade(withDuration: 0.5)
         self.view!.presentScene(sceneToMoveTo, transition: transition)
-        GameViewController.loadAds()
+        GameViewController.instance.loadAds()
     }
     
     func stopGameForeverRepeats(){

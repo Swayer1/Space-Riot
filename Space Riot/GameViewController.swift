@@ -23,9 +23,9 @@ class GameViewController: UIViewController, LoginButtonDelegate {
 
     static var instance: GameViewController!
     var backingAudio: AVAudioPlayer!
-    static var bannerViewBottom: GADBannerView!
-    static var interstitial: GADInterstitial!
-    static let request = GADRequest()
+    var bannerViewBottom: GADBannerView!
+    var interstitial: GADInterstitial!
+    let request = GADRequest()
 
     // Facebook login
     
@@ -116,17 +116,17 @@ class GameViewController: UIViewController, LoginButtonDelegate {
 
             //        Google ads
 
-            GameViewController.bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
-            GameViewController.bannerViewBottom.adUnitID = bannerAdsBottomId
-            GameViewController.bannerViewBottom.rootViewController = self
-            GameViewController.bannerViewBottom.load(GADRequest())
-            view.addSubview(GameViewController.bannerViewBottom)
-            GameViewController.bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
-            GameViewController.bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
-            GameViewController.bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
-            GameViewController.bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
+            bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
+            bannerViewBottom.adUnitID = bannerAdsBottomId
+            bannerViewBottom.rootViewController = self
+            bannerViewBottom.load(GADRequest())
+            view.addSubview(bannerViewBottom)
+            bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
+            bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
+            bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
+            bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
 
-            GameViewController.loadAds()
+            loadAds()
 
             //        Google ads
             
@@ -145,9 +145,9 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         }
     }
 
-    static func loadAds(){
-        GameViewController.interstitial = GADInterstitial(adUnitID: interstitialId )
-        GameViewController.interstitial.load(GameViewController.request)
+    func loadAds(){
+        interstitial = GADInterstitial(adUnitID: interstitialId )
+        interstitial.load(request)
     }
         
     override var shouldAutorotate: Bool {
