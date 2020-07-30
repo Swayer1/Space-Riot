@@ -450,6 +450,7 @@ class Menu: SKScene {
             let pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
+                print(convert(pointOfTouch, from: slider).x - (slider.size.width + slider.size.height))
             }
         }
     }
