@@ -21,6 +21,7 @@ let interstitialId: String = "ca-app-pub-3940256099942544/4411468910"
 
 class GameViewController: UIViewController, LoginButtonDelegate {
 
+    static var instance: GameViewController!
     var backingAudio: AVAudioPlayer!
     static var bannerViewBottom: GADBannerView!
     static var interstitial: GADInterstitial!
@@ -67,6 +68,8 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()        
 
+        GameViewController.instance = self
+
         // Firebase start
         
         let ref = Database.database().reference()
@@ -102,7 +105,6 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             }
             
             backingAudio.numberOfLoops = -1
-//            backingAudio.play()
             
             let deviceWidth = UIScreen.main.bounds.width * UIScreen.main.scale
             let deviceHeight = UIScreen.main.bounds.height * UIScreen.main.scale

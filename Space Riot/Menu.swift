@@ -80,10 +80,12 @@ class Menu: SKScene {
                 if(newValue){
                     offSprite.run(scaleOut)
                     onSprite.run(scaleIn)
+                    GameViewController.instance.backingAudio.play()
                 }
                 else{
                     onSprite.run(scaleOut)
                     offSprite.run(scaleIn)
+                    GameViewController.instance.backingAudio.stop()
                 }
             }
         }
