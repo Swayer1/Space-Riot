@@ -254,10 +254,10 @@ class Menu: SKScene {
         optionsWindowLabel.zPosition = 99
         optionsWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
 
-        slider.position = CGPoint(x: 0, y: 200)
+        slider.position = CGPoint(x: 50, y: 155)
         slider.table.name = "sliderbar"
         slider.piece.name = "sliderbar piece"
-        slider.size.width = 800
+        slider.size.width = 500
         slider.size.height = 40
         slider.zPosition = 2
         slider.setScale(1)
@@ -267,18 +267,18 @@ class Menu: SKScene {
         SensibilityLabel.fontColor = SKColor.white
         SensibilityLabel.fontName = "AvenirNext-Bold"
         SensibilityLabel.zPosition = 2
-        SensibilityLabel.position = CGPoint(x: 0, y: 290)
+        SensibilityLabel.position = CGPoint(x: -300, y: 290)
 
         MusicLabel.text = "Music"
         MusicLabel.fontSize = 50
         MusicLabel.fontColor = SKColor.white
         MusicLabel.fontName = "AvenirNext-Bold"
         MusicLabel.zPosition = 99
-        MusicLabel.position = CGPoint(x: 0, y: -120)
+        MusicLabel.position = CGPoint(x: -300, y: 150)
 
 
         Music.name = "Music checkbox"
-        Music.position = CGPoint(x: 0, y: 0)
+        Music.position = CGPoint(x: -60, y: 105)
         Music.zPosition = 2
         Music.setScale(0.5)
 
