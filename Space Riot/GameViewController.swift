@@ -105,6 +105,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             }
             
             backingAudio.numberOfLoops = -1
+            backingAudio.play()
             
             let deviceWidth = UIScreen.main.bounds.width * UIScreen.main.scale
             let deviceHeight = UIScreen.main.bounds.height * UIScreen.main.scale
