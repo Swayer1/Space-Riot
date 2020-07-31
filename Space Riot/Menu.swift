@@ -451,8 +451,8 @@ class Menu: SKScene {
         for touch:AnyObject in touches{
             let pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
-                slider.piece.position.x = pointOfTouch.x
-                print(convert(pointOfTouch, from: slider).x - (slider.size.width + slider.size.height))
+                slider.piece.position.x = pointOfTouch.x                
+                GameViewController.instance.options["TouchMultiplier"] = (convert(pointOfTouch, from: slider).x - (slider.size.width + slider.size.height))/500 + 1
             }
         }
     }

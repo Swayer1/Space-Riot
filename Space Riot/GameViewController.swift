@@ -26,7 +26,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     var bannerViewBottom: GADBannerView!
     var interstitial: GADInterstitial!
     let request = GADRequest()
-    var options: [String:CGFloat] = ["TouchMultiplier":1]
+    var options: [String:CGFloat] = ["TouchMultiplier":1.0]
 
     // Facebook login
     
