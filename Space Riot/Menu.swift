@@ -143,6 +143,7 @@ class Menu: SKScene {
             willSet{
                 table.position = newValue
                 piece.position = newValue
+                piece.position.x = -198
             }
         }
         override init() {
