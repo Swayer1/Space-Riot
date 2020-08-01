@@ -41,6 +41,13 @@ class Menu: SKScene {
     let MusicLabel: SKLabelNode
     let slider: SKSlider
 
+
+    // purchase view
+    let purchaseExitButton: SKLabelNode
+    let purchaseWindow: SKSpriteNode
+    let purchaseWindowLabel: SKLabelNode
+
+
     //    Actions
     let changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
     let changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
@@ -91,8 +98,8 @@ class Menu: SKScene {
         }
 
         override init() {
-            onSprite = SKSpriteNode(imageNamed: "assets/Ok_BTN")
-            offSprite = SKSpriteNode(imageNamed: "assets/Close_BTN")
+            onSprite = SKSpriteNode(imageNamed: "assets/optionView/Ok_BTN")
+            offSprite = SKSpriteNode(imageNamed: "assets/optionView/Close_BTN")
             self.size = .zero
             self.on = true
             super.init()
@@ -182,13 +189,18 @@ class Menu: SKScene {
         restartLabel = SKLabelNode()
 
         //    Option view
-        optionsWindow = SKSpriteNode(imageNamed: "assets/optionsWindow")
+        optionsWindow = SKSpriteNode(imageNamed: "assets/optionView/optionsWindow")
         exitButton = SKLabelNode()
         optionsWindowLabel = SKLabelNode()
         slider = SKSlider()
         Music = SKCheckBox()
         MusicLabel = SKLabelNode()
         SensibilityLabel = SKLabelNode()
+
+        // purchase view
+        purchaseExitButton = SKLabelNode()
+        purchaseWindow = SKSpriteNode(imageNamed: "assets/purchaseView/purchaseWindow")
+        purchaseWindowLabel = SKLabelNode()
 
         super.init(size: size)
 
@@ -284,6 +296,28 @@ class Menu: SKScene {
         Music.zPosition = 2
         Music.setScale(0.5)
 
+        // purchase view
+        purchaseWindow.name = "Game options window"
+        purchaseWindow.size.height = self.size.height * 0.48
+        purchaseWindow.position = CGPoint(x: self.size.width*0.5, y: -self.size.height+purchaseWindow.size.height)
+        purchaseWindow.zPosition = 2
+        purchaseWindow.setScale(1.5)
+
+        purchaseExitButton.text = "Back"
+        purchaseExitButton.name = "purchase back"
+        purchaseExitButton.fontSize = 70
+        purchaseExitButton.fontColor = SKColor.white
+        purchaseExitButton.fontName = "AvenirNext-Bold"
+        purchaseExitButton.zPosition = 99
+        purchaseExitButton.position = CGPoint(x: 0, y: -self.size.height*0.2)
+
+        purchaseWindowLabel.text = "Purchase"
+        purchaseWindowLabel.fontSize = 90
+        purchaseWindowLabel.fontColor = SKColor.white
+        purchaseWindowLabel.fontName = "AvenirNext-Bold"
+        purchaseWindowLabel.zPosition = 99
+        purchaseWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
+
         //    restart view
         gameOverLabel.text = "Game Over"
         gameOverLabel.fontSize = 200
@@ -361,6 +395,14 @@ class Menu: SKScene {
         optionsWindow.run(scale)
     }
 
+    func gamePurchaseWindows(){
+        let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
+        purchaseWindow.addChild(purchaseExitButton)
+        purchaseWindow.addChild(purchaseWindowLabel)
+        self.addChild(purchaseWindow)
+        purchaseWindow.run(scale)
+    }
+
     func saveOptions(){
         let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         let delete = SKAction.removeFromParent()
@@ -369,6 +411,16 @@ class Menu: SKScene {
         }
         let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
         optionsWindow.run(deleteSequence)
+    }
+
+    func exitPurchaseBack(){
+        let scale = SKAction.moveTo(y: -self.size.height+purchaseWindow.size.height, duration: 0.2)
+        let delete = SKAction.removeFromParent()
+        let deleteChildren = SKAction.run{
+            self.purchaseWindow.removeAllChildren()
+        }
+        let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
+        purchaseWindow.run(deleteSequence)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -395,7 +447,7 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "shop button"){
                 ButtonAction = SKAction.run{
-
+                    self.gamePurchaseWindows()
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
@@ -437,6 +489,13 @@ class Menu: SKScene {
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
+            else if(nodeITapped[0].name == "purchase back"){
+                ButtonAction = SKAction.run{
+                    self.exitPurchaseBack()
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
             else if(restartLabel.contains(pointOfTouch)){
                 GameViewController.instance.bannerViewBottom.isHidden = true
                 let sceneToMoveTo = GameScene.getInstance(size: self.size)
@@ -451,7 +510,7 @@ class Menu: SKScene {
         for touch:AnyObject in touches{
             let pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
-                slider.piece.position.x = pointOfTouch.x                
+                slider.piece.position.x = pointOfTouch.x
                 GameViewController.instance.options["TouchMultiplier"] = (convert(pointOfTouch, from: slider).x - (slider.size.width + slider.size.height))/500 + 1
             }
         }

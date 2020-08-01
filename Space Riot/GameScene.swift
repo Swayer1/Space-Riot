@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let CleaningWave: UInt32 = 0b0110 //6
         static let enemyBullet: UInt32 = 0b0111 //7
     }
-        
+
     static func getInstance(size: CGSize)->GameScene{
         if(instance == nil){
             instance = GameScene(size: size)
@@ -260,16 +260,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if(self.currentGameState == gameState.inGame){
             switch GameMode.currentLevelNumber{
-            case 0:
-                self.normalMode()
-            case 1:
-                self.guessMode()
-            case 2:
-                self.mirrorMode()
-            case 3:
-                self.pandemicMode()
-            default:
-                break
+                case 0:
+                    self.normalMode()
+                case 1:
+                    self.guessMode()
+                case 2:
+                    self.mirrorMode()
+                case 3:
+                    self.pandemicMode()
+                default:
+                    break
             }
         }
     }
@@ -398,7 +398,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if GameViewController.instance.interstitial.isReady {
             GameViewController.instance.interstitial.present(fromRootViewController: GameViewController.instance)
         } else {
-          print("Ad wasn't ready")
+            print("Ad wasn't ready")
         }
         currentGameState = gameState.afterGame
         GameMode.gameSpeed = 2.75
@@ -489,15 +489,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if(body1.categoryBitMask == PhysicsCatecories.Bullet && body2.categoryBitMask == PhysicsCatecories.Enemy && (body2.node!.position.y + body2.node!.frame.height) < self.size.height){
                 if(GameMode.mode == "Guess"){
                     switch body2.node?.name! {
-                    case "EnemyBlue":
-                        enemyFireGuessMode(body2.node!.position)
-                        addScore(1)
-                    case "EnemyRed":
-                        addScore(-2)
-                    case "EnemyGreen":
-                        addScore(1)
-                    default:
-                        addScore(1)
+                        case "EnemyBlue":
+                            enemyFireGuessMode(body2.node!.position)
+                            addScore(1)
+                        case "EnemyRed":
+                            addScore(-2)
+                        case "EnemyGreen":
+                            addScore(1)
+                        default:
+                            addScore(1)
                     }
                 }
                 else{
@@ -534,24 +534,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         explosion.position = Enemy.position
         explosion.zPosition = 3
         switch GameMode.mode {
-        case "Guess":
-            explosion.setScale(0)
-            scaleTo = 8
-            scaleDuration = 0.3
-        case "Pandemic":
-            explosion.setScale(4)
-            scaleTo = 0
-            scaleDuration = 1
-        case "Mirror":
-            explosion.setScale(0)
-            scaleTo = 8
-            scaleDuration = 0.3
-        case "Normal":
-            explosion.setScale(0)
-            scaleTo = 6
-            scaleDuration = 0.3
-        default:
-            break
+            case "Guess":
+                explosion.setScale(0)
+                scaleTo = 8
+                scaleDuration = 0.3
+            case "Pandemic":
+                explosion.setScale(4)
+                scaleTo = 0
+                scaleDuration = 1
+            case "Mirror":
+                explosion.setScale(0)
+                scaleTo = 8
+                scaleDuration = 0.3
+            case "Normal":
+                explosion.setScale(0)
+                scaleTo = 6
+                scaleDuration = 0.3
+            default:
+                break
         }
         self.addChild(explosion)
         let scaleOut = SKAction.scale(to: scaleTo, duration: scaleDuration)
@@ -609,14 +609,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnEnemyGuessMode(){
         switch GameMode.guessModeEnemyTypes[enemyCounterGuessMode] {
-        case 0:
-            guessEnemyTypeBlue()
-        case 1:
-            guessEnemyTypeRed()
-        case 2:
-            guessEnemyTypeGreen()
-        default:
-            guessEnemyTypeGreen()
+            case 0:
+                guessEnemyTypeBlue()
+            case 1:
+                guessEnemyTypeRed()
+            case 2:
+                guessEnemyTypeGreen()
+            default:
+                guessEnemyTypeGreen()
         }
         if(enemyCounterGuessMode >= GameMode.guessModeEnemyTypes.count - 1){
             enemyCounterGuessMode = 0
@@ -774,16 +774,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnEnemy(){
         switch GameMode.mode {
-        case "Guess":
-            spawnEnemyGuessMode()
-        case "Pandemic":
-            spawnEnemyPandemicMode()
-        case "Mirror":
-            spawnEnemyMirrorMode()
-        case "Normal":
-            spawnEnemyNormalMode()
-        default:
-            spawnEnemyNormalMode()
+            case "Guess":
+                spawnEnemyGuessMode()
+            case "Pandemic":
+                spawnEnemyPandemicMode()
+            case "Mirror":
+                spawnEnemyMirrorMode()
+            case "Normal":
+                spawnEnemyNormalMode()
+            default:
+                spawnEnemyNormalMode()
         }
     }
     
@@ -844,16 +844,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let pointOfPreviousTouch = touch.previousLocation(in: self)
             let amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x) * GameViewController.instance.options["TouchMultiplier"]!
             let amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y) * GameViewController.instance.options["TouchMultiplier"]!
-            print(amountXDragged)
-            print(amountYDragged)
             if(currentGameState == gameState.inGame && !GameMode.adsMode){
                 switch GameMode.mode {
-                case "Mirror":
-                    player.position.x -= amountXDragged
-                    player.position.y -= amountYDragged
-                default:
-                    player.position.x += amountXDragged
-                    player.position.y += amountYDragged
+                    case "Mirror":
+                        player.position.x -= amountXDragged
+                        player.position.y -= amountYDragged
+                    default:
+                        player.position.x += amountXDragged
+                        player.position.y += amountYDragged
                 }
                 if(player.position.x > GameArea.maxX){
                     player.position.x = GameArea.maxX
