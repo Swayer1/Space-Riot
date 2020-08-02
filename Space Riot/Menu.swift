@@ -16,6 +16,9 @@ import UIKit
 
 class Menu: SKScene {
 
+    // on device database
+    let defaults = UserDefaults()
+
     //    main view
     let background: SKSpriteNode
     let gameName: SKSpriteNode
@@ -163,9 +166,12 @@ class Menu: SKScene {
         }
     }
 
+    override func didMove(to view: SKView) {
+        loadUserOptions()
+    }
+
     init(size: CGSize, form: String) {
 
-        let defaults = UserDefaults()
         var highScoreNumber = defaults.integer(forKey: "highScoreSaved")
 
         if(gameScorePlayer > highScoreNumber){
@@ -417,7 +423,10 @@ class Menu: SKScene {
     }
 
     func saveOptions(){
-        let cookieHeader = convertDicToString(dic: userOptionsList.info)
+        userOptionsList.touchMultiplier = slider.piece.position
+        userOptionsList.musicOn = Music.on
+        let optionsData = convertDicToString(dic: userOptionsList.info)
+        defaults.set(optionsData, forKey: "userOptionData")
         let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         let delete = SKAction.removeFromParent()
         let deleteChildren = SKAction.run{
@@ -425,6 +434,16 @@ class Menu: SKScene {
         }
         let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
         optionsWindow.run(deleteSequence)
+    }
+
+    func loadUserOptions(){
+        let userOptions = defaults.string(forKey: "userOptionData")
+        let userOptionsDic = convertStringtoDic(input: userOptions!)
+        userOptionsList.touchMultiplier = NSCoder.cgPoint(for: userOptionsDic["TouchMultiplier"]!)
+        userOptionsList.musicOn = Bool(userOptionsDic["MusicOn"]!)!
+        slider.piece.position = userOptionsList.touchMultiplier
+        Music.on = userOptionsList.musicOn
+        print(userOptions)
     }
 
     func exitPurchaseBack(){
@@ -495,7 +514,6 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "Music checkbox"){
                 Music.on = !Music.on
-                userOptionsList.musicOn = Music.on
             }
             else if(nodeITapped[0].name == "Option save"){
                 ButtonAction = SKAction.run{
@@ -526,7 +544,6 @@ class Menu: SKScene {
             let pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
-                userOptionsList.touchMultiplier = pointOfTouch
             }
         }
     }
