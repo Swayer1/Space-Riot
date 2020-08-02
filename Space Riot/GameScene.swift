@@ -842,8 +842,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for touch:AnyObject in touches{
             let pointOfTouch = touch.location(in: self)
             let pointOfPreviousTouch = touch.previousLocation(in: self)
-            let amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x)
-            let amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y)
+            let amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x) * Menu.instance.UserOps.touchMultipler
+            let amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y) * Menu.instance.UserOps.touchMultipler
             if(currentGameState == gameState.inGame && !GameMode.adsMode){
                 switch GameMode.mode {
                     case "Mirror":

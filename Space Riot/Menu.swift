@@ -16,8 +16,13 @@ import UIKit
 
 class Menu: SKScene {
 
+    static var instance: Menu!
+
     // on device database
     let defaults = UserDefaults()
+
+    // user options
+    var UserOps: userOptionsList
 
     //    main view
     let background: SKSpriteNode
@@ -167,6 +172,7 @@ class Menu: SKScene {
     }
 
     override func didMove(to view: SKView) {
+        Menu.instance = self
         loadUserOptions()
     }
 
@@ -178,6 +184,10 @@ class Menu: SKScene {
             highScoreNumber = gameScorePlayer
             defaults.set(highScoreNumber, forKey: "highScoreSaved")
         }
+
+        // game options object
+
+        UserOps = userOptionsList()
 
         //    main view
         background = SKSpriteNode(imageNamed: "Normal/background1")
@@ -422,10 +432,26 @@ class Menu: SKScene {
         return dic.map { $0.0 + "=" + $0.1 }.joined(separator: ";")
     }
 
+    class userOptionsList: SKNode {
+        var info: [String:String] = [String:String]()
+        var touchMultipler: CGFloat = 1
+        var touchPosition: CGPoint = .zero{
+            willSet{
+                info["TouchMultiplier"] = NSCoder.string(for: newValue)
+                touchMultipler = (convert(newValue, from: Menu.instance.slider).x - (Menu.instance.slider.table.size.width + Menu.instance.slider.table.size.height))/500 + 1
+            }
+        }
+        var musicOn: Bool = true{
+            willSet{
+                info["MusicOn"] = String(newValue)
+            }
+        }
+    }
+
     func saveOptions(){
-        userOptionsList.touchMultiplier = slider.piece.position
-        userOptionsList.musicOn = Music.on
-        let optionsData = convertDicToString(dic: userOptionsList.info)
+        UserOps.touchPosition = slider.piece.position
+        UserOps.musicOn = Music.on        
+        let optionsData = convertDicToString(dic: UserOps.info)
         defaults.set(optionsData, forKey: "userOptionData")
         let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         let delete = SKAction.removeFromParent()
@@ -439,10 +465,10 @@ class Menu: SKScene {
     func loadUserOptions(){
         let userOptions = defaults.string(forKey: "userOptionData")
         let userOptionsDic = convertStringtoDic(input: userOptions!)
-        userOptionsList.touchMultiplier = NSCoder.cgPoint(for: userOptionsDic["TouchMultiplier"]!)
-        userOptionsList.musicOn = Bool(userOptionsDic["MusicOn"]!)!
-        slider.piece.position = userOptionsList.touchMultiplier
-        Music.on = userOptionsList.musicOn
+        UserOps.touchPosition = NSCoder.cgPoint(for: userOptionsDic["TouchMultiplier"]!)
+        UserOps.musicOn = Bool(userOptionsDic["MusicOn"]!)!
+        slider.piece.position = UserOps.touchPosition
+        Music.on = UserOps.musicOn
     }
 
     func exitPurchaseBack(){
@@ -544,21 +570,6 @@ class Menu: SKScene {
             if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
             }
-        }
-    }
-}
-
-
-struct userOptionsList {
-    static var info: [String:String] = [String:String]()
-    static var touchMultiplier: CGPoint = .zero{
-        willSet{
-            info["TouchMultiplier"] = NSCoder.string(for: newValue)
-        }
-    }
-    static var musicOn: Bool = true{
-        willSet{
-            info["MusicOn"] = String(newValue)
         }
     }
 }
