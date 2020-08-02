@@ -443,7 +443,6 @@ class Menu: SKScene {
         userOptionsList.musicOn = Bool(userOptionsDic["MusicOn"]!)!
         slider.piece.position = userOptionsList.touchMultiplier
         Music.on = userOptionsList.musicOn
-        print(userOptions)
     }
 
     func exitPurchaseBack(){
