@@ -26,13 +26,12 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     var bannerViewBottom: GADBannerView!
     var interstitial: GADInterstitial!
     let request = GADRequest()
-    var options: [String:CGFloat] = ["TouchMultiplier":1.0]
 
     // Facebook login
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         print("login OK")
-//        FetchProfile()
+        //        FetchProfile()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
@@ -78,7 +77,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         
         if let token = AccessToken.current, !token.isExpired{
             // user is log in
-//            FetchProfile()
+            //            FetchProfile()
         }
         
         // firebase end
@@ -87,7 +86,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         
         let loginButton = FBLoginButton()
         loginButton.center = view.center
-//        view.addSubview(loginButton)
+        //        view.addSubview(loginButton)
         loginButton.permissions = ["public_profile", "email", "user_friends"]
         loginButton.delegate = self
         
@@ -150,7 +149,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         interstitial = GADInterstitial(adUnitID: interstitialId )
         interstitial.load(request)
     }
-        
+
     override var shouldAutorotate: Bool {
         return true
     }

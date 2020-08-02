@@ -404,7 +404,20 @@ class Menu: SKScene {
         purchaseWindow.run(scale)
     }
 
+    func convertStringtoDic(input: String) -> [String: String]{
+        var array: [String: String] = [String: String]()
+        for item in input.split(separator: ";"){
+            array[String(item.split(separator: "=")[0])] = String(item.split(separator: "=")[1])
+        }
+        return array
+    }
+
+    func convertDicToString(dic: [String: String]) -> String{
+        return dic.map { $0.0 + "=" + $0.1 }.joined(separator: ";")
+    }
+
     func saveOptions(){
+        let cookieHeader = convertDicToString(dic: userOptionsList.info)        
         let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         let delete = SKAction.removeFromParent()
         let deleteChildren = SKAction.run{
@@ -482,6 +495,7 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "Music checkbox"){
                 Music.on = !Music.on
+                userOptionsList.musicOn = Music.on
             }
             else if(nodeITapped[0].name == "Option save"){
                 ButtonAction = SKAction.run{
@@ -512,8 +526,23 @@ class Menu: SKScene {
             let pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
-                GameViewController.instance.options["TouchMultiplier"] = (convert(pointOfTouch, from: slider).x - (slider.size.width + slider.size.height))/500 + 1
+                userOptionsList.touchMultiplier = pointOfTouch
             }
+        }
+    }
+}
+
+
+struct userOptionsList {
+    static var info: [String:String] = [String:String]()
+    static var touchMultiplier: CGPoint = .zero{
+        willSet{
+            info["TouchMultiplier"] = NSCoder.string(for: newValue)
+        }
+    }
+    static var musicOn: Bool = true{
+        willSet{
+            info["MusicOn"] = String(newValue)
         }
     }
 }
