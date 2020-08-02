@@ -417,7 +417,7 @@ class Menu: SKScene {
     }
 
     func saveOptions(){
-        let cookieHeader = convertDicToString(dic: userOptionsList.info)        
+        let cookieHeader = convertDicToString(dic: userOptionsList.info)
         let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         let delete = SKAction.removeFromParent()
         let deleteChildren = SKAction.run{
@@ -490,7 +490,7 @@ class Menu: SKScene {
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "sliderbar"){
-                let pointOfTouch = touch.location(in: self)
+                let pointOfTouch = touch.location(in: slider)
                 slider.piece.position.x = pointOfTouch.x
             }
             else if(nodeITapped[0].name == "Music checkbox"){
