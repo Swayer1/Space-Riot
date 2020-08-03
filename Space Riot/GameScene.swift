@@ -18,16 +18,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     static var instance: GameScene? = nil
     
-    let encouragingPhrases: [String] = ["Good job", "O YEAH", "Nice", "Hmm Damnn", "Fire baby"]
-    let scoreLabelPlayer = SKLabelNode()
+    var encouragingPhrases: [String] = ["Good job", "O YEAH", "Nice", "Hmm Damnn", "Fire baby"]
+    var scoreLabelPlayer = SKLabelNode()
     var player: SKSpriteNode = SKSpriteNode(imageNamed: "Normal/player")
     var timer: TimeInterval = 0
     var updateTimerAction = SKAction()
     var enemyCounterGuessMode: Int = 0
-    let bulletSound = SKAction.playSoundFileNamed("torpedo", waitForCompletion: false)
-    let enemyBulletSound = SKAction.playSoundFileNamed("torpedo", waitForCompletion: false)
-    let enemyExplosionSound = SKAction.playSoundFileNamed("explosion", waitForCompletion: false)
-    let tapToStartGame = SKLabelNode()
+    var bulletSound = SKAction.playSoundFileNamed("torpedo", waitForCompletion: false)
+    var enemyBulletSound = SKAction.playSoundFileNamed("torpedo", waitForCompletion: false)
+    var enemyExplosionSound = SKAction.playSoundFileNamed("explosion", waitForCompletion: false)
+    var tapToStartGame = SKLabelNode()
     var repeatFire = SKAction()
     enum gameState {
         case preGame
@@ -38,13 +38,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var currentGameState = gameState.preGame
     
     struct PhysicsCatecories {
-        static let None: UInt32 = 0 // 0
-        static let Player: UInt32 = 0b1 // 1
-        static let Bullet: UInt32 = 0b10 // 2
-        static let Enemy: UInt32 = 0b100 // 4
-        static let ModeChangeItem: UInt32 = 0b0101 //5
-        static let CleaningWave: UInt32 = 0b0110 //6
-        static let enemyBullet: UInt32 = 0b0111 //7
+        static var None: UInt32 = 0 // 0
+        static var Player: UInt32 = 0b1 // 1
+        static var Bullet: UInt32 = 0b10 // 2
+        static var Enemy: UInt32 = 0b100 // 4
+        static var ModeChangeItem: UInt32 = 0b0101 //5
+        static var CleaningWave: UInt32 = 0b0110 //6
+        static var enemyBullet: UInt32 = 0b0111 //7
     }
 
     static func getInstance(size: CGSize)->GameScene{
@@ -66,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return Int(random()) * (max - min) + min
     }
     
-    let GameArea:CGRect
+    var GameArea:CGRect
     
     private override init(size: CGSize) {
         GameArea = CGRect(x: (player.frame.width * 0.2) / 2, y: 0, width: size.width - (player.frame.width * 0.2), height: size.height)
@@ -90,20 +90,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         GameMode.mode = "Normal"
         
-        let callFunction = SKAction.run({self.fireBullet()})
-        let fireWait = SKAction.wait(forDuration: 0.2)
-        let fireSequence = SKAction.sequence([callFunction, fireWait])
+        var callFunction = SKAction.run({self.fireBullet()})
+        var fireWait = SKAction.wait(forDuration: 0.2)
+        var fireSequence = SKAction.sequence([callFunction, fireWait])
         repeatFire = SKAction.repeatForever(fireSequence)
         
         self.physicsWorld.contactDelegate = self
-        let background1 = SKSpriteNode(imageNamed: "Normal/background1")
+        var background1 = SKSpriteNode(imageNamed: "Normal/background1")
         background1.size = self.size
         background1.anchorPoint = CGPoint(x: 0.5, y: 0)
         background1.position = CGPoint(x: self.size.width/2, y: self.size.height * CGFloat(0))
         background1.zPosition = 0
         background1.name = "Background"
         self.addChild(background1)
-        let background2 = SKSpriteNode(imageNamed: "Normal/background2")
+        var background2 = SKSpriteNode(imageNamed: "Normal/background2")
         background2.size = self.size
         background2.anchorPoint = CGPoint(x: 0.5, y: 0)
         background2.position = CGPoint(x: self.size.width/2, y: self.size.height * CGFloat(1))
@@ -119,7 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelPlayer.position = CGPoint(x: self.size.width*0.15, y: self.size.height + scoreLabelPlayer.frame.size.height)
         scoreLabelPlayer.zPosition = 100
         self.addChild(scoreLabelPlayer)
-        let moveOnToTheScreen = SKAction.moveTo(y: self.size.height * 0.9, duration: 0.3)
+        var moveOnToTheScreen = SKAction.moveTo(y: self.size.height * 0.9, duration: 0.3)
         scoreLabelPlayer.run(moveOnToTheScreen)
         
         player = SKSpriteNode(imageNamed: "Normal/player")
@@ -142,7 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToStartGame.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         tapToStartGame.alpha = 0
         self.addChild(tapToStartGame)
-        let fadeInAction = SKAction.fadeIn(withDuration: 0.3)
+        var fadeInAction = SKAction.fadeIn(withDuration: 0.3)
         tapToStartGame.run(fadeInAction)
         
         startGame()
@@ -161,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             lastUpdateTime = currentTime
         }
         
-        let amountToMoveBackground = amountToMovePerSecond * CGFloat(deltaFrameTime)
+        var amountToMoveBackground = amountToMovePerSecond * CGFloat(deltaFrameTime)
         self.enumerateChildNodes(withName: "Background"){
             background, stop in
             
@@ -185,7 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func updateTimer(){
         timer += 1
         if(timer == 10){
-            let specialItem = SKSpriteNode(imageNamed: "specialElements/vortex")
+            var specialItem = SKSpriteNode(imageNamed: "specialElements/vortex")
             specialItem.name = "SpecialItem"
             specialItem.zPosition = 2
             specialItem.setScale(8)
@@ -196,7 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             specialItem.physicsBody!.contactTestBitMask = PhysicsCatecories.Player
             specialItem.position = CGPoint(x: self.size.width/2, y: self.size.height + specialItem.frame.height)
             self.addChild(specialItem)
-            let moveToBottom = SKAction.moveTo(y: -specialItem.frame.height, duration: 5)
+            var moveToBottom = SKAction.moveTo(y: -specialItem.frame.height, duration: 5)
             specialItem.run(moveToBottom)
             timer = 0
         }
@@ -230,7 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.removeAction(forKey: "fireBullets")
         }
         GameMode.changeMode = true
-        let wave = SKSpriteNode(imageNamed: "specialElements/wave")
+        var wave = SKSpriteNode(imageNamed: "specialElements/wave")
         wave.name = "Wave"
         wave.zPosition = 1
         wave.setScale(1)
@@ -242,12 +242,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wave.physicsBody!.collisionBitMask = PhysicsCatecories.None
         wave.physicsBody!.contactTestBitMask = PhysicsCatecories.Enemy
         self.addChild(wave)
-        let moveToScale = SKAction.scale(to: (self.size.width / wave.frame.width) * 1.4, duration: 0.3)
-        let movetoY = SKAction.moveTo(y: self.size.height + wave.frame.height, duration: 3)
-        let delete = SKAction.removeFromParent()
-        let stopSceneActions = SKAction.run(stopGameForeverRepeats)
-        let startSceneActions = SKAction.run(ChouseNewMode)
-        let specialItemSequence = SKAction.sequence([moveToScale, movetoY, stopSceneActions, delete, startSceneActions])
+        var moveToScale = SKAction.scale(to: (self.size.width / wave.frame.width) * 1.4, duration: 0.3)
+        var movetoY = SKAction.moveTo(y: self.size.height + wave.frame.height, duration: 3)
+        var delete = SKAction.removeFromParent()
+        var stopSceneActions = SKAction.run(stopGameForeverRepeats)
+        var startSceneActions = SKAction.run(ChouseNewMode)
+        var specialItemSequence = SKAction.sequence([moveToScale, movetoY, stopSceneActions, delete, startSceneActions])
         wave.run(specialItemSequence)
     }
     
@@ -276,7 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func pandemicMode(){
-        let modeName = SKLabelNode()
+        var modeName = SKLabelNode()
         modeName.text = "PANDEMIC MODE"
         modeName.fontSize = 100
         modeName.fontColor = SKColor.white
@@ -301,7 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func guessMode(){
-        let modeName = SKLabelNode()
+        var modeName = SKLabelNode()
         modeName.text = "GUESS MODE"
         modeName.fontSize = 100
         modeName.fontColor = SKColor.white
@@ -326,7 +326,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func mirrorMode(){
-        let modeName = SKLabelNode()
+        var modeName = SKLabelNode()
         modeName.text = "MIRROR MODE"
         modeName.fontSize = 100
         modeName.fontColor = SKColor.white
@@ -350,7 +350,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func normalMode(){
-        let modeName = SKLabelNode()
+        var modeName = SKLabelNode()
         modeName.text = "NORMAL MODE"
         modeName.fontSize = 100
         modeName.fontColor = SKColor.white
@@ -376,7 +376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addScore( _ amount:Int? = GameMode.modeScore){
         gameScorePlayer += amount!
         if(gameScorePlayer % 30 == 0){
-            let EncourageLabel = SKLabelNode()
+            var EncourageLabel = SKLabelNode()
             EncourageLabel.text = encouragingPhrases.randomElement()
             EncourageLabel.fontSize = 100
             EncourageLabel.fontColor = SKColor.white
@@ -430,9 +430,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player, stop in
             player.removeAllActions()
         }
-        let sceneToMoveTo = Menu(size: self.size, form: "gameOver")
+        var sceneToMoveTo = Menu(size: self.size, form: "gameOver")
         sceneToMoveTo.scaleMode = self.scaleMode
-        let transition = SKTransition.fade(withDuration: 0.5)
+        var transition = SKTransition.fade(withDuration: 0.5)
         self.view!.presentScene(sceneToMoveTo, transition: transition)
         GameViewController.instance.loadAds()
     }
@@ -527,7 +527,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func spawnExplosion(_ Enemy: SKNode){
         Enemy.isPaused = true
-        let explosion = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyDeath")
+        var explosion = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyDeath")
         explosion.name = "explosion"
         var scaleTo: CGFloat = 0
         var scaleDuration: TimeInterval = 0
@@ -554,22 +554,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break
         }
         self.addChild(explosion)
-        let scaleOut = SKAction.scale(to: scaleTo, duration: scaleDuration)
-        let delete = SKAction.removeFromParent()
-        let explosionSequence = SKAction.sequence([enemyExplosionSound, scaleOut, delete])
+        var scaleOut = SKAction.scale(to: scaleTo, duration: scaleDuration)
+        var delete = SKAction.removeFromParent()
+        var explosionSequence = SKAction.sequence([enemyExplosionSound, scaleOut, delete])
         explosion.run(explosionSequence)
     }
     
     func playerExplosion(_ spawnPosition: CGPoint){
-        let explosion = SKSpriteNode(imageNamed: "\(GameMode.mode)/playerDeath")
+        var explosion = SKSpriteNode(imageNamed: "\(GameMode.mode)/playerDeath")
         explosion.name = "explosion"
         explosion.position = spawnPosition
         explosion.zPosition = 3
         explosion.setScale(5)
         self.addChild(explosion)
-        let scaleOut = SKAction.scale(to: 0, duration: 1)
-        let delete = SKAction.removeFromParent()
-        let explosionSequence = SKAction.sequence([enemyExplosionSound, scaleOut, delete])
+        var scaleOut = SKAction.scale(to: 0, duration: 1)
+        var delete = SKAction.removeFromParent()
+        var explosionSequence = SKAction.sequence([enemyExplosionSound, scaleOut, delete])
         explosion.run(explosionSequence)
     }
     
@@ -587,7 +587,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func fireBullet(){
-        let bullet = SKSpriteNode(imageNamed: "\(GameMode.mode)/bullet")
+        var bullet = SKSpriteNode(imageNamed: "\(GameMode.mode)/bullet")
         bullet.name = "Bullet"
         bullet.setScale(GameMode.bulletScale)
         bullet.position = player.position
@@ -627,9 +627,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func guessEnemyTypeBlue(){
-        let randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
-        let randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
-        let enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
+        var randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
+        var randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
+        var enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
         enemy.name = "EnemyBlue"
         enemy.setScale(GameMode.enemyScale)        
         enemy.zPosition = 2
@@ -638,8 +638,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
         enemy.physicsBody!.contactTestBitMask = PhysicsCatecories.Player | PhysicsCatecories.Bullet
-        let startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
-        let endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
+        var startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
+        var endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
         enemy.position = startPoint
         self.addChild(enemy)
         if(currentGameState == gameState.inGame){
@@ -651,9 +651,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func guessEnemyTypeRed(){
-        let randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
-        let randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
-        let enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyRed")
+        var randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
+        var randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
+        var enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyRed")
         enemy.name = "EnemyRed"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
@@ -662,8 +662,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
         enemy.physicsBody!.contactTestBitMask = PhysicsCatecories.Player | PhysicsCatecories.Bullet
-        let startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
-        let endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
+        var startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
+        var endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
         enemy.position = startPoint
         self.addChild(enemy)
         if(currentGameState == gameState.inGame){
@@ -675,9 +675,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func guessEnemyTypeGreen(){
-        let randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
-        let randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
-        let enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyGreen")
+        var randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
+        var randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
+        var enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyGreen")
         enemy.name = "EnemyGreen"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
@@ -686,8 +686,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
         enemy.physicsBody!.contactTestBitMask = PhysicsCatecories.Player | PhysicsCatecories.Bullet
-        let startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
-        let endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
+        var startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
+        var endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
         enemy.position = startPoint
         self.addChild(enemy)
         if(currentGameState == gameState.inGame){
@@ -699,9 +699,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnEnemyNormalMode(){
-        let randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
-        let randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
-        let enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
+        var randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
+        var randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
+        var enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
         enemy.name = "Enemy"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
@@ -710,12 +710,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
         enemy.physicsBody!.contactTestBitMask = PhysicsCatecories.Player | PhysicsCatecories.Bullet
-        let startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
-        let endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
+        var startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
+        var endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
         enemy.position = startPoint
-        let dx = endPoint.x - startPoint.x
-        let dy = endPoint.y - startPoint.y
-        let amountToRotate = atan2(dy,dx)
+        var dx = endPoint.x - startPoint.x
+        var dy = endPoint.y - startPoint.y
+        var amountToRotate = atan2(dy,dx)
         enemy.zRotation = amountToRotate
         self.addChild(enemy)
         if(currentGameState == gameState.inGame){
@@ -727,9 +727,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnEnemyPandemicMode(){
-        let randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
-        let randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
-        let enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
+        var randomXStart = random(min: GameArea.minX, max: GameArea.maxX)
+        var randomXEnd = random(min: GameArea.minX, max: GameArea.maxX)
+        var enemy = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemy")
         enemy.name = "Enemy"
         enemy.setScale(GameMode.enemyScale)
         enemy.zPosition = 2
@@ -738,8 +738,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody!.categoryBitMask = PhysicsCatecories.Enemy
         enemy.physicsBody!.collisionBitMask = PhysicsCatecories.None
         enemy.physicsBody!.contactTestBitMask = PhysicsCatecories.Player | PhysicsCatecories.Bullet
-        let startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
-        let endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
+        var startPoint = CGPoint(x: randomXStart, y: (GameArea.maxY + enemy.size.height))
+        var endPoint = CGPoint(x: randomXEnd, y: 0 - enemy.size.height)
         enemy.position = startPoint
         self.addChild(enemy)
         if(currentGameState == gameState.inGame){
@@ -751,10 +751,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnEnemyMirrorMode(){
-        let randomX = random(min: GameArea.minX, max: GameArea.maxX)
-        let randomType = Int.random(in: 1 ... 4)
-        let randomSize = CGFloat.random(in: 5 ... 8)
-        let meteor = SKSpriteNode(imageNamed: "\(GameMode.mode)/meteor\(randomType)")
+        var randomX = random(min: GameArea.minX, max: GameArea.maxX)
+        var randomType = Int.random(in: 1 ... 4)
+        var randomSize = CGFloat.random(in: 5 ... 8)
+        var meteor = SKSpriteNode(imageNamed: "\(GameMode.mode)/meteor\(randomType)")
         meteor.setScale(randomSize)
         meteor.position = CGPoint(x: randomX, y: self.size.height + meteor.frame.height)
         meteor.zPosition = 2
@@ -765,10 +765,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         meteor.physicsBody!.collisionBitMask = PhysicsCatecories.None
         meteor.physicsBody!.contactTestBitMask = PhysicsCatecories.Player | PhysicsCatecories.Bullet
         self.addChild(meteor)
-        let moveOnScreen = SKAction.moveTo(y: -meteor.frame.height, duration: GameMode.gameSpeed)
-        let addScoreAction = SKAction.run{self.addScore(1)}
-        let delete = SKAction.removeFromParent()
-        let meteorSequence = SKAction.sequence([moveOnScreen, addScoreAction, delete])
+        var moveOnScreen = SKAction.moveTo(y: -meteor.frame.height, duration: GameMode.gameSpeed)
+        var addScoreAction = SKAction.run{self.addScore(1)}
+        var delete = SKAction.removeFromParent()
+        var meteorSequence = SKAction.sequence([moveOnScreen, addScoreAction, delete])
         meteor.run(meteorSequence)
     }
     
@@ -788,7 +788,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func enemyFireGuessMode(_ position: CGPoint){
-        let bullet = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyBackFire")
+        var bullet = SKSpriteNode(imageNamed: "\(GameMode.mode)/enemyBackFire")
         bullet.name = "Bullet"
         bullet.setScale(GameMode.bulletScale + 2)
         bullet.position = position
@@ -816,7 +816,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.run(repeatFire, withKey: "fireBullets")
         }
         for touch: AnyObject in touches{
-            let pointOfTouch = touch.location(in: self)
+            var pointOfTouch = touch.location(in: self)
             _ = nodes(at: pointOfTouch)
         }
         if(currentGameState == gameState.preGame){
@@ -836,14 +836,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let verticalUpLimit = GameArea.maxY - player.frame.height
-        let verticalDownLimit = GameArea.minY + player.frame.height
+        var verticalUpLimit = GameArea.maxY - player.frame.height
+        var verticalDownLimit = GameArea.minY + player.frame.height
         
         for touch:AnyObject in touches{
-            let pointOfTouch = touch.location(in: self)
-            let pointOfPreviousTouch = touch.previousLocation(in: self)
-            let amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x) * Menu.instance.UserOps.touchMultipler
-            let amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y) * Menu.instance.UserOps.touchMultipler
+            var pointOfTouch = touch.location(in: self)
+            var pointOfPreviousTouch = touch.previousLocation(in: self)
+            var amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x) * (userOptionsList.TouchSensibilityMultiplier ?? 1)
+            var amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y) * (userOptionsList.TouchSensibilityMultiplier ?? 1)
             if(currentGameState == gameState.inGame && !GameMode.adsMode){
                 switch GameMode.mode {
                     case "Mirror":
@@ -881,7 +881,7 @@ class GameMode{
     static var enemyScale: CGFloat = 0
     static var bulletScale: CGFloat = 0
     static var BodyCenterPointPercentage: CGFloat = 0
-    static let guessModeEnemyTypes: [Int] = [0,2,2,1,0,1,2,0,0,2]
+    static var guessModeEnemyTypes: [Int] = [0,2,2,1,0,1,2,0,0,2]
     static var spawnEnemyDelay: TimeInterval = 0.3
     static var gameSpeed: TimeInterval = 2.75
     static var nodeSpeed: CGFloat = 1

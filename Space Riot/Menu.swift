@@ -19,54 +19,54 @@ class Menu: SKScene {
     static var instance: Menu!
 
     // on device database
-    let defaults = UserDefaults()
+    var defaults = UserDefaults()
 
     // user options
     var UserOps: userOptionsList
 
     //    main view
-    let background: SKSpriteNode
-    let gameName: SKSpriteNode
-    let startGame: SKSpriteNode
-    let facebookButton: SKSpriteNode
-    let ranklistButton: SKSpriteNode
-    let shopButton: SKSpriteNode
-    let options: SKSpriteNode
-    let credits: SKSpriteNode
+    var background: SKSpriteNode
+    var gameName: SKSpriteNode
+    var startGame: SKSpriteNode
+    var facebookButton: SKSpriteNode
+    var ranklistButton: SKSpriteNode
+    var shopButton: SKSpriteNode
+    var options: SKSpriteNode
+    var credits: SKSpriteNode
 
     //    restart view
-    let gameOverLabel: SKLabelNode
-    let scoreLabel: SKLabelNode
-    let highScoreLabel: SKLabelNode
-    let restartLabel: SKLabelNode
+    var gameOverLabel: SKLabelNode
+    var scoreLabel: SKLabelNode
+    var highScoreLabel: SKLabelNode
+    var restartLabel: SKLabelNode
 
     //    Option view
-    let exitButton: SKLabelNode
-    let optionsWindow: SKSpriteNode
-    let optionsWindowLabel: SKLabelNode
-    let SensibilityLabel: SKLabelNode
-    let Music: SKCheckBox
-    let MusicLabel: SKLabelNode
-    let slider: SKSlider
+    var exitButton: SKLabelNode
+    var optionsWindow: SKSpriteNode
+    var optionsWindowLabel: SKLabelNode
+    var SensibilityLabel: SKLabelNode
+    var Music: SKCheckBox
+    var MusicLabel: SKLabelNode
+    var slider: SKSlider
 
 
     // purchase view
-    let purchaseExitButton: SKLabelNode
-    let purchaseWindow: SKSpriteNode
-    let purchaseWindowLabel: SKLabelNode
+    var purchaseExitButton: SKLabelNode
+    var purchaseWindow: SKSpriteNode
+    var purchaseWindowLabel: SKLabelNode
 
 
     //    Actions
-    let changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
-    let changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
+    var changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
+    var changeScaleDown = SKAction.scale(by: 1.25, duration: 0.1)
     var ButtonAction = SKAction()
     var changeScaleSequence = SKAction()
 
     // Custom elements
 
     class SKCheckBox: SKNode {
-        let onSprite: SKSpriteNode
-        let offSprite: SKSpriteNode
+        var onSprite: SKSpriteNode
+        var offSprite: SKSpriteNode
         var size: CGSize{
             willSet{
                 onSprite.size = newValue
@@ -90,8 +90,8 @@ class Menu: SKScene {
 
         var on: Bool{
             willSet{
-                let scaleOut = SKAction.scale(to: 0, duration: 0.2)
-                let scaleIn = SKAction.scale(to: 1, duration: 0.2)
+                var scaleOut = SKAction.scale(to: 0, duration: 0.2)
+                var scaleIn = SKAction.scale(to: 1, duration: 0.2)
                 if(newValue){
                     offSprite.run(scaleOut)
                     onSprite.run(scaleIn)
@@ -132,8 +132,8 @@ class Menu: SKScene {
 
 
     class SKSlider: SKNode {
-        let table: SKSpriteNode        
-        let piece: SKSpriteNode
+        var table: SKSpriteNode
+        var piece: SKSpriteNode
         var size: CGSize{
             willSet{
                 table.size.height = newValue.height
@@ -173,7 +173,6 @@ class Menu: SKScene {
 
     override func didMove(to view: SKView) {
         Menu.instance = self
-        loadUserOptions()
     }
 
     init(size: CGSize, form: String) {
@@ -401,7 +400,7 @@ class Menu: SKScene {
     }
 
     func gameOptions(){
-        let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
+        var scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
         optionsWindow.addChild(optionsWindowLabel)
         optionsWindow.addChild(exitButton)
         optionsWindow.addChild(Music)
@@ -413,7 +412,7 @@ class Menu: SKScene {
     }
 
     func gamePurchaseWindows(){
-        let scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
+        var scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
         purchaseWindow.addChild(purchaseExitButton)
         purchaseWindow.addChild(purchaseWindowLabel)
         self.addChild(purchaseWindow)
@@ -432,64 +431,38 @@ class Menu: SKScene {
         return dic.map { $0.0 + "=" + $0.1 }.joined(separator: ";")
     }
 
-    class userOptionsList: SKNode {
-        var info: [String:String] = [String:String]()
-        var touchMultipler: CGFloat = 1
-        var touchPosition: CGPoint = .zero{
-            willSet{
-                info["TouchMultiplier"] = NSCoder.string(for: newValue)
-                touchMultipler = (convert(newValue, from: Menu.instance.slider).x - (Menu.instance.slider.table.size.width + Menu.instance.slider.table.size.height))/500 + 1
-            }
-        }
-        var musicOn: Bool = true{
-            willSet{
-                info["MusicOn"] = String(newValue)
-            }
-        }
-    }
-
     func saveOptions(){
-        UserOps.touchPosition = slider.piece.position
-        UserOps.musicOn = Music.on        
-        let optionsData = convertDicToString(dic: UserOps.info)
-        defaults.set(optionsData, forKey: "userOptionData")
-        let scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
-        let delete = SKAction.removeFromParent()
-        let deleteChildren = SKAction.run{
+        userOptionsList.TouchSensibilityPosition = slider.piece.position
+        userOptionsList.TouchSensibilityMultiplier = (convert(slider.piece.position, from: slider).x - (slider.piece.size.width + slider.table.size.height))/454
+        userOptionsList.Music = Music.on
+        var scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
+        var delete = SKAction.removeFromParent()
+        var deleteChildren = SKAction.run{
             self.optionsWindow.removeAllChildren()
         }
-        let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
+        var deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
         optionsWindow.run(deleteSequence)
     }
 
-    func loadUserOptions(){
-        let userOptions = defaults.string(forKey: "userOptionData")
-        let userOptionsDic = convertStringtoDic(input: userOptions!)
-        UserOps.touchPosition = NSCoder.cgPoint(for: userOptionsDic["TouchMultiplier"]!)
-        UserOps.musicOn = Bool(userOptionsDic["MusicOn"]!)!
-        slider.piece.position = UserOps.touchPosition
-        Music.on = UserOps.musicOn
-    }
-
     func exitPurchaseBack(){
-        let scale = SKAction.moveTo(y: -self.size.height+purchaseWindow.size.height, duration: 0.2)
-        let delete = SKAction.removeFromParent()
-        let deleteChildren = SKAction.run{
+        var scale = SKAction.moveTo(y: -self.size.height+purchaseWindow.size.height, duration: 0.2)
+        var delete = SKAction.removeFromParent()
+        var deleteChildren = SKAction.run{
             self.purchaseWindow.removeAllChildren()
         }
-        let deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
+        var deleteSequence = SKAction.sequence([scale, deleteChildren, delete])
         purchaseWindow.run(deleteSequence)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches{
-            let pointOfTouch = touch.location(in: self)
-            let nodeITapped = nodes(at: pointOfTouch)
+            var pointOfTouch = touch.location(in: self)
+            var nodeITapped = nodes(at: pointOfTouch)
             if(nodeITapped[0].name == "Start Game"){
                 ButtonAction = SKAction.run{
-                    let sceneMoveTo = GameScene.getInstance(size: self.size)
+                    var sceneMoveTo = GameScene.getInstance(size: self.size)
                     sceneMoveTo.scaleMode = self.scaleMode
-                    let myTransion = SKTransition.fade(withDuration: 0.5)
+                    var myTransion = SKTransition.fade(withDuration: 0.5)
                     self.view!.presentScene(sceneMoveTo, transition: myTransion)
                     GameViewController.instance.bannerViewBottom.isHidden = true
                 }
@@ -534,7 +507,7 @@ class Menu: SKScene {
                 nodeITapped[0].run(changeScaleSequence)
             }
             else if(nodeITapped[0].name == "sliderbar"){
-                let pointOfTouch = touch.location(in: slider)
+                var pointOfTouch = touch.location(in: slider)
                 slider.piece.position.x = pointOfTouch.x
             }
             else if(nodeITapped[0].name == "Music checkbox"){
@@ -556,9 +529,9 @@ class Menu: SKScene {
             }
             else if(restartLabel.contains(pointOfTouch)){
                 GameViewController.instance.bannerViewBottom.isHidden = true
-                let sceneToMoveTo = GameScene.getInstance(size: self.size)
+                var sceneToMoveTo = GameScene.getInstance(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
-                let myTransition = SKTransition.fade(withDuration: 0.5)
+                var myTransition = SKTransition.fade(withDuration: 0.5)
                 self.view!.presentScene(sceneToMoveTo, transition: myTransition)
             }
         }
@@ -566,10 +539,16 @@ class Menu: SKScene {
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch:AnyObject in touches{
-            let pointOfTouch = touch.location(in: slider)
+            var pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
             }
         }
     }
+}
+
+class userOptionsList {
+    static var TouchSensibilityPosition: CGPoint?
+    static var TouchSensibilityMultiplier: CGFloat?
+    static var Music: Bool?
 }

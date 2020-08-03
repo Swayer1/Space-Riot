@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             FirebaseApp.configure()
 
-//        let imageView = UIImageView.init(image: UIImage(named: "assets/Ares"))
+//        var imageView = UIImageView.init(image: UIImage(named: "assets/Ares"))
 //        imageView.frame = UIScreen.main.bounds
 //
 //        window = UIWindow(frame: UIScreen.main.bounds)
