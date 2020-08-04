@@ -20,6 +20,7 @@ class Menu: SKScene {
 
     // on device database
     var defaults = UserDefaults()
+    var userSets = userOptionsList()
 
     // user options
     var UserOps: userOptionsList
@@ -173,6 +174,7 @@ class Menu: SKScene {
 
     override func didMove(to view: SKView) {
         Menu.instance = self
+        loadUserSettings()
     }
 
     init(size: CGSize, form: String) {
@@ -431,10 +433,21 @@ class Menu: SKScene {
         return dic.map { $0.0 + "=" + $0.1 }.joined(separator: ";")
     }
 
+    func loadUserSettings(){
+        if var userData = UserDefaults.standard.data(forKey: "UserSettings"),
+            var userLoadedSets = try? JSONDecoder().decode(userOptionsList.self, from: userData) {
+            slider.piece.position = userLoadedSets.TouchSensibilityPosition!            
+            Music.on = userLoadedSets.Music!
+        }
+    }
+
     func saveOptions(){
-        userOptionsList.TouchSensibilityPosition = slider.piece.position
-        userOptionsList.TouchSensibilityMultiplier = (convert(slider.piece.position, from: slider).x - (slider.piece.size.width + slider.table.size.height))/454
-        userOptionsList.Music = Music.on
+        userSets.TouchSensibilityPosition = slider.piece.position
+        userSets.TouchSensibilityMultiplier = (convert(slider.piece.position, from: slider).x - (slider.piece.size.width + slider.table.size.height))/454
+        userSets.Music = Music.on
+        if var encoded = try? JSONEncoder().encode(userSets) {
+            UserDefaults.standard.set(encoded, forKey: "UserSettings")            
+        }
         var scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         var delete = SKAction.removeFromParent()
         var deleteChildren = SKAction.run{
@@ -547,8 +560,8 @@ class Menu: SKScene {
     }
 }
 
-class userOptionsList {
-    static var TouchSensibilityPosition: CGPoint?
-    static var TouchSensibilityMultiplier: CGFloat?
-    static var Music: Bool?
+class userOptionsList: Codable {
+    var TouchSensibilityPosition: CGPoint?
+    var TouchSensibilityMultiplier: CGFloat?
+    var Music: Bool?
 }
