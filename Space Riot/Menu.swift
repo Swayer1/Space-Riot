@@ -304,8 +304,13 @@ class Menu: SKScene {
 
     func gamePurchaseWindows(){
         var scale = SKAction.moveTo(y: self.size.height*0.5, duration: 0.2)
+        var testItem = SKSpriteNode(imageNamed: "assets/optionView/Close_BTN")
+        testItem.name = "testItem"
+        testItem.position = CGPoint.zero
+        testItem.zPosition = 2
         purchaseWindow.addChild(purchaseExitButton)
         purchaseWindow.addChild(purchaseWindowLabel)
+        purchaseWindow.addChild(testItem)
         self.addChild(purchaseWindow)
         purchaseWindow.run(scale)
     }
@@ -427,6 +432,13 @@ class Menu: SKScene {
             else if(nodeITapped[0].name == "purchase back"){
                 ButtonAction = SKAction.run{
                     self.exitPurchaseBack()
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "testItem"){
+                ButtonAction = SKAction.run{
+//                    self.exitPurchaseBack()
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)

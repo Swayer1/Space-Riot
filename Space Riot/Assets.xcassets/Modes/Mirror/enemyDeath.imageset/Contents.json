@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Coronavirus1kill@1.png",
+      "filename" : "explosion@1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Coronavirus1kill@2.png",
+      "filename" : "explosion@2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Coronavirus1kill@3.png",
+      "filename" : "explosion@3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
