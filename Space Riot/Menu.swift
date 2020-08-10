@@ -9,7 +9,6 @@
 // AdMob Test id : ca-app-pub-3940256099942544/6300978111
 
 
-
 import Foundation
 import SpriteKit
 import UIKit
@@ -435,9 +434,11 @@ class Menu: SKScene {
 
     func loadUserSettings(){
         if var userData = UserDefaults.standard.data(forKey: "UserSettings"),
-            var userLoadedSets = try? JSONDecoder().decode(userOptionsList.self, from: userData) {
+           var userLoadedSets = try? JSONDecoder().decode(userOptionsList.self, from: userData) {
             slider.piece.position = userLoadedSets.TouchSensibilityPosition!            
             Music.on = userLoadedSets.Music!
+            userSets.TouchSensibilityMultiplier = userLoadedSets.TouchSensibilityMultiplier!
+            userSets.Music = Music.on
         }
     }
 
@@ -446,7 +447,7 @@ class Menu: SKScene {
         userSets.TouchSensibilityMultiplier = (convert(slider.piece.position, from: slider).x - (slider.piece.size.width + slider.table.size.height))/454
         userSets.Music = Music.on
         if var encoded = try? JSONEncoder().encode(userSets) {
-            UserDefaults.standard.set(encoded, forKey: "UserSettings")            
+            UserDefaults.standard.set(encoded, forKey: "UserSettings")
         }
         var scale = SKAction.moveTo(y: self.size.height+optionsWindow.size.height, duration: 0.2)
         var delete = SKAction.removeFromParent()
