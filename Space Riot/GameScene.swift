@@ -430,7 +430,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player, stop in
             player.removeAllActions()
         }
-        var sceneToMoveTo = Menu(size: self.size, form: "gameOver")
+        var sceneToMoveTo = Menu(size: self.size, form: "welcome")
         sceneToMoveTo.scaleMode = self.scaleMode
         var transition = SKTransition.fade(withDuration: 0.5)
         self.view!.presentScene(sceneToMoveTo, transition: transition)

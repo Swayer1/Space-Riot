@@ -62,115 +62,6 @@ class Menu: SKScene {
     var ButtonAction = SKAction()
     var changeScaleSequence = SKAction()
 
-    // Custom elements
-
-    class SKCheckBox: SKNode {
-        var onSprite: SKSpriteNode
-        var offSprite: SKSpriteNode
-        var size: CGSize{
-            willSet{
-                onSprite.size = newValue
-                offSprite.size = newValue
-            }
-        }
-
-        override var zPosition: CGFloat{
-            willSet{
-                onSprite.zPosition = newValue
-                offSprite.zPosition = newValue
-            }
-        }
-
-        override var name: String?{
-            willSet{
-                onSprite.name = newValue
-                offSprite.name = newValue
-            }
-        }
-
-        var on: Bool{
-            willSet{
-                var scaleOut = SKAction.scale(to: 0, duration: 0.2)
-                var scaleIn = SKAction.scale(to: 1, duration: 0.2)
-                if(newValue){
-                    offSprite.run(scaleOut)
-                    onSprite.run(scaleIn)
-                    GameViewController.instance.backingAudio.play()
-                }
-                else{
-                    onSprite.run(scaleOut)
-                    offSprite.run(scaleIn)
-                    GameViewController.instance.backingAudio.stop()
-                }
-            }
-        }
-
-        override init() {
-            onSprite = SKSpriteNode(imageNamed: "assets/optionView/Ok_BTN")
-            offSprite = SKSpriteNode(imageNamed: "assets/optionView/Close_BTN")
-            self.size = .zero
-            self.on = true
-            super.init()
-            onSprite.zPosition = self.zPosition
-            offSprite.zPosition = self.zPosition
-            offSprite.setScale(0)
-            self.addChild(onSprite)
-            self.addChild(offSprite)
-        }
-
-        override var position: CGPoint{
-            willSet{
-                onSprite.position = newValue
-                offSprite.position = newValue
-            }
-        }
-
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-    }
-
-
-    class SKSlider: SKNode {
-        var table: SKSpriteNode
-        var piece: SKSpriteNode
-        var size: CGSize{
-            willSet{
-                table.size.height = newValue.height
-                table.size.width = newValue.width
-                piece.size.height = newValue.height * 2
-            }
-        }
-        override var zPosition: CGFloat{
-            willSet{
-                table.zPosition = self.zPosition
-                piece.zPosition = self.zPosition + 1
-            }
-        }
-        override var position: CGPoint{
-            willSet{
-                table.position = newValue
-                piece.position = newValue
-                piece.position.x = -198
-            }
-        }
-        override init() {
-            table = SKSpriteNode(imageNamed: "assets/Table")
-            piece = SKSpriteNode(imageNamed: "assets/piece")
-            self.size = .zero
-            super.init()
-            piece.position.x = -370
-            table.position = self.position
-            piece.position = self.position
-            self.addChild(table)
-            self.addChild(piece)
-        }
-
-        required init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-    }
-
     override func didMove(to view: SKView) {
         Menu.instance = self
         loadUserSettings()
@@ -220,7 +111,6 @@ class Menu: SKScene {
         purchaseWindowLabel = SKLabelNode()
 
         super.init(size: size)
-
 
         //    main view
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)

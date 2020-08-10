@@ -18,6 +18,8 @@
 		FA2553532496B2B2003B9BEC /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553502496B2B0003B9BEC /* explosion.mp3 */; };
 		FA2553542496B2B2003B9BEC /* font music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553512496B2B1003B9BEC /* font music.mp3 */; };
 		FA2553552496B2B2003B9BEC /* torpedo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553522496B2B2003B9BEC /* torpedo.mp3 */; };
+		FA76A11624E1222F005D107C /* SKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA76A11524E1222F005D107C /* SKSlider.swift */; };
+		FA76A11924E1223F005D107C /* SKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA76A11824E1223F005D107C /* SKCheckBox.swift */; };
 		FAB3431124B4DFC9005E6F01 /* Guess in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431024B4DFC9005E6F01 /* Guess */; };
 		FAB3431324B4E017005E6F01 /* Mirror in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431224B4E017005E6F01 /* Mirror */; };
 		FAB3431524B4E022005E6F01 /* Pandemic in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431424B4E022005E6F01 /* Pandemic */; };
@@ -41,6 +43,8 @@
 		FA2553502496B2B0003B9BEC /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		FA2553512496B2B1003B9BEC /* font music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "font music.mp3"; sourceTree = "<group>"; };
 		FA2553522496B2B2003B9BEC /* torpedo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = torpedo.mp3; sourceTree = "<group>"; };
+		FA76A11524E1222F005D107C /* SKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSlider.swift; sourceTree = "<group>"; };
+		FA76A11824E1223F005D107C /* SKCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKCheckBox.swift; sourceTree = "<group>"; };
 		FAB3431024B4DFC9005E6F01 /* Guess */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Guess; sourceTree = "<group>"; };
 		FAB3431224B4E017005E6F01 /* Mirror */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mirror; sourceTree = "<group>"; };
 		FAB3431424B4E022005E6F01 /* Pandemic */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pandemic; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				FA25533B2496AFB4003B9BEC /* LaunchScreen.storyboard */,
 				FA25533E2496AFB4003B9BEC /* Info.plist */,
 				FAED07B42496C344003AB459 /* GoogleService-Info.plist */,
+				FA76A11724E12233005D107C /* Utilities */,
 			);
 			path = "Space Riot";
 			sourceTree = "<group>";
@@ -132,6 +137,15 @@
 				FA2553522496B2B2003B9BEC /* torpedo.mp3 */,
 			);
 			path = music;
+			sourceTree = "<group>";
+		};
+		FA76A11724E12233005D107C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FA76A11524E1222F005D107C /* SKSlider.swift */,
+				FA76A11824E1223F005D107C /* SKCheckBox.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA76A11924E1223F005D107C /* SKCheckBox.swift in Sources */,
+				FA76A11624E1222F005D107C /* SKSlider.swift in Sources */,
 				FA2553492496AFF2003B9BEC /* Menu.swift in Sources */,
 				FA2553332496AFB2003B9BEC /* GameScene.swift in Sources */,
 				FA2553352496AFB2003B9BEC /* GameViewController.swift in Sources */,
