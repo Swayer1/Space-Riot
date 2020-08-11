@@ -31,19 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var image = UIImage(named: "Space-Riot-Assets/Welcome-Scene/start screen")
         var imageView = UIImageView.init(image: image)
-        var imageVIew2 = UIImageView(frame: UIScreen.main.bounds)
-        imageVIew2.backgroundColor = UIColor.init(hexString: "#000a1e")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.frame = UIScreen.main.bounds
                         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.rootViewController?.view.addSubview(imageView)
-        window?.rootViewController?.view.addSubview(imageVIew2)
         window?.rootViewController?.view.bringSubviewToFront(imageView)
         window?.makeKeyAndVisible()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10) {
             self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         }
         
