@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "start screen-Recovered-Recovered.png",
+      "filename" : "start screen.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "start screen-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "start screen-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
