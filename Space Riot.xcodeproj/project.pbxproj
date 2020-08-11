@@ -24,6 +24,7 @@
 		FAB3431324B4E017005E6F01 /* Mirror in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431224B4E017005E6F01 /* Mirror */; };
 		FAB3431524B4E022005E6F01 /* Pandemic in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431424B4E022005E6F01 /* Pandemic */; };
 		FAB3431924B4E0DF005E6F01 /* Normal in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431824B4E0DF005E6F01 /* Normal */; };
+		FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8224E27BC700FB9527 /* hexConverter.swift */; };
 		FAED07B52496C344003AB459 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAED07B42496C344003AB459 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		FAB3431224B4E017005E6F01 /* Mirror */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mirror; sourceTree = "<group>"; };
 		FAB3431424B4E022005E6F01 /* Pandemic */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pandemic; sourceTree = "<group>"; };
 		FAB3431824B4E0DF005E6F01 /* Normal */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Normal; sourceTree = "<group>"; };
+		FADF7D8224E27BC700FB9527 /* hexConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexConverter.swift; sourceTree = "<group>"; };
 		FAED07B42496C344003AB459 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 			children = (
 				FA76A11524E1222F005D107C /* SKSlider.swift */,
 				FA76A11824E1223F005D107C /* SKCheckBox.swift */,
+				FADF7D8224E27BC700FB9527 /* hexConverter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			files = (
 				FA76A11924E1223F005D107C /* SKCheckBox.swift in Sources */,
 				FA76A11624E1222F005D107C /* SKSlider.swift in Sources */,
+				FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */,
 				FA2553492496AFF2003B9BEC /* Menu.swift in Sources */,
 				FA2553332496AFB2003B9BEC /* GameScene.swift in Sources */,
 				FA2553352496AFB2003B9BEC /* GameViewController.swift in Sources */,
