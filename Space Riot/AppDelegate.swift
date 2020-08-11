@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController?.view.bringSubviewToFront(imageView)
         window?.makeKeyAndVisible()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
             self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         }
         
