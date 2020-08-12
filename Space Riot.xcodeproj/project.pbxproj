@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		807A2F901012860094BBB8D8 /* Pods_Space_Riot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17555A11158DA17650314BE4 /* Pods_Space_Riot.framework */; };
+		FA214C2C24E43E9F005BBFB9 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA214C2B24E43E9F005BBFB9 /* Animation.swift */; };
 		FA25532D2496AFB2003B9BEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA25532C2496AFB2003B9BEC /* AppDelegate.swift */; };
 		FA2553332496AFB2003B9BEC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2553322496AFB2003B9BEC /* GameScene.swift */; };
 		FA2553352496AFB2003B9BEC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2553342496AFB2003B9BEC /* GameViewController.swift */; };
@@ -18,6 +19,13 @@
 		FA2553532496B2B2003B9BEC /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553502496B2B0003B9BEC /* explosion.mp3 */; };
 		FA2553542496B2B2003B9BEC /* font music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553512496B2B1003B9BEC /* font music.mp3 */; };
 		FA2553552496B2B2003B9BEC /* torpedo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553522496B2B2003B9BEC /* torpedo.mp3 */; };
+		FA3775D924E3D31500831DC9 /* LogInScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775D824E3D31500831DC9 /* LogInScene.swift */; };
+		FA3775DB24E3D31D00831DC9 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775DA24E3D31D00831DC9 /* MainMenu.swift */; };
+		FA3775DD24E3D32800831DC9 /* WelcomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775DC24E3D32800831DC9 /* WelcomeScene.swift */; };
+		FA3775DF24E3D34200831DC9 /* WindowRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775DE24E3D34200831DC9 /* WindowRanking.swift */; };
+		FA3775E124E3D43C00831DC9 /* WindowSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775E024E3D43C00831DC9 /* WindowSettings.swift */; };
+		FA3775E324E3D44500831DC9 /* WindowShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775E224E3D44500831DC9 /* WindowShop.swift */; };
+		FA3775E524E3D45100831DC9 /* WindowVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775E424E3D45100831DC9 /* WindowVideo.swift */; };
 		FA76A11624E1222F005D107C /* SKSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA76A11524E1222F005D107C /* SKSlider.swift */; };
 		FA76A11924E1223F005D107C /* SKCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA76A11824E1223F005D107C /* SKCheckBox.swift */; };
 		FAB3431124B4DFC9005E6F01 /* Guess in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431024B4DFC9005E6F01 /* Guess */; };
@@ -25,6 +33,7 @@
 		FAB3431524B4E022005E6F01 /* Pandemic in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431424B4E022005E6F01 /* Pandemic */; };
 		FAB3431924B4E0DF005E6F01 /* Normal in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431824B4E0DF005E6F01 /* Normal */; };
 		FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8224E27BC700FB9527 /* hexConverter.swift */; };
+		FADF7D8724E2B11300FB9527 /* PurchaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */; };
 		FAED07B52496C344003AB459 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAED07B42496C344003AB459 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +41,7 @@
 		17555A11158DA17650314BE4 /* Pods_Space_Riot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Space_Riot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3054CC3AF2F79EE7EA732778 /* Pods-Space Riot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Space Riot.release.xcconfig"; path = "Target Support Files/Pods-Space Riot/Pods-Space Riot.release.xcconfig"; sourceTree = "<group>"; };
 		A2D8AB210BAF5C96096DBC7F /* Pods-Space Riot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Space Riot.debug.xcconfig"; path = "Target Support Files/Pods-Space Riot/Pods-Space Riot.debug.xcconfig"; sourceTree = "<group>"; };
+		FA214C2B24E43E9F005BBFB9 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		FA2553292496AFB2003B9BEC /* Space Riot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Riot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA25532C2496AFB2003B9BEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA2553322496AFB2003B9BEC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -44,6 +54,13 @@
 		FA2553502496B2B0003B9BEC /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		FA2553512496B2B1003B9BEC /* font music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "font music.mp3"; sourceTree = "<group>"; };
 		FA2553522496B2B2003B9BEC /* torpedo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = torpedo.mp3; sourceTree = "<group>"; };
+		FA3775D824E3D31500831DC9 /* LogInScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScene.swift; sourceTree = "<group>"; };
+		FA3775DA24E3D31D00831DC9 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		FA3775DC24E3D32800831DC9 /* WelcomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScene.swift; sourceTree = "<group>"; };
+		FA3775DE24E3D34200831DC9 /* WindowRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowRanking.swift; sourceTree = "<group>"; };
+		FA3775E024E3D43C00831DC9 /* WindowSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSettings.swift; sourceTree = "<group>"; };
+		FA3775E224E3D44500831DC9 /* WindowShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowShop.swift; sourceTree = "<group>"; };
+		FA3775E424E3D45100831DC9 /* WindowVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowVideo.swift; sourceTree = "<group>"; };
 		FA76A11524E1222F005D107C /* SKSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSlider.swift; sourceTree = "<group>"; };
 		FA76A11824E1223F005D107C /* SKCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKCheckBox.swift; sourceTree = "<group>"; };
 		FAB3431024B4DFC9005E6F01 /* Guess */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Guess; sourceTree = "<group>"; };
@@ -51,6 +68,7 @@
 		FAB3431424B4E022005E6F01 /* Pandemic */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pandemic; sourceTree = "<group>"; };
 		FAB3431824B4E0DF005E6F01 /* Normal */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Normal; sourceTree = "<group>"; };
 		FADF7D8224E27BC700FB9527 /* hexConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexConverter.swift; sourceTree = "<group>"; };
+		FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseClass.swift; sourceTree = "<group>"; };
 		FAED07B42496C344003AB459 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,17 +133,15 @@
 		FA25532B2496AFB2003B9BEC /* Space Riot */ = {
 			isa = PBXGroup;
 			children = (
-				FA2553562496B2B7003B9BEC /* music */,
-				FA25532C2496AFB2003B9BEC /* AppDelegate.swift */,
+				FA25533E2496AFB4003B9BEC /* Info.plist */,
+				FA3775D724E3D2EB00831DC9 /* Menu */,
+				FA3775E624E3D60600831DC9 /* Booting files */,
 				FA2553322496AFB2003B9BEC /* GameScene.swift */,
 				FA1917DF24B49B7000A7458B /* bodies */,
 				FA2553482496AFF2003B9BEC /* Menu.swift */,
-				FA2553342496AFB2003B9BEC /* GameViewController.swift */,
-				FA2553362496AFB2003B9BEC /* Main.storyboard */,
-				FA2553392496AFB4003B9BEC /* Assets.xcassets */,
-				FA25533B2496AFB4003B9BEC /* LaunchScreen.storyboard */,
-				FA25533E2496AFB4003B9BEC /* Info.plist */,
-				FAED07B42496C344003AB459 /* GoogleService-Info.plist */,
+				FA3775E824E3D63A00831DC9 /* storyboards */,
+				FA3775E724E3D62500831DC9 /* assets */,
+				FA3775EA24E3D65200831DC9 /* googleAds */,
 				FA76A11724E12233005D107C /* Utilities */,
 			);
 			path = "Space Riot";
@@ -141,12 +157,63 @@
 			path = music;
 			sourceTree = "<group>";
 		};
+		FA3775D724E3D2EB00831DC9 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				FA3775D824E3D31500831DC9 /* LogInScene.swift */,
+				FA3775DA24E3D31D00831DC9 /* MainMenu.swift */,
+				FA3775DC24E3D32800831DC9 /* WelcomeScene.swift */,
+				FA3775DE24E3D34200831DC9 /* WindowRanking.swift */,
+				FA3775E024E3D43C00831DC9 /* WindowSettings.swift */,
+				FA3775E224E3D44500831DC9 /* WindowShop.swift */,
+				FA3775E424E3D45100831DC9 /* WindowVideo.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		FA3775E624E3D60600831DC9 /* Booting files */ = {
+			isa = PBXGroup;
+			children = (
+				FA2553342496AFB2003B9BEC /* GameViewController.swift */,
+				FA25532C2496AFB2003B9BEC /* AppDelegate.swift */,
+			);
+			path = "Booting files";
+			sourceTree = "<group>";
+		};
+		FA3775E724E3D62500831DC9 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				FA2553562496B2B7003B9BEC /* music */,
+				FA2553392496AFB4003B9BEC /* Assets.xcassets */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		FA3775E824E3D63A00831DC9 /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FA2553362496AFB2003B9BEC /* Main.storyboard */,
+				FA25533B2496AFB4003B9BEC /* LaunchScreen.storyboard */,
+			);
+			path = storyboards;
+			sourceTree = "<group>";
+		};
+		FA3775EA24E3D65200831DC9 /* googleAds */ = {
+			isa = PBXGroup;
+			children = (
+				FAED07B42496C344003AB459 /* GoogleService-Info.plist */,
+			);
+			path = googleAds;
+			sourceTree = "<group>";
+		};
 		FA76A11724E12233005D107C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				FA76A11524E1222F005D107C /* SKSlider.swift */,
 				FA76A11824E1223F005D107C /* SKCheckBox.swift */,
 				FADF7D8224E27BC700FB9527 /* hexConverter.swift */,
+				FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */,
+				FA214C2B24E43E9F005BBFB9 /* Animation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -274,13 +341,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA3775DD24E3D32800831DC9 /* WelcomeScene.swift in Sources */,
 				FA76A11924E1223F005D107C /* SKCheckBox.swift in Sources */,
 				FA76A11624E1222F005D107C /* SKSlider.swift in Sources */,
+				FA3775E324E3D44500831DC9 /* WindowShop.swift in Sources */,
 				FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */,
+				FA3775DF24E3D34200831DC9 /* WindowRanking.swift in Sources */,
+				FA3775D924E3D31500831DC9 /* LogInScene.swift in Sources */,
 				FA2553492496AFF2003B9BEC /* Menu.swift in Sources */,
+				FA3775E524E3D45100831DC9 /* WindowVideo.swift in Sources */,
+				FA3775DB24E3D31D00831DC9 /* MainMenu.swift in Sources */,
+				FA214C2C24E43E9F005BBFB9 /* Animation.swift in Sources */,
 				FA2553332496AFB2003B9BEC /* GameScene.swift in Sources */,
 				FA2553352496AFB2003B9BEC /* GameViewController.swift in Sources */,
 				FA25532D2496AFB2003B9BEC /* AppDelegate.swift in Sources */,
+				FA3775E124E3D43C00831DC9 /* WindowSettings.swift in Sources */,
+				FADF7D8724E2B11300FB9527 /* PurchaseClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +512,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SUPPRESS_WARNINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -456,7 +532,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SUPPRESS_WARNINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

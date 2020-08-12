@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     static func getInstance(size: CGSize)->GameScene{
         if(instance == nil){
             instance = GameScene(size: size)
-        }
+        }        
         return instance!
     }
     
@@ -68,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var GameArea:CGRect
     
-    private override init(size: CGSize) {
+    override init(size: CGSize) {
         GameArea = CGRect(x: (player.frame.width * 0.2) / 2, y: 0, width: size.width - (player.frame.width * 0.2), height: size.height)
         super.init(size:size)
         scene?.name = "GameScene"        

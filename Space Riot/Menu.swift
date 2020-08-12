@@ -28,7 +28,6 @@ class Menu: SKScene {
     var background: SKSpriteNode
     var gameName: SKSpriteNode
     var startGame: SKSpriteNode
-    var facebookButton: SKSpriteNode
     var ranklistButton: SKSpriteNode
     var shopButton: SKSpriteNode
     var options: SKSpriteNode
@@ -48,13 +47,17 @@ class Menu: SKScene {
     var Music: SKCheckBox
     var MusicLabel: SKLabelNode
     var slider: SKSlider
-    
-    
+        
     // purchase view
     var purchaseExitButton: SKLabelNode
     var purchaseWindow: SKSpriteNode
     var purchaseWindowLabel: SKLabelNode
-    
+        
+    // loginForm View
+    var loginTitle: SKSpriteNode
+    var loginBackground: SKSpriteNode
+    var loginGuestButton: SKSpriteNode
+    var loginFacebookButton: SKSpriteNode
     
     //    Actions
     var changeScaleUp = SKAction.scale(by: 0.8, duration: 0.1)
@@ -86,7 +89,6 @@ class Menu: SKScene {
         startGame = SKSpriteNode(imageNamed: "assets/start")
         options = SKSpriteNode(imageNamed: "assets/settings")
         credits = SKSpriteNode(imageNamed: "assets/credits")
-        facebookButton = SKSpriteNode(imageNamed: "assets/facebook")
         ranklistButton = SKSpriteNode(imageNamed: "assets/ranklist")
         shopButton = SKSpriteNode(imageNamed: "assets/shop")
         
@@ -110,7 +112,13 @@ class Menu: SKScene {
         purchaseWindow = SKSpriteNode(imageNamed: "assets/purchaseView/purchaseWindow")
         purchaseWindowLabel = SKLabelNode()
         
-        super.init(size: size)
+        // loginForm View
+        loginTitle = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/title/SPACE_RIOT")
+        loginBackground = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/background/background")
+        loginGuestButton = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/buttons/Guest/guest_button")
+        loginFacebookButton = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/buttons/Facebook/facebook")
+        
+        super.init(size: size)                
         
         //    main view
         background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
@@ -132,12 +140,7 @@ class Menu: SKScene {
         startGame.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
         startGame.zPosition = 1
         startGame.setScale(0.25)
-        
-        facebookButton.name = "facebook button"
-        facebookButton.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.2)
-        facebookButton.zPosition = 1
-        facebookButton.setScale(0.35)
-        
+                
         ranklistButton.name = "ranklist button"
         ranklistButton.position = CGPoint(x: self.size.width*0.4, y: self.size.height*0.2)
         ranklistButton.zPosition = 1
@@ -177,7 +180,7 @@ class Menu: SKScene {
         
         slider.position = CGPoint(x: 50, y: 155)
         slider.table.name = "sliderbar"
-        slider.piece.name = "sliderbar piece"
+        slider.piece.name = "sliderbarPiece"
         slider.size.width = 500
         slider.size.height = 40
         slider.zPosition = 2
@@ -225,6 +228,28 @@ class Menu: SKScene {
         purchaseWindowLabel.zPosition = 99
         purchaseWindowLabel.position = CGPoint(x: 0, y: self.size.height*0.195)
         
+        
+        // loginForm View
+        loginTitle.position = CGPoint(x: self.size.width/2, y: self.size.height*0.7)
+        loginTitle.zPosition = 1
+        loginTitle.setScale(3.8)
+        
+        loginBackground.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        loginBackground.zPosition = 0
+        loginBackground.setScale(1)
+        loginBackground.size = self.size
+        
+        loginFacebookButton.name = "loginFacebookButton"
+        loginFacebookButton.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.4)
+        loginFacebookButton.zPosition = 1
+        loginFacebookButton.setScale(3)
+
+        loginGuestButton.name = "loginGuestButton"
+        loginGuestButton.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.5)
+        loginGuestButton.zPosition = 1
+        loginGuestButton.setScale(3)
+        
+        
         //    restart view
         gameOverLabel.text = "Game Over"
         gameOverLabel.fontSize = 200
@@ -259,6 +284,8 @@ class Menu: SKScene {
             welcomeForm()
         case "gameOver":
             gameOverForm()
+        case "loginForm":
+            gameLoginForm()
         default:
             print("no such form")
             break
@@ -274,7 +301,6 @@ class Menu: SKScene {
         self.addChild(gameName)
         self.addChild(startGame)
         self.addChild(options)
-        self.addChild(facebookButton)
         self.addChild(ranklistButton)
         self.addChild(shopButton)
         self.addChild(credits)
@@ -288,6 +314,7 @@ class Menu: SKScene {
         self.addChild(highScoreLabel)
         self.addChild(restartLabel)
         GameViewController.instance.bannerViewBottom.isHidden = false
+        print("Hello")
     }
     
     func gameOptions(){
@@ -313,6 +340,13 @@ class Menu: SKScene {
         purchaseWindow.addChild(testItem)
         self.addChild(purchaseWindow)
         purchaseWindow.run(scale)
+    }
+    
+    func gameLoginForm(){
+        self.addChild(loginTitle)
+        self.addChild(loginBackground)
+        self.addChild(loginFacebookButton)
+        self.addChild(loginGuestButton)
     }
     
     func convertStringtoDic(input: String) -> [String: String]{
@@ -369,7 +403,7 @@ class Menu: SKScene {
             var nodeITapped = nodes(at: pointOfTouch)
             if(nodeITapped[0].name == "Start Game"){
                 ButtonAction = SKAction.run{
-                    var sceneMoveTo = GameScene.getInstance(size: self.size)
+                    var sceneMoveTo = GameScene(size: self.size)
                     sceneMoveTo.scaleMode = self.scaleMode
                     var myTransion = SKTransition.fade(withDuration: 0.5)
                     self.view!.presentScene(sceneMoveTo, transition: myTransion)
@@ -438,12 +472,26 @@ class Menu: SKScene {
             }
             else if(nodeITapped[0].name == "testItem"){
                 ButtonAction = SKAction.run{
-                    //                    self.exitPurchaseBack()
+
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
-            else if(restartLabel.contains(pointOfTouch)){
+            else if(nodeITapped[0].name == "loginFacebookButton"){
+                ButtonAction = SKAction.run{
+                    
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "loginGuestButton"){
+                ButtonAction = SKAction.run{
+                    
+                }
+                changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
+                nodeITapped[0].run(changeScaleSequence)
+            }
+            else if(nodeITapped[0].name == "Restart"){
                 GameViewController.instance.bannerViewBottom.isHidden = true
                 var sceneToMoveTo = GameScene.getInstance(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
@@ -455,7 +503,7 @@ class Menu: SKScene {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch:AnyObject in touches{
-            var pointOfTouch = touch.location(in: slider)
+        var pointOfTouch = touch.location(in: slider)
             if(slider.table.contains(pointOfTouch)){
                 slider.piece.position.x = pointOfTouch.x
             }
@@ -467,4 +515,5 @@ class userOptionsList: Codable {
     var TouchSensibilityPosition: CGPoint?
     var TouchSensibilityMultiplier: CGFloat?
     var Music: Bool?
+    var loginFacebook: Bool?
 }
