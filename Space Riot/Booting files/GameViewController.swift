@@ -35,10 +35,12 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         print("* login OK")
         facebbokLogin = true
         var token = result?.token?.tokenString
-        var parameters = ["fields":"id", "email", "name"]
-        var request = FBSDKCoreKit.GraphRequest(graphPath: "me", parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
+        var parameters = ["fields":"id, email, name"]
+        var request = FBSDKCoreKit.GraphRequest(graphPath: "me",
+                                                parameters: parameters,
+                                                tokenString: token, version: nil, httpMethod: .get)
         request.start(completionHandler: {connection, result, error in
-            print("\(result)")
+            print("* \(result)")
         })
     }
     
