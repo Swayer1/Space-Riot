@@ -34,7 +34,12 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         print("* login OK")
         facebbokLogin = true
-        FetchProfile()
+        var token = result?.token?.tokenString
+        var parameters = ["fields":"id", "email", "name"]
+        var request = FBSDKCoreKit.GraphRequest(graphPath: "me", parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
+        request.start(completionHandler: {connection, result, error in
+            print("\(result)")
+        })
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
@@ -45,28 +50,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
         return true
     }
-    
-    func FetchProfile(){
-        print("* Profile fetch")
-        var parameter = ["fields": "email, first_name, last_name, picture.type(large)"]
-        GraphRequest(graphPath: "me", parameters: parameter).start { (connection, result, error) in
-            if(error != nil){
-                print(error as Any)
-                return
-            }
-            if var data = result as? NSDictionary{
-                print(data["* email"] as Any)
-                print(data["* first_name"] as Any)
-                print(data["* last_name"] as Any)
-                if var picture = data["picture"] as? NSDictionary, var data = picture["data"] as? NSDictionary{
-                    print(data["* height"] as Any)
-                    print(data["* width"] as Any)
-                    print(data["* url"] as Any)
-                }
-            }
-        }
-    }
-    
+        
     // Facebook login end
     
     override func viewDidLoad() {
@@ -93,9 +77,8 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             // User is logged in, do work such as go to next view controller.
             facebbokLogin = true
         }
-                
-        loginButton.center = view.center
-        loginButton.permissions = ["public_profile", "email", "user_friends"]
+                        
+        loginButton.permissions = ["public_profile", "first_name", "id"]
         loginButton.delegate = self
         
         // Facebook login button end

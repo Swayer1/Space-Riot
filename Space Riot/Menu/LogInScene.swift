@@ -74,7 +74,8 @@ class LogInScene: SKScene {
                             else{
                                 print("* logout")
                             }
-                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
+//                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
+                            GameViewController.instance.FetchProfile()
 //                            Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
                         })
                         break
