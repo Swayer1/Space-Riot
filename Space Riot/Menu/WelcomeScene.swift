@@ -22,7 +22,7 @@ class WelcomeScene: SKScene {
             return item
         }()
         self.addChild(background)
-        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self)
+//        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,5 +31,24 @@ class WelcomeScene: SKScene {
     
     deinit{
         print("* welcomeScene deinit")
+    }
+    
+    override func didMove(to view: SKView) {
+        print("* \(GameViewController.instance.loginType)")
+        Animations.ButtonClickAnimation(item: self, action: SKAction.run {
+            switch GameViewController.instance.loginType {
+                case 0:
+                    Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self, delay: 1)
+                    break
+                case 1:
+                    GameViewController.instance.getFacebookLoginData()
+                    Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 1)
+                    break
+                case 2:
+                    break
+                default:
+                break
+            }
+        })
     }
 }

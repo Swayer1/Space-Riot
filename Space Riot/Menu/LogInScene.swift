@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class LogInScene: SKScene {
-    override init(size: CGSize) {
+    override init(size: CGSize) {        
         super.init(size: size)
         var background: SKSpriteNode = {
             var item = SKSpriteNode(imageNamed: "Space Riot Assets/Log-in-Scene/background/background5down")
@@ -67,20 +67,14 @@ class LogInScene: SKScene {
             for node in nodeInTouch{
                 switch node.name {
                     case "facebookButton":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            if(GameViewController.instance.facebbokLogin){
-                                print("* login")
-                                GameViewController.instance.getFacebookLoginData()
-                            }
-                            else{
-                                print("* logout")
-                                GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
-                            }
-//                            Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {                            
+                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
+                            Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
                         })
                         break
                     case "guessButton":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            GameViewController.instance.loginGuest()
                             Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
                         })
                         break

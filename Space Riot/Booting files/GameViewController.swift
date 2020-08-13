@@ -27,24 +27,28 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     var interstitial: GADInterstitial!
     var request = GADRequest()
     var loginButton = FBLoginButton()
-    var facebbokLogin: Bool = false
+    var loginType: Int = 0
     
     // Facebook login
         
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         print("* login OK")
-        facebbokLogin = true
+        loginType = 1
         var token = result?.token?.tokenString
         var parameters = ["fields":"email, name"]
         var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
         request.start(completionHandler: {connection, result, error in
             print("* \(result)")
-        })
+        })        
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("* Logout OK")
-        facebbokLogin = false
+        loginType = 0
+    }
+    
+    func loginGuest(){
+        loginType = 2
     }
     
     func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
@@ -81,7 +85,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         
         if var token = AccessToken.current, !token.isExpired {
             // User is logged in, do work such as go to next view controller.
-            facebbokLogin = true
+            loginType = 1
         }
                         
         loginButton.delegate = self
