@@ -50,6 +50,18 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
         return true
     }
+    
+    func getFacebookLoginData(){
+        if var token = AccessToken.current, !token.isExpired {
+            // User is logged in, do work such as go to next view controller.
+            var token = token.tokenString
+            var parameters = ["fields":"email, name"]
+            var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
+            request.start(completionHandler: {connection, result, error in
+                print("* \(result)")
+            })
+        }
+    }
         
     // Facebook login end
     
@@ -70,12 +82,6 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         if var token = AccessToken.current, !token.isExpired {
             // User is logged in, do work such as go to next view controller.
             facebbokLogin = true
-            var token = token.tokenString
-            var parameters = ["fields":"email, name"]
-            var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
-            request.start(completionHandler: {connection, result, error in
-                print("* \(result)")
-            })
         }
                         
         loginButton.delegate = self

@@ -70,11 +70,12 @@ class LogInScene: SKScene {
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
                             if(GameViewController.instance.facebbokLogin){
                                 print("* login")
+                                GameViewController.instance.getFacebookLoginData()
                             }
                             else{
                                 print("* logout")
+                                GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
                             }
-                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)                            
 //                            Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
                         })
                         break
