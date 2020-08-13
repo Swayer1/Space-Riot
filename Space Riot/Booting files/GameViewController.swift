@@ -35,8 +35,8 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         print("* login OK")
         facebbokLogin = true
         var token = result?.token?.tokenString
-        var parameters = ["fields":"id, email, name"]
-        var request = FBSDKCoreKit.GraphRequest(graphPath: "me",
+        var parameters = ["fields":"email, name"]
+        var request = FBSDKLoginKit.GraphRequest(graphPath: "me",
                                                 parameters: parameters,
                                                 tokenString: token, version: nil, httpMethod: .get)
         request.start(completionHandler: {connection, result, error in
@@ -64,24 +64,18 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         
         var ref = Database.database().reference()
         ref.child("someid/name").setValue("Hello world")
-        
-        if var token = AccessToken.current, !token.isExpired{
-            // user is log in
-            //            FetchProfile()
-        }
-        
+                
         // firebase end
         
         // Facebook login button
         
-        if let token = AccessToken.current,
-            !token.isExpired {
+        if var token = AccessToken.current, !token.isExpired {
             // User is logged in, do work such as go to next view controller.
             facebbokLogin = true
         }
                         
-        loginButton.permissions = ["public_profile", "first_name", "id"]
         loginButton.delegate = self
+        loginButton.permissions = ["public_profile", "email"]
         
         // Facebook login button end
         
