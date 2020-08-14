@@ -10,7 +10,6 @@ import Foundation
 import SpriteKit
 
 class WelcomeScene: SKScene {
-    
     override init(size: CGSize) {
         super.init(size: size)
         var background: SKSpriteNode = {
@@ -33,8 +32,7 @@ class WelcomeScene: SKScene {
         print("* welcomeScene deinit")
     }
     
-    override func didMove(to view: SKView) {
-        print("* \(GameViewController.instance.loginType)")
+    override func didMove(to view: SKView) {        
         Animations.ButtonClickAnimation(item: self, action: SKAction.run {
             switch GameViewController.instance.loginType {
                 case 0:

@@ -46,11 +46,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
         print("* Logout OK")
         loginType = 0
     }
-    
-    func loginGuest(){
-        loginType = 2
-    }
-    
+            
     func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
         return true
     }
@@ -63,7 +59,7 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
             request.start(completionHandler: {connection, result, error in
                 print("* \(result)")
-            })
+            })                        
         }
     }
         
