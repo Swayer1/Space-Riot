@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class LogInScene: SKScene {
+    static var instance: LogInScene?
     override init(size: CGSize) {
         super.init(size: size)
         var background: SKSpriteNode = {
@@ -50,6 +51,8 @@ class LogInScene: SKScene {
         self.addChild(facebookButton)
         self.addChild(guessButton)
         self.addChild(gameTitle)
+        
+        LogInScene.instance = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,14 +72,12 @@ class LogInScene: SKScene {
                     case "facebookButton":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {                            
                             GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
-                            if(GameViewController.instance.loginType == 1){
-                                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
-                            }
                         })
                         break
                     case "guessButton":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
                             self.GuestLogin()
+                            LogInScene.instance = nil
                         })
                         break
                     default:

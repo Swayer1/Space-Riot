@@ -28,13 +28,19 @@ class GameViewController: UIViewController, LoginButtonDelegate {
     var request = GADRequest()
     var loginButton = FBLoginButton()
     var loginType: Int = 0
+    var defaults = UserDefaults()
+    var token: String?
     
     // Facebook login
         
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         print("* login OK")
-        loginType = 1
-        var token = result?.token?.tokenString
+        token = result?.token?.tokenString
+        if(token != nil){
+            loginType = 1
+            Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenu.self, delay: 0)
+            LogInScene.instance = nil
+        }        
         var parameters = ["fields":"email, name"]
         var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
         request.start(completionHandler: {connection, result, error in

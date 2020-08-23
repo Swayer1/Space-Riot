@@ -32,6 +32,7 @@
 		FAB3431324B4E017005E6F01 /* Mirror in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431224B4E017005E6F01 /* Mirror */; };
 		FAB3431524B4E022005E6F01 /* Pandemic in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431424B4E022005E6F01 /* Pandemic */; };
 		FAB3431924B4E0DF005E6F01 /* Normal in Resources */ = {isa = PBXBuildFile; fileRef = FAB3431824B4E0DF005E6F01 /* Normal */; };
+		FAD9123924E6B6EC00019172 /* FacebookLoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9123824E6B6EC00019172 /* FacebookLoginData.swift */; };
 		FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8224E27BC700FB9527 /* hexConverter.swift */; };
 		FADF7D8724E2B11300FB9527 /* PurchaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */; };
 		FAED07B52496C344003AB459 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAED07B42496C344003AB459 /* GoogleService-Info.plist */; };
@@ -67,6 +68,7 @@
 		FAB3431224B4E017005E6F01 /* Mirror */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mirror; sourceTree = "<group>"; };
 		FAB3431424B4E022005E6F01 /* Pandemic */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pandemic; sourceTree = "<group>"; };
 		FAB3431824B4E0DF005E6F01 /* Normal */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Normal; sourceTree = "<group>"; };
+		FAD9123824E6B6EC00019172 /* FacebookLoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginData.swift; sourceTree = "<group>"; };
 		FADF7D8224E27BC700FB9527 /* hexConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexConverter.swift; sourceTree = "<group>"; };
 		FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseClass.swift; sourceTree = "<group>"; };
 		FAED07B42496C344003AB459 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		FA76A11724E12233005D107C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FAD9123824E6B6EC00019172 /* FacebookLoginData.swift */,
 				FA76A11524E1222F005D107C /* SKSlider.swift */,
 				FA76A11824E1223F005D107C /* SKCheckBox.swift */,
 				FADF7D8224E27BC700FB9527 /* hexConverter.swift */,
@@ -354,6 +357,7 @@
 				FA214C2C24E43E9F005BBFB9 /* Animation.swift in Sources */,
 				FA2553332496AFB2003B9BEC /* GameScene.swift in Sources */,
 				FA2553352496AFB2003B9BEC /* GameViewController.swift in Sources */,
+				FAD9123924E6B6EC00019172 /* FacebookLoginData.swift in Sources */,
 				FA25532D2496AFB2003B9BEC /* AppDelegate.swift in Sources */,
 				FA3775E124E3D43C00831DC9 /* WindowSettings.swift in Sources */,
 				FADF7D8724E2B11300FB9527 /* PurchaseClass.swift in Sources */,
