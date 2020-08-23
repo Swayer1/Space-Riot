@@ -13,7 +13,7 @@ class WelcomeScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         var background: SKSpriteNode = {
-            var item = SKSpriteNode(imageNamed: "Space Riot Assets/Welcome-Scene/start screen")
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Welcome-Scene/start screen")
             item.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
             var scaleFactor = (self.size.height/item.size.height)
             item.setScale(scaleFactor)

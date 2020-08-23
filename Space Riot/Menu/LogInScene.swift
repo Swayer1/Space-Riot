@@ -14,7 +14,7 @@ class LogInScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         var background: SKSpriteNode = {
-            var item = SKSpriteNode(imageNamed: "Space Riot Assets/Log-in-Scene/background/background5down")
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/background/background5down")
             item.anchorPoint = self.anchorPoint
             item.size = self.size
             item.zPosition = 0
@@ -22,7 +22,7 @@ class LogInScene: SKScene {
         }()
         
         var facebookButton: SKSpriteNode = {
-            var item = SKSpriteNode(imageNamed: "Space Riot Assets/Log-in-Scene/buttons/Facebook/facebook")
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/buttons/Facebook/facebook")
             item.position = CGPoint(x: self.size.width/2, y: self.size.height*0.45)
             item.name = "facebookButton"
             item.setScale(3.8)
@@ -31,7 +31,7 @@ class LogInScene: SKScene {
         }()
 
         var guessButton: SKSpriteNode = {
-            var item = SKSpriteNode(imageNamed: "Space Riot Assets/Log-in-Scene/buttons/Guest/guest_button")
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/buttons/Guest/guest_button")
             item.position = CGPoint(x: self.size.width/2, y: self.size.height*0.35)
             item.name = "guessButton"
             item.setScale(3.8)
@@ -40,7 +40,7 @@ class LogInScene: SKScene {
         }()
 
         var gameTitle: SKSpriteNode = {
-            var item = SKSpriteNode(imageNamed: "Space Riot Assets/Log-in-Scene/title/SPACE_RIOT")
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/title/SPACE_RIOT")
             item.position = CGPoint(x: self.size.width/2, y: self.size.height*0.7)
             item.setScale(3.8)
             item.zPosition = 1
