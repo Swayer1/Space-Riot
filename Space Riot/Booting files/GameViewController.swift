@@ -119,15 +119,15 @@ class GameViewController: UIViewController, LoginButtonDelegate {
             
             //        Google ads
             
-            bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
-            bannerViewBottom.adUnitID = bannerAdsBottomId
-            bannerViewBottom.rootViewController = self
-            bannerViewBottom.load(GADRequest())
-            view.addSubview(bannerViewBottom)
-            bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
-            bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
-            bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
-            bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
+//            bannerViewBottom = GADBannerView(adSize: kGADAdSizeBanner)
+//            bannerViewBottom.adUnitID = bannerAdsBottomId
+//            bannerViewBottom.rootViewController = self
+//            bannerViewBottom.load(GADRequest())
+//            view.addSubview(bannerViewBottom)
+//            bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
+//            bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
+//            bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
+//            bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
             
             loadAds()
                         
