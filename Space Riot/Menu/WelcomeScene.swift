@@ -21,7 +21,6 @@ class WelcomeScene: SKScene {
             return item
         }()
         self.addChild(background)
-//        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self)
     }
     
     required init?(coder aDecoder: NSCoder) {
