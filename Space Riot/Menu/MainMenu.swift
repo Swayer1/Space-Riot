@@ -12,7 +12,7 @@ import SpriteKit
 class MainMenu: SKScene {
     static var instance: MainMenu?
     var background: SKSpriteNode?
-    var bottomSpace: CGFloat? = 0
+    var bottomSpace: CGFloat?
     var gameBar: SKSpriteNode?
     var shopCart: SKSpriteNode?
     var videoAds: SKSpriteNode?
@@ -59,7 +59,7 @@ class MainMenu: SKScene {
         
         gameBar = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Empty-bar/bar")
-            item.position = CGPoint(x: self.size.width/2, y: 0 + bottomSpace!)
+            item.position = CGPoint(x: self.size.width/2, y: 0)
             item.size.width = self.size.width * 0.95
             item.size.height = self.size.height * 0.27
             item.zPosition = 1
@@ -68,7 +68,7 @@ class MainMenu: SKScene {
         
         shopCart = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Icon-Shop/Shopping")
-            item.position = CGPoint(x: self.size.width * 0.15, y: self.size.height * 0.065  + bottomSpace!)
+            item.position = CGPoint(x: self.size.width * 0.15, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
             return item
@@ -76,7 +76,7 @@ class MainMenu: SKScene {
 
         videoAds = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Icon-Video/video-ad")
-            item.position = CGPoint(x: self.size.width * 0.383, y: self.size.height * 0.065 + bottomSpace!)
+            item.position = CGPoint(x: self.size.width * 0.383, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
             return item
@@ -84,7 +84,7 @@ class MainMenu: SKScene {
 
         leaderboard = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Icon-Ranking/ranking")
-            item.position = CGPoint(x: self.size.width * 0.6163, y: self.size.height * 0.065 + bottomSpace!)
+            item.position = CGPoint(x: self.size.width * 0.6163, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
             return item
@@ -92,7 +92,7 @@ class MainMenu: SKScene {
 
         settings = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Icon-Settings/settings")
-            item.position = CGPoint(x: self.size.width * 0.85, y: self.size.height * 0.065 + bottomSpace!)
+            item.position = CGPoint(x: self.size.width * 0.85, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
             return item
@@ -119,7 +119,8 @@ class MainMenu: SKScene {
     
     func MoveMeniBar(space: CGFloat){
         if(GameViewController.instance.bannerViewBottom.isDescendant(of: GameViewController.instance.view)){
-            bottomSpace = space
+            print("* \(bottomSpace)")
+            bottomSpace = bottomSpace == nil ? space : 0
             gameBar!.position.y += bottomSpace!
             gamePlayButton!.position.y = ((gameTitle!.position.y - gameTitle!.size.height/2) - (gameBar!.position.y + gameBar!.size.height/2))/2 + (gameBar!.position.y + gameBar!.size.height/2)
             shopCart!.position.y += bottomSpace!
