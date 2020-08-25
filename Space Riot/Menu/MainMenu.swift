@@ -107,8 +107,7 @@ class MainMenu: SKScene {
         self.addChild(videoAds!)
         self.addChild(leaderboard!)
         self.addChild(settings!)
-        
-        MoveMeniBar()
+        MoveMeniBar(space: 200)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -118,13 +117,15 @@ class MainMenu: SKScene {
         print("* MainMenu Deinit")
     }
     
-    func MoveMeniBar(){
-        bottomSpace = 0
-        gameBar!.position.y += bottomSpace!
-        gamePlayButton!.position.y = ((gameTitle!.position.y - gameTitle!.size.height/2) - (gameBar!.position.y + gameBar!.size.height/2))/2 + (gameBar!.position.y + gameBar!.size.height/2)
-        shopCart!.position.y += bottomSpace!
-        videoAds!.position.y += bottomSpace!
-        leaderboard!.position.y += bottomSpace!
-        settings!.position.y += bottomSpace!
+    func MoveMeniBar(space: CGFloat){
+        if(GameViewController.instance.bannerViewBottom.isDescendant(of: GameViewController.instance.view)){
+            bottomSpace = space
+            gameBar!.position.y += bottomSpace!
+            gamePlayButton!.position.y = ((gameTitle!.position.y - gameTitle!.size.height/2) - (gameBar!.position.y + gameBar!.size.height/2))/2 + (gameBar!.position.y + gameBar!.size.height/2)
+            shopCart!.position.y += bottomSpace!
+            videoAds!.position.y += bottomSpace!
+            leaderboard!.position.y += bottomSpace!
+            settings!.position.y += bottomSpace!
+        }
     }
 }

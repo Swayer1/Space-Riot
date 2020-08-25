@@ -123,11 +123,6 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             bannerViewBottom.delegate = self
             bannerViewBottom.rootViewController = self
             bannerViewBottom.load(GADRequest())
-//            view.addSubview(bannerViewBottom)
-//            bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
-//            bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
-//            bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
-//            bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
             loadAds()
                         
             // Google ads
@@ -152,6 +147,12 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("* adViewDidReceiveAd")
+        MainMenu.instance?.MoveMeniBar(space: 200)
+        view.addSubview(bannerViewBottom)
+        bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
+        bannerViewBottom.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive=true
+        bannerViewBottom.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive=true
+        bannerViewBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive=true
     }
     
     /// Tells the delegate an ad request failed.
