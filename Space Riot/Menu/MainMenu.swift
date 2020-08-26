@@ -46,6 +46,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width/2, y: self.size.height*0.4)
             item.setScale(3.8)
             item.zPosition = 1
+            item.name = "gamePlayButton"
             return item
         }()
         
@@ -54,6 +55,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
             item.setScale(5)
             item.zPosition = 1
+            item.name = "playerProfile"
             return item
         }()
         
@@ -71,6 +73,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width * 0.15, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
+            item.name = "shopCart"
             return item
         }()
 
@@ -79,6 +82,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width * 0.383, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
+            item.name = "videoAds"
             return item
         }()
 
@@ -87,6 +91,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width * 0.6163, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
+            item.name = "leaderboard"
             return item
         }()
 
@@ -95,6 +100,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width * 0.85, y: self.size.height * 0.065)
             item.setScale(self.size.width * 0.0025)
             item.zPosition = 2
+            item.name = "settings"
             return item
         }()
 
@@ -127,6 +133,49 @@ class MainMenu: SKScene {
             videoAds!.position.y += bottomSpace!
             leaderboard!.position.y += bottomSpace!
             settings!.position.y += bottomSpace!
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches{
+            var pointOfTouch = touch.location(in: self)
+            var nodeInTouch = nodes(at: pointOfTouch)
+            for node in nodeInTouch{
+                switch node.name {
+                    case "shopCart":
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            
+                        })
+                        break
+                    case "videoAds":
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            
+                        })
+                        break
+                    case "leaderboard":
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+
+                        })
+                        break
+                    case "settings":
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            
+                        })
+                        break
+                    case "gamePlayButton":
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            
+                        })
+                        break
+                    case "playerProfile":
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            
+                        })
+                        break
+                    default:
+                        break
+                }
+            }
         }
     }
 }
