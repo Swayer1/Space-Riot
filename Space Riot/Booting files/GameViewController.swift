@@ -61,14 +61,15 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         if var token = AccessToken.current, !token.isExpired {
             // User is logged in, do work such as go to next view controller.
             var token = token.tokenString
-            var parameters = ["fields":"email, name"]
+            var parameters = ["fields":"email, name, picture.type(large)"]
             var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
             request.start(completionHandler: {connection, result, error in
-                print("* \(result)")
+                var data = result as! [String: Any]
+                print("* \(data)")
             })                        
         }
     }
-        
+            
     // Facebook login end
     
     override func viewDidLoad() {

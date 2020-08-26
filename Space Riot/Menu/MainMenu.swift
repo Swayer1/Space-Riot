@@ -125,7 +125,6 @@ class MainMenu: SKScene {
     
     func MoveMeniBar(space: CGFloat){
         if(GameViewController.instance.bannerViewBottom.isDescendant(of: GameViewController.instance.view)){
-            print("* \(bottomSpace)")
             bottomSpace = bottomSpace == nil ? space : 0
             gameBar!.position.y += bottomSpace!
             gamePlayButton!.position.y = ((gameTitle!.position.y - gameTitle!.size.height/2) - (gameBar!.position.y + gameBar!.size.height/2))/2 + (gameBar!.position.y + gameBar!.size.height/2)
@@ -164,7 +163,7 @@ class MainMenu: SKScene {
                         break
                     case "gamePlayButton":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            
+                            GameViewController.instance.getFacebookLoginData()
                         })
                         break
                     case "playerProfile":
