@@ -50,16 +50,16 @@ class MainMenu: SKScene {
             item.name = "gamePlayButton"
             return item
         }()
-        
+
         playerProfileRing = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/profile/Oval")
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
-            item.setScale(5)
-            item.zPosition = 1
+            item.setScale(4.5)
+            item.zPosition = 2
             item.name = "playerProfileRing"
             return item
         }()
-        
+
         playerProfileImage = {
             var item = SKSpriteNode(texture: SKTexture(image: FacebookLoginData.userPhoto!))
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
@@ -68,7 +68,7 @@ class MainMenu: SKScene {
             item.name = "playerProfileImage"
             return item
         }()
-                
+                        
         gameBar = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Empty-bar/bar")
             item.position = CGPoint(x: self.size.width/2, y: 0)
