@@ -36,22 +36,22 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         print("* login OK")
         token = result?.token?.tokenString
-        if(token != nil){
-            loginType = 1
-            getFacebookLoginData()
-            Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenu.self, delay: 0)
-            LogInScene.instance = nil
-        }        
         var parameters = ["fields":"email, name"]
         var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
         request.start(completionHandler: {connection, result, error in
             print("* \(result)")
-        })        
+        })
+        if(token != nil){
+            loginType = 1
+            getFacebookLoginData()
+        }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("* Logout OK")
         loginType = 0
+        Animations.changeSceneAnimationWithDelay(fromScene: MainMenu.instance!, toScene: LogInScene.self, delay: 1)
+        MainMenu.instance = nil
     }
             
     func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
@@ -70,7 +70,12 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
                 var pictureData = picture["data"] as! [String: Any]
                 var url = URL(string: pictureData["url"] as! String)
                 if var data = try? Data(contentsOf: url!){
-                    FacebookLoginData.userPhoto = UIImage(data: data)                    
+                    FacebookLoginData.userPhoto = FacebookLoginData.maskRoundedImage(image: UIImage(data: data)!, radius: UIImage(data: data)!.size.width/2)
+//                    MainMenu.instance?.LoadFacebookData()
+                    if(LogInScene.instance != nil){
+                        Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenu.self, delay: 0)
+                        LogInScene.instance = nil
+                    }
                 }
             })
         }

@@ -61,14 +61,14 @@ class MainMenu: SKScene {
         }()
         
         playerProfileImage = {
-            var item = SKSpriteNode(texture: SKTexture(image: FacebookLoginData.maskRoundedImage(image: FacebookLoginData.userPhoto!, radius: FacebookLoginData.userPhoto!.size.width/2)))
+            var item = SKSpriteNode(texture: SKTexture(image: FacebookLoginData.userPhoto!))
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
             item.setScale(1)
             item.zPosition = 2
             item.name = "playerProfileImage"
             return item
         }()
-        
+                
         gameBar = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Empty-bar/bar")
             item.position = CGPoint(x: self.size.width/2, y: 0)
@@ -187,5 +187,5 @@ class MainMenu: SKScene {
                 }
             }
         }
-    }
+    }    
 }

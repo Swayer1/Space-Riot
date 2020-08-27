@@ -32,20 +32,18 @@ class WelcomeScene: SKScene {
     }
     
     override func didMove(to view: SKView) {        
-        Animations.ButtonClickAnimation(item: self, action: SKAction.run {
-            switch GameViewController.instance.loginType {
-                case 0:
-                    Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self, delay: 1)
-                    break
-                case 1:
-                    GameViewController.instance.getFacebookLoginData()
-                    Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 1)
-                    break
-                case 2:
-                    break
-                default:
+        switch GameViewController.instance.loginType {
+            case 0:
+                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self, delay: 1)
                 break
-            }
-        })
+            case 1:
+                GameViewController.instance.getFacebookLoginData()
+                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 1)
+                break
+            case 2:
+                break
+            default:
+                break
+        }
     }
 }
