@@ -65,11 +65,16 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
             request.start(completionHandler: {connection, result, error in
                 var data = result as! [String: Any]
-                print("* \(data)")
-            })                        
+                var picture = data["picture"] as! [String: Any]
+                var pictureData = picture["data"] as! [String: Any]
+                var url = URL(string: pictureData["url"] as! String)
+                if var data = try? Data(contentsOf: url!){
+                    FacebookLoginData.userPhoto = UIImage(data: data)                    
+                }
+            })
         }
     }
-            
+                
     // Facebook login end
     
     override func viewDidLoad() {
@@ -147,7 +152,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     // google ads delegates
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("* adViewDidReceiveAd")
+//        print("* adViewDidReceiveAd")
         MainMenu.instance?.MoveMeniBar(space: 200)
         view.addSubview(bannerViewBottom)
         bannerViewBottom.translatesAutoresizingMaskIntoConstraints = false
@@ -158,29 +163,29 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     
     /// Tells the delegate an ad request failed.
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("* adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+//        print("* adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
     
     /// Tells the delegate that a full-screen view will be presented in response
     /// to the user clicking on an ad.
     func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print("* adViewWillPresentScreen")
+//        print("* adViewWillPresentScreen")
     }
     
     /// Tells the delegate that the full-screen view will be dismissed.
     func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print("* adViewWillDismissScreen")
+//        print("* adViewWillDismissScreen")
     }
     
     /// Tells the delegate that the full-screen view has been dismissed.
     func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print("* adViewDidDismissScreen")
+//        print("* adViewDidDismissScreen")
     }
     
     /// Tells the delegate that a user click will open another app (such as
     /// the App Store), backgrounding the current app.
     func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-        print("* adViewWillLeaveApplication")
+//        print("* adViewWillLeaveApplication")
     }
     
     // end google ads delegates

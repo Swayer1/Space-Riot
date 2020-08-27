@@ -10,14 +10,26 @@ import Foundation
 import UIKit
 
 struct FacebookLoginData {
-    static var userPhoto: UIImage? = UIImage()
+    static var userPhoto: UIImage? = UIImage()    
     static var fullName: String? = ""
     static var friendsList: [String]? = []
     
-    func convertImageToData(){
+    static func convertImageToData(){
         if var data = FacebookLoginData.userPhoto?.pngData(){
             var documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             var url = documents.appendingPathComponent("facebookUserPhoto.png")
         }
+    }
+    
+    static func maskRoundedImage(image: UIImage, radius: CGFloat) -> UIImage {
+        let imageView: UIImageView = UIImageView(image: image)
+        let layer = imageView.layer
+        layer.masksToBounds = true
+        layer.cornerRadius = radius
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return roundedImage!
     }
 }
