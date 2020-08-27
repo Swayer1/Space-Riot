@@ -38,6 +38,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         token = result?.token?.tokenString
         if(token != nil){
             loginType = 1
+            getFacebookLoginData()
             Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenu.self, delay: 0)
             LogInScene.instance = nil
         }        

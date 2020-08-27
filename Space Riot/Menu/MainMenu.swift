@@ -20,7 +20,7 @@ class MainMenu: SKScene {
     var settings: SKSpriteNode?
     var gameTitle: SKSpriteNode?
     var gamePlayButton: SKSpriteNode?
-    var playerProfile: SKSpriteNode?
+    var playerProfileRing: SKSpriteNode?
     var playerProfileImage: SKSpriteNode?
     
     override init(size: CGSize) {
@@ -51,12 +51,12 @@ class MainMenu: SKScene {
             return item
         }()
         
-        playerProfile = {
+        playerProfileRing = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/profile/Oval")
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
             item.setScale(5)
             item.zPosition = 1
-            item.name = "playerProfile"
+            item.name = "playerProfileRing"
             return item
         }()
         
@@ -65,7 +65,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
             item.setScale(1)
             item.zPosition = 2
-            item.name = "playerProfile"            
+            item.name = "playerProfileImage"
             return item
         }()
         
@@ -117,7 +117,7 @@ class MainMenu: SKScene {
         self.addChild(background!)
         self.addChild(gameTitle!)
         self.addChild(gamePlayButton!)
-        self.addChild(playerProfile!)
+        self.addChild(playerProfileRing!)
         self.addChild(gameBar!)
         self.addChild(shopCart!)
         self.addChild(videoAds!)
@@ -174,12 +174,12 @@ class MainMenu: SKScene {
                         break
                     case "gamePlayButton":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            GameViewController.instance.getFacebookLoginData()
+                            
                         })
                         break
-                    case "playerProfile":
+                    case "playerProfileImage":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            
+                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
                         })
                         break
                     default:

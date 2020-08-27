@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 struct FacebookLoginData {
-    static var userPhoto: UIImage? = UIImage()    
-    static var fullName: String? = ""
-    static var friendsList: [String]? = []
+    static var userPhoto: UIImage?
+    static var fullName: String?
+    static var friendsList: [String]?
     
     static func convertImageToData(){
         if var data = FacebookLoginData.userPhoto?.pngData(){
