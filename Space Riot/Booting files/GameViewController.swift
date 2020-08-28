@@ -71,9 +71,8 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
                 var url = URL(string: pictureData["url"] as! String)
                 if var data = try? Data(contentsOf: url!){
                     FacebookLoginData.userPhoto = FacebookLoginData.maskRoundedImage(image: UIImage(data: data)!, radius: UIImage(data: data)!.size.width/2)
-//                    MainMenu.instance?.LoadFacebookData()
                     if(LogInScene.instance != nil){
-                        Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenu.self, delay: 0)
+                        Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenuFacebookLogin.self, delay: 0)
                         LogInScene.instance = nil
                     }
                 }

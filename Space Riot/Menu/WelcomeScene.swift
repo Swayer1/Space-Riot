@@ -38,9 +38,10 @@ class WelcomeScene: SKScene {
                 break
             case 1:
                 GameViewController.instance.getFacebookLoginData()
-                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 1)
+                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuFacebookLogin.self, delay: 1)
                 break
             case 2:
+                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuGuessLogin.self, delay: 1)
                 break
             default:
                 break

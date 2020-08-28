@@ -89,6 +89,6 @@ class LogInScene: SKScene {
     
     func GuestLogin(){
         GameViewController.instance.loginType = 2
-        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenu.self, delay: 0)
+        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuGuessLogin.self, delay: 0)
     }
 }

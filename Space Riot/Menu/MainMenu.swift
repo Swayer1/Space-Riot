@@ -21,7 +21,6 @@ class MainMenu: SKScene {
     var gameTitle: SKSpriteNode?
     var gamePlayButton: SKSpriteNode?
     var playerProfileRing: SKSpriteNode?
-    var playerProfileImage: SKSpriteNode?
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -55,20 +54,11 @@ class MainMenu: SKScene {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/profile/Oval")
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
             item.setScale(4.5)
-            item.zPosition = 2
+            item.zPosition = 1
             item.name = "playerProfileRing"
             return item
         }()
-
-        playerProfileImage = {
-            var item = SKSpriteNode(texture: SKTexture(image: FacebookLoginData.userPhoto!))
-            item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
-            item.setScale(1)
-            item.zPosition = 2
-            item.name = "playerProfileImage"
-            return item
-        }()
-                        
+                
         gameBar = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Empty-bar/bar")
             item.position = CGPoint(x: self.size.width/2, y: 0)
@@ -123,7 +113,6 @@ class MainMenu: SKScene {
         self.addChild(videoAds!)
         self.addChild(leaderboard!)
         self.addChild(settings!)
-        self.addChild(playerProfileImage!)
         MoveMeniBar(space: 200)
     }
     required init?(coder aDecoder: NSCoder) {
