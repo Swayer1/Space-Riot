@@ -42,7 +42,7 @@ class MainMenuFacebookLogin: MainMenu{
                 switch node.name {
                     case "playerProfileImageFacebook":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
+                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)                            
                         })
                         break
                     default:

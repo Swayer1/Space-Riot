@@ -19,7 +19,7 @@ var bannerAdsTopId: String = "ca-app-pub-3940256099942544/6300978111"
 var bannerAdsBottomId: String = "ca-app-pub-3940256099942544/6300978111"
 var interstitialId: String = "ca-app-pub-3940256099942544/4411468910"
 
-class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDelegate {
+class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDelegate, UIActionSheetDelegate {
     
     static var instance: GameViewController!
     var backingAudio: AVAudioPlayer!
@@ -215,5 +215,24 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func downloadSheet(fromScene: SKScene, toScene: SKScene.Type)
+    {
+        var optionMenu = UIAlertController(title: nil, message: "Log in as Guess", preferredStyle: .actionSheet)
+        var deleteAction = UIAlertAction(title: "Log out", style: .default, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            Animations.changeSceneAnimationWithDelay(fromScene: fromScene, toScene: toScene, delay: 0)
+        })
+        
+        var cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
+        {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
     }
 }
