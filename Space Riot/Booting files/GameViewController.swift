@@ -220,7 +220,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     func downloadSheet(fromScene: SKScene, toScene: SKScene.Type)
     {
         var optionMenu = UIAlertController(title: nil, message: "Log in as Guess", preferredStyle: .actionSheet)
-        var deleteAction = UIAlertAction(title: "Log out", style: .default, handler:
+        var logOutAction = UIAlertAction(title: "Log out", style: .destructive, handler:
         {
             (alert: UIAlertAction!) -> Void in
             Animations.changeSceneAnimationWithDelay(fromScene: fromScene, toScene: toScene, delay: 0)
@@ -231,7 +231,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             (alert: UIAlertAction!) -> Void in
             print("Cancelled")
         })
-        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(logOutAction)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
     }
