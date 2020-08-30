@@ -21,4 +21,6 @@ target 'Space Riot' do
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKPlacesKit'
+    
+  pod 'ReachabilitySwift'
 end

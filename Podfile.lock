@@ -94,6 +94,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - ReachabilitySwift (5.0.0)
   - SKImport (1.0.0)
 
 DEPENDENCIES:
@@ -105,6 +106,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Google-Mobile-Ads-SDK
+  - ReachabilitySwift
   - SKImport
 
 SPEC REPOS:
@@ -129,6 +131,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - ReachabilitySwift
     - SKImport
 
 SPEC CHECKSUMS:
@@ -152,8 +155,9 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SKImport: 8e630a47252eb6fb1aa0227b043a380efb1bd956
 
-PODFILE CHECKSUM: 2956529ddd24d255d2a77fd912bc6d51d367267f
+PODFILE CHECKSUM: 2c9d66ed7e388ec52b2f03a400e7f06ea9c5ccfd
 
 COCOAPODS: 1.9.3

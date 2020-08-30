@@ -70,8 +70,8 @@ class LogInScene: SKScene {
             for node in nodeInTouch{
                 switch node.name {
                     case "facebookButton":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {                            
-                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
+                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+                            GameViewController.instance.checkInternetConnection()
                         })
                         break
                     case "guessButton":
@@ -89,6 +89,6 @@ class LogInScene: SKScene {
     
     func GuestLogin(){
         GameViewController.instance.loginType = 2
-        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuGuessLogin.self, delay: 0)
+        Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuGuessLogin.self, delay: 0)        
     }
 }

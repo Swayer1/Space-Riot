@@ -42,7 +42,7 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 switch node.name {
                     case "playerProfileImageGuess":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {                            
-                            GameViewController.instance.downloadSheet(fromScene: self, toScene: LogInScene.self)
+                            GameViewController.instance.ShowCustomLogOut(fromScene: self, toScene: LogInScene.self)
                         })
                         break
                     default:

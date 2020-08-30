@@ -14,6 +14,7 @@ import Foundation
 import FBSDKLoginKit
 import FirebaseDatabase
 import GoogleMobileAds
+import Reachability
 
 var bannerAdsTopId: String = "ca-app-pub-3940256099942544/6300978111"
 var bannerAdsBottomId: String = "ca-app-pub-3940256099942544/6300978111"
@@ -217,9 +218,9 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         return true
     }
     
-    func downloadSheet(fromScene: SKScene, toScene: SKScene.Type)
+    func ShowCustomLogOut(fromScene: SKScene, toScene: SKScene.Type)
     {
-        var optionMenu = UIAlertController(title: nil, message: "Log in as Guess", preferredStyle: .actionSheet)
+        var optionMenu = UIAlertController(title: nil, message: "Logged in as Guess", preferredStyle: .actionSheet)
         var logOutAction = UIAlertAction(title: "Log out", style: .destructive, handler:
         {
             (alert: UIAlertAction!) -> Void in
@@ -234,5 +235,21 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         optionMenu.addAction(logOutAction)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    func checkInternetConnection(){
+        let reachability = try! Reachability()
+        switch reachability.isReachable {
+            case true:
+                loginButton.sendActions(for: .touchUpInside)
+            break
+            case false:
+                let alert = UIAlertController(title: "Warning", message: "No internet connection", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            break
+            default:
+            break
+        }
     }
 }
