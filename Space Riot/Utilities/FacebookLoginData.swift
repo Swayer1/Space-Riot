@@ -12,6 +12,7 @@ import UIKit
 struct FacebookLoginData {
     static var userPhoto: UIImage?
     static var fullName: String?
+    static var email: String?
     static var friendsList: [String]?
     
     static func convertImageToData(){

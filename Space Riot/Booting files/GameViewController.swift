@@ -66,12 +66,17 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             var parameters = ["fields":"email, name, picture.type(large)"]
             var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
             request.start(completionHandler: {connection, result, error in
+                print(result)
                 var data = result as! [String: Any]
                 var picture = data["picture"] as! [String: Any]
+                var email = data["email"]
+                var name = data["name"]
                 var pictureData = picture["data"] as! [String: Any]
                 var url = URL(string: pictureData["url"] as! String)
                 if var data = try? Data(contentsOf: url!){
                     FacebookLoginData.userPhoto = FacebookLoginData.maskRoundedImage(image: UIImage(data: data)!, radius: UIImage(data: data)!.size.width/2)
+                    FacebookLoginData.fullName = name as? String
+                    FacebookLoginData.email = email as? String
                     if(LogInScene.instance != nil){
                         Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenuFacebookLogin.self, delay: 0)
                         LogInScene.instance = nil
@@ -154,7 +159,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             view.showsPhysics = true
         }
     }
-    
+        
     // google ads delegates
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
