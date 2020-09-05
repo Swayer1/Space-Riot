@@ -39,6 +39,7 @@
 		FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8224E27BC700FB9527 /* hexConverter.swift */; };
 		FADF7D8724E2B11300FB9527 /* PurchaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */; };
 		FAED07B52496C344003AB459 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAED07B42496C344003AB459 /* GoogleService-Info.plist */; };
+		FAF1D51424FBCB47002C390E /* Utulities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF1D51324FBCB47002C390E /* Utulities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		FADF7D8224E27BC700FB9527 /* hexConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexConverter.swift; sourceTree = "<group>"; };
 		FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseClass.swift; sourceTree = "<group>"; };
 		FAED07B42496C344003AB459 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FAF1D51324FBCB47002C390E /* Utulities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utulities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				FA15853A24F8032E00FA2BB0 /* GuessLoginData.swift */,
+				FAF1D51324FBCB47002C390E /* Utulities.swift */,
 				FAD9123824E6B6EC00019172 /* FacebookLoginData.swift */,
 				FA76A11524E1222F005D107C /* SKSlider.swift */,
 				FA76A11824E1223F005D107C /* SKCheckBox.swift */,
@@ -376,6 +379,7 @@
 				FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */,
 				FA3775DF24E3D34200831DC9 /* WindowRanking.swift in Sources */,
 				FA3775D924E3D31500831DC9 /* LogInScene.swift in Sources */,
+				FAF1D51424FBCB47002C390E /* Utulities.swift in Sources */,
 				FA2553492496AFF2003B9BEC /* Menu.swift in Sources */,
 				FA3775E524E3D45100831DC9 /* WindowVideo.swift in Sources */,
 				FA3775DB24E3D31D00831DC9 /* MainMenu.swift in Sources */,

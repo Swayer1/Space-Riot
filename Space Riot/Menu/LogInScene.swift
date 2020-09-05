@@ -87,8 +87,9 @@ class LogInScene: SKScene {
         }
     }
     
-    func GuestLogin(){
-        GameViewController.instance.loginType = 2
+    func GuestLogin(){        
+        var defaults = UserDefaults()
+        defaults.set(2, forKey: "loginType")
         Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuGuessLogin.self, delay: 0)        
     }
 }

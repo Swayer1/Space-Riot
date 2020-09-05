@@ -27,8 +27,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     var bannerViewBottom: GADBannerView!
     var interstitial: GADInterstitial!
     var request = GADRequest()
-    var loginButton = FBLoginButton()
-    var loginType: Int = 0
+    var loginButton = FBLoginButton()    
     var defaults = UserDefaults()
     var token: String?
     
@@ -43,14 +42,16 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             print("* \(result)")
         })
         if(token != nil){
-            loginType = 1
+            var defaults = UserDefaults()
+            defaults.set(1, forKey: "loginType")
             getFacebookLoginData()
         }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("* Logout OK")
-        loginType = 0
+        var defaults = UserDefaults()
+        defaults.set(0, forKey: "loginType")
         Animations.changeSceneAnimationWithDelay(fromScene: MainMenu.instance!, toScene: LogInScene.self, delay: 1)
         MainMenu.instance = nil
     }
@@ -74,9 +75,11 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
                 var pictureData = picture["data"] as! [String: Any]
                 var url = URL(string: pictureData["url"] as! String)
                 if var data = try? Data(contentsOf: url!){
-                    FacebookLoginData.userPhoto = FacebookLoginData.maskRoundedImage(image: UIImage(data: data)!, radius: UIImage(data: data)!.size.width/2)
+                    FacebookLoginData.userPhoto = Utilities.maskRoundedImage(image: UIImage(data: data)!, radius: UIImage(data: data)!.size.width/2)
                     FacebookLoginData.fullName = name as? String
                     FacebookLoginData.email = email as? String
+                    Utilities.SaveFacebookDataToDevice()
+                    Utilities.LoadFacebookDataToDevice()
                     if(LogInScene.instance != nil){
                         Animations.changeSceneAnimationWithDelay(fromScene: LogInScene.instance!, toScene: MainMenuFacebookLogin.self, delay: 0)
                         LogInScene.instance = nil
@@ -104,7 +107,8 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         
         if var token = AccessToken.current, !token.isExpired {
             // User is logged in, do work such as go to next view controller.
-            loginType = 1
+            var defaults = UserDefaults()
+            defaults.set(1, forKey: "loginType")
         }
                         
         loginButton.delegate = self
