@@ -233,6 +233,8 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         var logOutAction = UIAlertAction(title: "Log out", style: .destructive, handler:
         {
             (alert: UIAlertAction!) -> Void in
+            var defaults = UserDefaults()
+            defaults.set(0, forKey: "loginType")
             Animations.changeSceneAnimationWithDelay(fromScene: fromScene, toScene: toScene, delay: 0)
         })
         
