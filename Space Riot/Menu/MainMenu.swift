@@ -141,7 +141,7 @@ class MainMenu: SKScene {
     func LeaderBoardMenu(){
         gameBarMenuWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-ranking/Facebook/Window/big-window")
-            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
+            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.015)
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
             item.zPosition = 2
@@ -154,7 +154,7 @@ class MainMenu: SKScene {
     func SettingsMenu(){
         gameBarMenuWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-settings/windows/Window-settings")
-            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
+            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.015)
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
             item.zPosition = 2
