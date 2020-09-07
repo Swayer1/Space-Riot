@@ -304,7 +304,6 @@ class Menu: SKScene {
         self.addChild(ranklistButton)
         self.addChild(shopButton)
         self.addChild(credits)
-        GameViewController.instance.bannerViewBottom.isHidden = false
     }
     
     func gameOverForm(){
@@ -313,8 +312,6 @@ class Menu: SKScene {
         self.addChild(scoreLabel)
         self.addChild(highScoreLabel)
         self.addChild(restartLabel)
-        GameViewController.instance.bannerViewBottom.isHidden = false
-        print("Hello")
     }
     
     func gameOptions(){
@@ -406,8 +403,7 @@ class Menu: SKScene {
                     var sceneMoveTo = GameScene(size: self.size)
                     sceneMoveTo.scaleMode = self.scaleMode
                     var myTransion = SKTransition.fade(withDuration: 0.5)
-                    self.view!.presentScene(sceneMoveTo, transition: myTransion)
-                    GameViewController.instance.bannerViewBottom.isHidden = true
+                    self.view!.presentScene(sceneMoveTo, transition: myTransion)                    
                 }
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
@@ -491,8 +487,7 @@ class Menu: SKScene {
                 changeScaleSequence = SKAction.sequence([changeScaleUp, changeScaleDown, ButtonAction])
                 nodeITapped[0].run(changeScaleSequence)
             }
-            else if(nodeITapped[0].name == "Restart"){
-                GameViewController.instance.bannerViewBottom.isHidden = true
+            else if(nodeITapped[0].name == "Restart"){                
                 var sceneToMoveTo = GameScene.getInstance(size: self.size)
                 sceneToMoveTo.scaleMode = self.scaleMode
                 var myTransition = SKTransition.fade(withDuration: 0.5)

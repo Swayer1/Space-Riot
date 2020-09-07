@@ -21,7 +21,8 @@ class MainMenu: SKScene {
     var gameTitle: SKSpriteNode?
     var gamePlayButton: SKSpriteNode?
     var playerProfileRing: SKSpriteNode?
-    
+    var gameBarMenuWindow: SKSpriteNode?
+
     override init(size: CGSize) {
         super.init(size: size)
         MainMenu.instance = self
@@ -32,7 +33,7 @@ class MainMenu: SKScene {
             item.zPosition = 0
             return item
         }()
-        
+
         gameTitle = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Log-in-Scene/title/SPACE_RIOT")
             item.position = CGPoint(x: self.size.width/2, y: self.size.height*0.7)
@@ -58,16 +59,17 @@ class MainMenu: SKScene {
             item.name = "playerProfileRing"
             return item
         }()
-                
+
         gameBar = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Empty-bar/bar")
             item.position = CGPoint(x: self.size.width/2, y: 0)
             item.size.width = self.size.width * 0.95
             item.size.height = self.size.height * 0.27
+            item.setScale(1)
             item.zPosition = 1
             return item
         }()
-        
+
         shopCart = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Bar/Icon-Shop/Shopping")
             item.position = CGPoint(x: self.size.width * 0.15, y: self.size.height * 0.065)
@@ -112,29 +114,56 @@ class MainMenu: SKScene {
         self.addChild(shopCart!)
         self.addChild(videoAds!)
         self.addChild(leaderboard!)
-        self.addChild(settings!)
-        MoveMeniBar(space: 200)
+        self.addChild(settings!)        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit{
         print("* MainMenu Deinit")
     }
-    
-    func MoveMeniBar(space: CGFloat){
-        if(GameViewController.instance.bannerViewBottom.isDescendant(of: GameViewController.instance.view)){
-            bottomSpace = bottomSpace == nil ? space : 0
-            gameBar!.position.y += bottomSpace!
-            gamePlayButton!.position.y = ((gameTitle!.position.y - gameTitle!.size.height/2) - (gameBar!.position.y + gameBar!.size.height/2))/2 + (gameBar!.position.y + gameBar!.size.height/2)
-            shopCart!.position.y += bottomSpace!
-            videoAds!.position.y += bottomSpace!
-            leaderboard!.position.y += bottomSpace!
-            settings!.position.y += bottomSpace!
-        }
+
+    func shoppingCart(){
+        gameBarMenuWindow = {
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")
+            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
+            item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
+            item.setScale(1)
+            item.zPosition = 2
+            item.name = "shopCartWindow"
+            return item
+        }()
+
+        Utilities.AddChild(scene: self, item: gameBarMenuWindow!)
     }
-    
+
+    func LeaderBoardMenu(){
+        gameBarMenuWindow = {
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-ranking/Facebook/Window/big-window")
+            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
+            item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
+            item.setScale(1)
+            item.zPosition = 2
+            item.name = "LeaderBoardWindow"
+            return item
+        }()
+        Utilities.AddChild(scene: self, item: gameBarMenuWindow!)
+    }
+
+    func SettingsMenu(){
+        gameBarMenuWindow = {
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-settings/windows/Window-settings")
+            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
+            item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
+            item.setScale(1)
+            item.zPosition = 2
+            item.name = "SettingWindow"
+            return item
+        }()
+        Utilities.AddChild(scene: self, item: gameBarMenuWindow!)
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             var pointOfTouch = touch.location(in: self)
@@ -143,27 +172,27 @@ class MainMenu: SKScene {
                 switch node.name {
                     case "shopCart":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            
+                            self.shoppingCart()
                         })
                         break
-                    case "videoAds":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            
-                        })
+                    case "videoAds":4
+                    Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+
+                    })
                         break
                     case "leaderboard":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-
+                            self.LeaderBoardMenu()
                         })
                         break
                     case "settings":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            
+                            self.SettingsMenu()
                         })
                         break
                     case "gamePlayButton":
                         Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            
+
                         })
                         break
                     case "playerProfileImage":
@@ -176,5 +205,5 @@ class MainMenu: SKScene {
                 }
             }
         }
-    }    
+    }
 }

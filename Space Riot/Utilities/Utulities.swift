@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class Utilities{
     static func SaveFacebookDataToDevice(){
@@ -24,7 +25,12 @@ class Utilities{
         FacebookLoginData.fullName = defaults.string(forKey: "facebookNameData")
         FacebookLoginData.email = defaults.string(forKey: "facebookEmailData")
     }
-    
+
+    static func AddChild(scene: SKScene, item: SKNode){
+        if(scene.childNode(withName: item.name!) == nil){
+            scene.addChild(item)
+        }
+    }
     
     static func maskRoundedImage(image: UIImage, radius: CGFloat) -> UIImage {
         let imageView: UIImageView = UIImageView(image: image)
