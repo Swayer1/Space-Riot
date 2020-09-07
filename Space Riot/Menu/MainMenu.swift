@@ -6,10 +6,19 @@
 //  Copyright © 2020 alex. All rights reserved.
 //
 
+/*
+ level in UI view class
+ 0 - background
+ 1 - everything on the background / bottom menu
+ 2 - icons on the bottom menu, menu windows
+ 3 - everything in the menu window
+*/
+
+
 import Foundation
 import SpriteKit
 
-class MainMenu: SKScene {
+class MainMenu: SKScene {    
     static var instance: MainMenu?
     var background: SKSpriteNode?
     var bottomSpace: CGFloat?
@@ -147,6 +156,18 @@ class MainMenu: SKScene {
         }()
 
         showMenuWindows(item: gameBarMenuWindow!)
+        
+        var backButton: SKSpriteNode = {
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")
+            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+//            item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
+            item.setScale(5)
+            item.zPosition = 3
+            item.name = "back button Window"
+            return item
+        }()
+                
+        Utilities.AddChild(scene: self, item: backButton)
     }
 
     func LeaderBoardMenu(){
