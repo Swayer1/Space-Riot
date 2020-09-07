@@ -124,6 +124,17 @@ class MainMenu: SKScene {
         print("* MainMenu Deinit")
     }
 
+    func showMenuWindows(item: SKNode){
+        for node in self.children {
+            if(node.name != nil){
+                if(node.name!.contains("Window")){
+                    node.removeFromParent()
+                }
+            }
+        }
+        Utilities.AddChild(scene: self, item: item)
+    }
+
     func shoppingCart(){
         gameBarMenuWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")
@@ -131,11 +142,11 @@ class MainMenu: SKScene {
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
             item.zPosition = 2
-            item.name = "shopCartWindow"
+            item.name = "shopCart Window"
             return item
         }()
 
-        Utilities.AddChild(scene: self, item: gameBarMenuWindow!)
+        showMenuWindows(item: gameBarMenuWindow!)
     }
 
     func LeaderBoardMenu(){
@@ -145,10 +156,10 @@ class MainMenu: SKScene {
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
             item.zPosition = 2
-            item.name = "LeaderBoardWindow"
+            item.name = "LeaderBoard Window"
             return item
         }()
-        Utilities.AddChild(scene: self, item: gameBarMenuWindow!)
+        showMenuWindows(item: gameBarMenuWindow!)
     }
 
     func SettingsMenu(){
@@ -158,10 +169,10 @@ class MainMenu: SKScene {
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
             item.zPosition = 2
-            item.name = "SettingWindow"
+            item.name = "Setting Window"
             return item
         }()
-        Utilities.AddChild(scene: self, item: gameBarMenuWindow!)
+        showMenuWindows(item: gameBarMenuWindow!)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
