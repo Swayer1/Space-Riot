@@ -152,22 +152,23 @@ class MainMenu: SKScene {
             item.setScale(1)
             item.zPosition = 2
             item.name = "shopCart Window"
-            return item
+            return item            
         }()
 
-        showMenuWindows(item: gameBarMenuWindow!)
-        
+//        showMenuWindows(item: gameBarMenuWindow!)                
+                
         var backButton: SKSpriteNode = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")
-            item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
-//            item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
+            item.position = CGPoint(x: 0, y: 0)            
             item.setScale(5)
             item.zPosition = 3
             item.name = "back button Window"
             return item
-        }()
+        }()                
+        
+        gameBarMenuWindow!.addChild(backButton)
                 
-        Utilities.AddChild(scene: self, item: backButton)
+        showMenuWindows(item: gameBarMenuWindow!)
     }
 
     func LeaderBoardMenu(){
@@ -199,6 +200,11 @@ class MainMenu: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             var pointOfTouch = touch.location(in: self)
+            var frontTouchNode = atPoint(pointOfTouch)
+            print("* \(frontTouchNode.position)")
+            /* 
+            https://developer.apple.com/documentation/spritekit/sknode/controlling_user_interaction_on_nodes       
+            */            
             var nodeInTouch = nodes(at: pointOfTouch)
             for node in nodeInTouch{
                 switch node.name {
