@@ -153,9 +153,7 @@ class MainMenu: SKScene {
             item.zPosition = 2
             item.name = "shopCart Window"
             return item            
-        }()
-
-//        showMenuWindows(item: gameBarMenuWindow!)                
+        }()                
                 
         var backButton: SKSpriteNode = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")
@@ -166,9 +164,8 @@ class MainMenu: SKScene {
             return item
         }()                
         
-        gameBarMenuWindow!.addChild(backButton)
-                
-        showMenuWindows(item: gameBarMenuWindow!)
+        gameBarMenuWindow!.addChild(backButton)        
+        showMenuWindows(item: gameBarMenuWindow!)        
     }
 
     func LeaderBoardMenu(){
