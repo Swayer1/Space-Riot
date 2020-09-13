@@ -196,52 +196,49 @@ class MainMenu: SKScene {
         }()
         showMenuWindows(item: gameBarMenuWindow!)
     }
-
+            
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches{
-            var pointOfTouch = touch.location(in: self)
-            var frontTouchNode = atPoint(pointOfTouch)
-            print("* \(frontTouchNode.position)")
-            /* 
-            https://developer.apple.com/documentation/spritekit/sknode/controlling_user_interaction_on_nodes       
-            */            
-            var nodeInTouch = nodes(at: pointOfTouch)
-            for node in nodeInTouch{
-                switch node.name {
-                    case "shopCart":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            self.shoppingCart()
-                        })
-                        break
-                    case "videoAds":4
-                    Animations.ButtonClickAnimation(item: node, action: SKAction.run {
+        guard var touch = touches.first else {return}        
+        var pointOfTouch = touch.location(in: self)
+        var frontTouchNode = atPoint(pointOfTouch)                        
+        switch frontTouchNode.name {
+            case "shopCart":
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                    self.shoppingCart()                        
+                })
+                break
+            case "back button Window":
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                    print("* test node back")                        
+                })
+            break                
+            case "videoAds":4
+            Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
 
-                    })
-                        break
-                    case "leaderboard":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            self.LeaderBoardMenu()
-                        })
-                        break
-                    case "settings":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            self.SettingsMenu()
-                        })
-                        break
-                    case "gamePlayButton":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-
-                        })
-                        break
-                    case "playerProfileImage":
-                        Animations.ButtonClickAnimation(item: node, action: SKAction.run {
-                            GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
-                        })
-                        break
-                    default:
-                        break
-                }
-            }
-        }
+            })
+                break
+            case "leaderboard":
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                    self.LeaderBoardMenu()
+                })
+                break
+            case "settings":
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                    self.SettingsMenu()
+                })
+                break
+            case "gamePlayButton":
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                    print("* play button touched")
+                })
+                break
+            case "playerProfileImage":
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                    GameViewController.instance.loginButton.sendActions(for: .touchUpInside)
+                })
+                break
+            default:
+                break
+        }        
     }
 }
