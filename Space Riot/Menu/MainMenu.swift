@@ -144,6 +144,16 @@ class MainMenu: SKScene {
         Utilities.AddChild(scene: self, item: item)
     }
 
+    func clearMenuWindows(){
+        for node in self.children {
+            if(node.name != nil){
+                if(node.name!.contains("Window")){
+                    node.removeFromParent()
+                }
+            }
+        }        
+    }    
+
     func shoppingCart(){
         gameBarMenuWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")            
@@ -170,7 +180,7 @@ class MainMenu: SKScene {
             item.size = CGSize(width: gameBarMenuWindow!.size.width * 0.9, height: gameBarMenuWindow!.size.height * 0.7)
             item.position = CGPoint(x: 0, y: 0)
             item.zPosition = 3
-            item.name = "back button Window"
+            item.name = "inner Window"
             return item
         }()            
         
@@ -217,7 +227,7 @@ class MainMenu: SKScene {
                 break
             case "back button Window":
                 Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
-                    print("* test node back")                        
+                    self.clearMenuWindows()                        
                 })
             break                
             case "videoAds":4
