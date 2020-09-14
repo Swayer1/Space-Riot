@@ -146,7 +146,7 @@ class MainMenu: SKScene {
 
     func shoppingCart(){
         gameBarMenuWindow = {
-            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")            
             item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
@@ -156,15 +156,26 @@ class MainMenu: SKScene {
         }()                
                 
         var backButton: SKSpriteNode = {
-            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")
-            item.position = CGPoint(x: 0, y: 0)            
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")            
             item.setScale(5)
+            item.position = CGPoint(x: -gameBarMenuWindow!.size.width * 0.48 + item.size.width, y: gameBarMenuWindow!.size.height * 0.48 - item.size.height)
             item.zPosition = 3
             item.name = "back button Window"
             return item
-        }()                
+        }()
+
+        var innerWindow: SKSpriteNode = {
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/Inner-window")            
+            item.setScale(3)
+            item.size = CGSize(width: gameBarMenuWindow!.size.width * 0.9, height: gameBarMenuWindow!.size.height * 0.7)
+            item.position = CGPoint(x: 0, y: 0)
+            item.zPosition = 3
+            item.name = "back button Window"
+            return item
+        }()            
         
-        gameBarMenuWindow!.addChild(backButton)        
+        gameBarMenuWindow!.addChild(backButton)
+        gameBarMenuWindow!.addChild(innerWindow)        
         showMenuWindows(item: gameBarMenuWindow!)        
     }
 
