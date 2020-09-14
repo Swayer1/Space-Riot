@@ -28,6 +28,6 @@ struct Animations {
             fromScene.view!.presentScene(sceneMoveTo, transition: myTransion)
         }
         var actionSequence = SKAction.sequence([wait, changeSence])
-        fromScene.run(actionSequence)
-    }
+        fromScene.run(actionSequence)        
+    }                
 }

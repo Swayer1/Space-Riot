@@ -182,7 +182,7 @@ class MainMenu: SKScene {
             item.zPosition = 3
             item.name = "inner Window"
             return item
-        }()            
+        }()                
         
         gameBarMenuWindow!.addChild(backButton)
         gameBarMenuWindow!.addChild(innerWindow)        
