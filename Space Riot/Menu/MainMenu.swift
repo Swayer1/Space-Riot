@@ -12,6 +12,7 @@
  1 - everything on the background / bottom menu
  2 - icons on the bottom menu, menu windows
  3 - everything in the menu window
+ 4 - everything in the inner windows
 */
 
 
@@ -31,6 +32,9 @@ class MainMenu: SKScene {
     var gamePlayButton: SKSpriteNode?
     var playerProfileRing: SKSpriteNode?
     var gameBarMenuWindow: SKSpriteNode?
+    var innerWindow: SKSpriteNode?
+    var titleinnerWindow: SKSpriteNode?
+    var backButton: SKSpriteNode?
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -165,7 +169,7 @@ class MainMenu: SKScene {
             return item            
         }()                
                 
-        var backButton: SKSpriteNode = {
+        backButton = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")            
             item.setScale(5)
             item.position = CGPoint(x: -gameBarMenuWindow!.size.width * 0.48 + item.size.width, y: gameBarMenuWindow!.size.height * 0.48 - item.size.height)
@@ -174,7 +178,7 @@ class MainMenu: SKScene {
             return item
         }()
 
-        var innerWindow: SKSpriteNode = {
+        innerWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/Inner-window")            
             item.setScale(3)
             item.size = CGSize(width: gameBarMenuWindow!.size.width * 0.9, height: gameBarMenuWindow!.size.height * 0.7)
@@ -182,10 +186,22 @@ class MainMenu: SKScene {
             item.zPosition = 3
             item.name = "inner Window"
             return item
-        }()                
+        }()
         
-        gameBarMenuWindow!.addChild(backButton)
-        gameBarMenuWindow!.addChild(innerWindow)        
+        titleinnerWindow = {
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/Text-icon/Text-icon")            
+            item.setScale(1)            
+            item.position = CGPoint(x: 0, y: innerWindow!.size.height * 0.125)            
+            item.zPosition = 4
+            item.name = "title inner Window"
+            return item
+        }()
+                
+        innerWindow!.addChild(titleinnerWindow!)
+        
+        gameBarMenuWindow!.addChild(innerWindow!)        
+        gameBarMenuWindow!.addChild(backButton!)
+        
         showMenuWindows(item: gameBarMenuWindow!)        
     }
 
