@@ -197,11 +197,9 @@ class MainMenu: SKScene {
             return item
         }()
                 
-        innerWindow!.addChild(titleinnerWindow!)
-        
+        innerWindow!.addChild(titleinnerWindow!)        
         gameBarMenuWindow!.addChild(innerWindow!)        
-        gameBarMenuWindow!.addChild(backButton!)
-        
+        gameBarMenuWindow!.addChild(backButton!)        
         showMenuWindows(item: gameBarMenuWindow!)        
     }
 
