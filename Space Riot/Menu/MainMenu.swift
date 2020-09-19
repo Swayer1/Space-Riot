@@ -182,7 +182,7 @@ class MainMenu: SKScene {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/Inner-window")            
             item.setScale(3)
             item.size = CGSize(width: gameBarMenuWindow!.size.width * 0.9, height: gameBarMenuWindow!.size.height * 0.8)
-            item.position = CGPoint(x: 0, y: -35)            
+            item.position = CGPoint(x: 0, y: -35)
             item.zPosition = 3
             item.name = "inner Window"
             return item
@@ -190,7 +190,7 @@ class MainMenu: SKScene {
         
         titleinnerWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/Text-icon/Text-icon")            
-            item.setScale(1)            
+            item.setScale(1.5)
             item.position = CGPoint(x: 0, y: innerWindow!.size.height * 0.125)            
             item.zPosition = 4
             item.name = "title inner Window"
