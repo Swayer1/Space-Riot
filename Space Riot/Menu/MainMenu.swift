@@ -179,7 +179,7 @@ class MainMenu: SKScene {
         }()
 
         innerWindow = {
-            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/Inner-window")            
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/Inner-window")
             item.setScale(3)
             item.size = CGSize(width: gameBarMenuWindow!.size.width * 0.9, height: gameBarMenuWindow!.size.height * 0.8)
             item.position = CGPoint(x: 0, y: -35)
@@ -187,18 +187,27 @@ class MainMenu: SKScene {
             item.name = "inner Window"
             return item
         }()
-        
+
         titleinnerWindow = {
-            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/Text-icon/Text-icon")            
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/Text-icon/Text-icon")
             item.setScale(1.5)
-            item.position = CGPoint(x: 0, y: innerWindow!.size.height * 0.125)            
+            item.position = CGPoint(x: 0, y: innerWindow!.size.height * 0.125)
             item.zPosition = 4
             item.name = "title inner Window"
             return item
         }()
-                
-        innerWindow!.addChild(titleinnerWindow!)        
-        gameBarMenuWindow!.addChild(innerWindow!)        
+
+        var testInnerWindow: SKShapeNode = {
+            var item = SKShapeNode(rectOf: CGSize(width: (innerWindow!.size.width * 0.85) / (innerWindow!.xScale), height: (innerWindow!.size.height * 0.67) / (innerWindow!.xScale)))
+            item.position = CGPoint(x: -1, y: innerWindow!.position.y * 1.4)
+            item.fillColor = .black
+            item.zPosition = 4
+            return item
+        }()
+
+        innerWindow!.addChild(titleinnerWindow!)
+        innerWindow!.addChild(testInnerWindow)
+        gameBarMenuWindow!.addChild(innerWindow!)
         gameBarMenuWindow!.addChild(backButton!)        
         showMenuWindows(item: gameBarMenuWindow!)        
     }

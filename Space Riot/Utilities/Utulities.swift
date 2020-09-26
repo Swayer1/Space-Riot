@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 import SpriteKit
 
+func + (left: CGPoint, right: CGPoint) -> CGPoint{
+    return CGPoint(x: left.x + right.x, y: left.y + right.y)
+}
+
+func / (size: CGSize, scale: CGFloat) -> CGSize{
+    return CGSize(width: size.width / scale, height: size.height / scale)
+}
+
 class Utilities{
     static func SaveFacebookDataToDevice(){
         var defaults = UserDefaults()

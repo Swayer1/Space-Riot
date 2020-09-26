@@ -81,7 +81,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {                
         
         gameScorePlayer = 0
-        updateTimerAction = SKAction.sequence([
+        updateTimerAction = SKAction.sequence([ 
             SKAction.run(updateTimer),
             SKAction.wait(forDuration: 1.0)
         ])
