@@ -205,11 +205,40 @@ class MainMenu: SKScene {
             return item
         }()
 
+        var movingObject: SKSpriteNode = {
+            var item = SKSpriteNode()
+            item.size = CGSize(width: 100, height: 100)
+            item.position = CGPoint(x: 0, y: 0)
+            item.color = .red
+            return item
+        }()
+
+        var coveringObject: SKSpriteNode = {
+            var item = SKSpriteNode()
+            item.position = CGPoint(x: 0, y: 0)
+            item.color = .black
+            item.size = CGSize(width: 100, height: 100)
+            return item
+        }()
+
+        var cropObject: SKCropNode = {
+            var item = SKCropNode()
+            item.position = CGPoint(x: 0, y: 0)
+            item.zPosition = 5
+            item.addChild(movingObject)
+            item.maskNode = coveringObject
+            return item
+        }()
+
+
+        innerWindow?.addChild(cropObject)
         innerWindow!.addChild(titleinnerWindow!)
         innerWindow!.addChild(testInnerWindow)
         gameBarMenuWindow!.addChild(innerWindow!)
-        gameBarMenuWindow!.addChild(backButton!)        
-        showMenuWindows(item: gameBarMenuWindow!)        
+        gameBarMenuWindow!.addChild(backButton!)
+        showMenuWindows(item: gameBarMenuWindow!)
+        var action = SKAction.moveTo(y: coveringObject.frame.height, duration: 2)
+        movingObject.run(action)
     }
 
     func LeaderBoardMenu(){
