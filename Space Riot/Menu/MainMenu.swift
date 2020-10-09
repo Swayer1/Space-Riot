@@ -226,18 +226,17 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: 0, y: 0)
             item.zPosition = 5
             item.addChild(movingObject)
-            item.maskNode = coveringObject
+            item.maskNode = testInnerWindow
             return item
         }()
 
 
         innerWindow?.addChild(cropObject)
         innerWindow!.addChild(titleinnerWindow!)
-        innerWindow!.addChild(testInnerWindow)
         gameBarMenuWindow!.addChild(innerWindow!)
         gameBarMenuWindow!.addChild(backButton!)
         showMenuWindows(item: gameBarMenuWindow!)
-        var action = SKAction.moveTo(y: coveringObject.frame.height, duration: 2)
+        var action = SKAction.moveTo(y: testInnerWindow.frame.height, duration: 2)
         movingObject.run(action)
     }
 
