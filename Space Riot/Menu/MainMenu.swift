@@ -230,7 +230,6 @@ class MainMenu: SKScene {
             return item
         }()
 
-
         innerWindow?.addChild(cropObject)
         innerWindow!.addChild(titleinnerWindow!)
         gameBarMenuWindow!.addChild(innerWindow!)
