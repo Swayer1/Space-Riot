@@ -13,13 +13,13 @@
  2 - icons on the bottom menu, menu windows
  3 - everything in the menu window
  4 - everything in the inner windows
-*/
+ */
 
 
 import Foundation
 import SpriteKit
 
-class MainMenu: SKScene {    
+class MainMenu: SKScene {
     static var instance: MainMenu?
     var background: SKSpriteNode?
     var bottomSpace: CGFloat?
@@ -35,6 +35,9 @@ class MainMenu: SKScene {
     var innerWindow: SKSpriteNode?
     var titleinnerWindow: SKSpriteNode?
     var backButton: SKSpriteNode?
+    var movingObject: SKSpriteNode?
+    var cropObject: SKCropNode?
+    var testInnerWindow: SKShapeNode?
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -127,7 +130,7 @@ class MainMenu: SKScene {
         self.addChild(shopCart!)
         self.addChild(videoAds!)
         self.addChild(leaderboard!)
-        self.addChild(settings!)        
+        self.addChild(settings!)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -155,22 +158,22 @@ class MainMenu: SKScene {
                     node.removeFromParent()
                 }
             }
-        }        
-    }    
+        }
+    }
 
     func shoppingCart(){
         gameBarMenuWindow = {
-            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")            
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/windows/window")
             item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.025)
             item.size = CGSize(width: self.size.width * 0.99, height: self.size.height * 0.7)
             item.setScale(1)
             item.zPosition = 2
             item.name = "shopCart Window"
-            return item            
-        }()                
-                
+            return item
+        }()
+
         backButton = {
-            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")            
+            var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-shop/buttons/back")
             item.setScale(5)
             item.position = CGPoint(x: -gameBarMenuWindow!.size.width * 0.48 + item.size.width, y: gameBarMenuWindow!.size.height * 0.48 - item.size.height)
             item.zPosition = 3
@@ -197,7 +200,7 @@ class MainMenu: SKScene {
             return item
         }()
 
-        var testInnerWindow: SKShapeNode = {
+        testInnerWindow = {
             var item = SKShapeNode(rectOf: CGSize(width: (innerWindow!.size.width * 0.85) / (innerWindow!.xScale), height: (innerWindow!.size.height * 0.67) / (innerWindow!.xScale)))
             item.position = CGPoint(x: -1, y: innerWindow!.position.y * 1.4)
             item.fillColor = .black
@@ -205,38 +208,32 @@ class MainMenu: SKScene {
             return item
         }()
 
-        var movingObject: SKSpriteNode = {
+        movingObject = {
             var item = SKSpriteNode()
-            item.size = CGSize(width: 100, height: 100)
-            item.position = CGPoint(x: 0, y: 0)
-            item.color = .red
-            return item
-        }()
-
-        var coveringObject: SKSpriteNode = {
-            var item = SKSpriteNode()
-            item.position = CGPoint(x: 0, y: 0)
+            item.size = testInnerWindow!.frame.size
+            item.position = testInnerWindow!.position
+            item.position.y = testInnerWindow!.frame.height + testInnerWindow!.position.y
+            print("* \(item.position)")
+            print("* \(item.frame.height)")
+            item.name = "movingObject"
             item.color = .black
-            item.size = CGSize(width: 100, height: 100)
             return item
         }()
 
-        var cropObject: SKCropNode = {
+        cropObject = {
             var item = SKCropNode()
             item.position = CGPoint(x: 0, y: 0)
             item.zPosition = 5
-            item.addChild(movingObject)
-            item.maskNode = testInnerWindow
+            item.addChild(movingObject!)
+            item.maskNode = nil
             return item
         }()
 
-        innerWindow?.addChild(cropObject)
+        innerWindow!.addChild(cropObject!)
         innerWindow!.addChild(titleinnerWindow!)
         gameBarMenuWindow!.addChild(innerWindow!)
         gameBarMenuWindow!.addChild(backButton!)
         showMenuWindows(item: gameBarMenuWindow!)
-        var action = SKAction.moveTo(y: testInnerWindow.frame.height, duration: 2)
-        movingObject.run(action)
     }
 
     func LeaderBoardMenu(){
@@ -264,26 +261,26 @@ class MainMenu: SKScene {
         }()
         showMenuWindows(item: gameBarMenuWindow!)
     }
-            
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard var touch = touches.first else {return}        
+        guard var touch = touches.first else {return}
         var pointOfTouch = touch.location(in: self)
-        var frontTouchNode = atPoint(pointOfTouch)                        
+        var frontTouchNode = atPoint(pointOfTouch)
         switch frontTouchNode.name {
             case "shopCart":
                 Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
-                    self.shoppingCart()                        
+                    self.shoppingCart()
                 })
                 break
             case "back button Window":
                 Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
-                    self.clearMenuWindows()                        
+                    self.clearMenuWindows()
                 })
-            break                
+                break
             case "videoAds":4
-            Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
+                Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
 
-            })
+                })
                 break
             case "leaderboard":
                 Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
@@ -307,6 +304,20 @@ class MainMenu: SKScene {
                 break
             default:
                 break
-        }        
+        }
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if(innerWindow! != nil){
+            for touch in touches{
+                var previousToch = touch.previousLocation(in: innerWindow!)
+                var location = touch.location(in: innerWindow!)
+                var distanceY = location.y - previousToch.y
+                var limit = testInnerWindow!.position.y
+                var MovingObjY = movingObject!.position.y
+                movingObject!.run(SKAction.moveBy(x: .zero , y: distanceY, duration: 0.3))
+                print("* \(movingObject?.position.y)")
+            }
+        }
     }
 }
