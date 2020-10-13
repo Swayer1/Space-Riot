@@ -211,10 +211,9 @@ class MainMenu: SKScene {
         movingObject = {
             var item = SKSpriteNode()
             item.size = testInnerWindow!.frame.size
+            item.size.height = testInnerWindow!.frame.size.height * 2
             item.position = testInnerWindow!.position
             item.position.y = testInnerWindow!.frame.height + testInnerWindow!.position.y
-            print("* \(item.position)")
-            print("* \(item.frame.height)")
             item.name = "movingObject"
             item.color = .black
             return item
@@ -308,7 +307,7 @@ class MainMenu: SKScene {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(innerWindow! != nil){
+        if(innerWindow != nil){
             for touch in touches{
                 var previousToch = touch.previousLocation(in: innerWindow!)
                 var location = touch.location(in: innerWindow!)
@@ -316,7 +315,6 @@ class MainMenu: SKScene {
                 var limit = testInnerWindow!.position.y
                 var MovingObjY = movingObject!.position.y
                 movingObject!.run(SKAction.moveBy(x: .zero , y: distanceY, duration: 0.3))
-                print("* \(movingObject?.position.y)")
             }
         }
     }
