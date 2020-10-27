@@ -15,7 +15,6 @@
  4 - everything in the inner windows
  */
 
-
 import Foundation
 import SpriteKit
 
@@ -224,7 +223,7 @@ class MainMenu: SKScene {
             item.position = CGPoint(x: 0, y: 0)
             item.zPosition = 5
             item.addChild(movingObject!)
-            item.maskNode = nil
+            item.maskNode = testInnerWindow
             return item
         }()
 
@@ -236,6 +235,11 @@ class MainMenu: SKScene {
     }
 
     func LeaderBoardMenu(){
+
+        var testAction = SKAction.run {
+            print("* Hello")
+        }
+
         gameBarMenuWindow = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Window-ranking/Facebook/Window/big-window")
             item.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 - self.size.height * 0.015)
@@ -243,6 +247,7 @@ class MainMenu: SKScene {
             item.setScale(1)
             item.zPosition = 2
             item.name = "LeaderBoard Window"
+            item.action(forKey: "testAction")
             return item
         }()
         showMenuWindows(item: gameBarMenuWindow!)
