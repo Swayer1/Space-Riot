@@ -18,7 +18,7 @@ class MainMenuGuessLogin: MainMenu{
             var item = SKSpriteNode(texture: SKTexture(image: GuessLoginData.userPhoto))
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
             item.setScale(5)
-            item.zPosition = 1
+            item.zPosition = MainMenu.instance?.playerProfileRing?.zPosition ?? 1
             item.name = "playerProfileImageGuess"
             return item
         }()
