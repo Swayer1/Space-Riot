@@ -69,9 +69,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var GameArea:CGRect
     
     override init(size: CGSize) {
-        GameArea = CGRect(x: (player.frame.width * 0.2) / 2, y: 0, width: size.width - (player.frame.width * 0.2), height: size.height)
-        super.init(size:size)
-        scene?.name = "GameScene"        
+		GameArea = CGRect(x: (player.frame.width * 0.2) / 2, y: 0, width: size.width - (player.frame.width * 0.2), height: size.height)
+		super.init(size:size)
+		scene?.name = "GameScene"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -394,11 +394,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelPlayer.text = "Score: \(gameScorePlayer)"
     }
     
-    func runGameOver(){
+	func runGameOver(){
         if GameViewController.instance.interstitial.isReady {
             GameViewController.instance.interstitial.present(fromRootViewController: GameViewController.instance)
         } else {
-            print("Ad wasn't ready")
+            
         }
         currentGameState = gameState.afterGame
         GameMode.gameSpeed = 2.75
@@ -430,11 +430,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player, stop in
             player.removeAllActions()
         }
-        var sceneToMoveTo = Menu(size: self.size, form: "welcome")
-        sceneToMoveTo.scaleMode = self.scaleMode
-        var transition = SKTransition.fade(withDuration: 0.5)
-        self.view!.presentScene(sceneToMoveTo, transition: transition)
-        GameViewController.instance.loadAds()
+		Utilities.determentLogin(self)
+        GameViewController.instance.loadAds()		
     }
     
     func stopGameForeverRepeats(){
@@ -842,8 +839,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for touch:AnyObject in touches{
             var pointOfTouch = touch.location(in: self)
             var pointOfPreviousTouch = touch.previousLocation(in: self)
-            var amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x) * (Menu.instance.userSets.TouchSensibilityMultiplier ?? 1)
-            var amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y) * (Menu.instance.userSets.TouchSensibilityMultiplier ?? 1)
+			var amountXDragged = (pointOfTouch.x - pointOfPreviousTouch.x) * (MainMenu.instance!.userSets.TouchSensibilityMultiplier ?? 1)
+			var amountYDragged = (pointOfTouch.y - pointOfPreviousTouch.y) * (MainMenu.instance!.userSets.TouchSensibilityMultiplier ?? 1)
             if(currentGameState == gameState.inGame && !GameMode.adsMode){
                 switch GameMode.mode {
                     case "Mirror":

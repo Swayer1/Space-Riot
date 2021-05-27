@@ -13,7 +13,6 @@ class MainMenuFacebookLogin: MainMenu{
     var playerProfileImage: SKSpriteNode?
     override init(size: CGSize) {        
         super.init(size: size)
-        print("* MainMenuFacebookLogin")
         playerProfileImage = {
             var item = SKSpriteNode(texture: SKTexture(image: FacebookLoginData.userPhoto!))
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
@@ -30,7 +29,7 @@ class MainMenuFacebookLogin: MainMenu{
     }
     
     deinit {
-        print("* MainMenuFacebookLogin Deinit")
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

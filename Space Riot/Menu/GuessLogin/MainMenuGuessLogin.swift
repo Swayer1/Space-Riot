@@ -13,7 +13,6 @@ class MainMenuGuessLogin: MainMenu{
     var playerProfileImage: SKSpriteNode?
     override init(size: CGSize) {
         super.init(size: size)
-        print("* guessMainMenu")
         playerProfileImage = {
             var item = SKSpriteNode(texture: SKTexture(image: GuessLoginData.userPhoto))
             item.position = CGPoint(x: self.size.width * 0.12, y: self.size.height*0.93)
@@ -30,7 +29,7 @@ class MainMenuGuessLogin: MainMenu{
     }
     
     deinit {
-        print("* MainMenuGuessLogin Deinit")
+        
     }
     
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

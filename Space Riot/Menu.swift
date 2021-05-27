@@ -286,8 +286,7 @@ class Menu: SKScene {
             gameOverForm()
         case "loginForm":
             gameLoginForm()
-        default:
-            print("no such form")
+        default:            
             break
         }
     }
@@ -504,11 +503,4 @@ class Menu: SKScene {
             }
         }
     }
-}
-
-class userOptionsList: Codable {
-    var TouchSensibilityPosition: CGPoint?
-    var TouchSensibilityMultiplier: CGFloat?
-    var Music: Bool?
-    var loginFacebook: Bool?
 }

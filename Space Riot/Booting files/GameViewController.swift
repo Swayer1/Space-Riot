@@ -33,12 +33,10 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     // Facebook login
         
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        print("* login OK")
         token = result?.token?.tokenString
         var parameters = ["fields":"email, name"]
         var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
         request.start(completionHandler: {connection, result, error in
-            print("* \(result)")
         })
         if(token != nil){
             var defaults = UserDefaults()
@@ -48,7 +46,6 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        print("* Logout OK")
         var defaults = UserDefaults()
         defaults.set(0, forKey: "loginType")
         Animations.changeSceneAnimationWithDelay(fromScene: MainMenu.instance!, toScene: LogInScene.self, delay: 1)
@@ -66,7 +63,6 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
             var parameters = ["fields":"email, name, picture.type(large)"]
             var request = FBSDKLoginKit.GraphRequest(graphPath: "me",parameters: parameters, tokenString: token, version: nil, httpMethod: .get)
             request.start(completionHandler: {connection, result, error in
-                print(result)
                 var data = result as! [String: Any]
                 var picture = data["picture"] as! [String: Any]
                 var email = data["email"]
@@ -124,11 +120,11 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
                 backingAudio = try AVAudioPlayer(contentsOf: audioNSURL)
             }
             catch{
-                return(print("cannot find audio"))
+
             }
             
             backingAudio.numberOfLoops = -1
-            backingAudio.play()
+//            backingAudio.play()
             
             var deviceWidth = UIScreen.main.bounds.width * UIScreen.main.scale
             var deviceHeight = UIScreen.main.bounds.height * UIScreen.main.scale
@@ -162,34 +158,34 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     // google ads delegates
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-//        print("* adViewDidReceiveAd")
+
     }
     
     /// Tells the delegate an ad request failed.
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-//        print("* adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+
     }
     
     /// Tells the delegate that a full-screen view will be presented in response
     /// to the user clicking on an ad.
     func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-//        print("* adViewWillPresentScreen")
+
     }
     
     /// Tells the delegate that the full-screen view will be dismissed.
     func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-//        print("* adViewWillDismissScreen")
+
     }
     
     /// Tells the delegate that the full-screen view has been dismissed.
     func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-//        print("* adViewDidDismissScreen")
+
     }
     
     /// Tells the delegate that a user click will open another app (such as
     /// the App Store), backgrounding the current app.
     func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-//        print("* adViewWillLeaveApplication")
+
     }
     
     // end google ads delegates
@@ -229,8 +225,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         
         var cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler:
         {
-            (alert: UIAlertAction!) -> Void in
-            print("Cancelled")
+            (alert: UIAlertAction!) -> Void in            
         })
         optionMenu.addAction(logOutAction)
         optionMenu.addAction(cancelAction)

@@ -20,6 +20,8 @@ import SpriteKit
 
 class MainMenu: SKScene {
     static var instance: MainMenu?
+	var userSets = userOptionsList()
+
     var background: SKSpriteNode?
     var bottomSpace: CGFloat?
     var gameBar: SKSpriteNode?
@@ -136,7 +138,7 @@ class MainMenu: SKScene {
     }
 
     deinit{
-        print("* MainMenu Deinit")
+
     }
 
     func showMenuWindows(item: SKNode){
@@ -293,7 +295,10 @@ class MainMenu: SKScene {
                 break
             case "gamePlayButton":
                 Animations.ButtonClickAnimation(item: frontTouchNode, action: SKAction.run {
-                    print("* play button touched")
+					var sceneMoveTo = GameScene.getInstance(size: self.size)
+					sceneMoveTo.scaleMode = self.scaleMode
+					var myTransion = SKTransition.fade(withDuration: 0.5)
+					self.view!.presentScene(sceneMoveTo, transition: myTransion)  
                 })
                 break
             case "playerProfileImage":
@@ -318,4 +323,11 @@ class MainMenu: SKScene {
             }
         }
     }
+}
+
+class userOptionsList: Codable {
+	var TouchSensibilityPosition: CGPoint?
+	var TouchSensibilityMultiplier: CGFloat?
+	var Music: Bool?
+	var loginFacebook: Bool?
 }

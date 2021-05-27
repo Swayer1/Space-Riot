@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SpriteKit
+import Reachability
 
 func + (left: CGPoint, right: CGPoint) -> CGPoint{
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
@@ -19,6 +20,31 @@ func / (size: CGSize, scale: CGFloat) -> CGSize{
 }
 
 class Utilities{
+
+	static func determentLogin(_ scene: SKScene) {
+		var defaults = UserDefaults()
+		var loginType = defaults.integer(forKey: "loginType")
+		var timeDelay = TimeInterval(1)
+		switch loginType {
+			case 0:
+				Animations.changeSceneAnimationWithDelay(fromScene: scene, toScene: LogInScene.self, delay: timeDelay)
+				break
+			case 1:
+				let reachability = try! Reachability()
+				if reachability.isReachable {
+					GameViewController.instance.getFacebookLoginData()
+				}
+				Utilities.LoadFacebookDataToDevice()
+				Animations.changeSceneAnimationWithDelay(fromScene: scene, toScene: MainMenuFacebookLogin.self, delay: timeDelay)
+				break
+			case 2:
+				Animations.changeSceneAnimationWithDelay(fromScene: scene, toScene: MainMenuGuessLogin.self, delay: timeDelay)
+				break
+			default:
+				break
+		}
+	}
+
     static func SaveFacebookDataToDevice(){
         var defaults = UserDefaults()
         var imageData: NSData = FacebookLoginData.userPhoto!.pngData() as! NSData

@@ -60,7 +60,7 @@ class LogInScene: SKScene {
     }
     
     deinit {
-        print("* loginForm Deinit")
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

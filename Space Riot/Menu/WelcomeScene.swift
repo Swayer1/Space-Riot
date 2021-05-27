@@ -8,7 +8,6 @@
 
 import Foundation
 import SpriteKit
-import Reachability
 
 class WelcomeScene: SKScene {
     override init(size: CGSize) {
@@ -29,29 +28,10 @@ class WelcomeScene: SKScene {
     }
     
     deinit{
-        print("* welcomeScene deinit")
+        
     }
-    
-    override func didMove(to view: SKView) {
-        var defaults = UserDefaults()
-        var loginType = defaults.integer(forKey: "loginType")
-        switch loginType {
-            case 0:
-                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: LogInScene.self, delay: 1)
-                break
-            case 1:
-                let reachability = try! Reachability()
-                if reachability.isReachable {
-                    GameViewController.instance.getFacebookLoginData()
-                }
-                Utilities.LoadFacebookDataToDevice()
-                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuFacebookLogin.self, delay: 1)
-                break
-            case 2:
-                Animations.changeSceneAnimationWithDelay(fromScene: self, toScene: MainMenuGuessLogin.self, delay: 1)
-                break
-            default:
-                break
-        }
+
+	override func didMove(to view: SKView) {
+		Utilities.determentLogin(self)
     }
 }
