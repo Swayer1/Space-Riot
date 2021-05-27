@@ -20,6 +20,7 @@ import SpriteKit
 
 class MainMenu: SKScene {
     static var instance: MainMenu?
+
 	var userSets = userOptionsList()
 
     var background: SKSpriteNode?
@@ -39,6 +40,13 @@ class MainMenu: SKScene {
     var movingObject: SKSpriteNode?
     var cropObject: SKCropNode?
     var testInnerWindow: SKShapeNode?
+
+	static func getInstance(size: CGSize) -> MainMenu{
+		if(instance == nil){
+			instance = MainMenu(size: size)
+		}
+		return instance!
+	}
 
     override init(size: CGSize) {
         super.init(size: size)
