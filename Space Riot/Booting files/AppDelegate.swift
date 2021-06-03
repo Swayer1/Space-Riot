@@ -10,6 +10,8 @@ import UIKit
 import GoogleMobileAds
 import FBSDKCoreKit
 import Firebase
+import FirebaseCore
+import FirebaseFirestore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         FirebaseApp.configure()
+
+		let db = Firestore.firestore()
                 
         return true
     }

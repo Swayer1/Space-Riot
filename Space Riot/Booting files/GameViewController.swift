@@ -15,6 +15,9 @@ import FBSDKLoginKit
 import FirebaseDatabase
 import GoogleMobileAds
 import Reachability
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 var bannerAdsTopId: String = "ca-app-pub-3940256099942544/6300978111"
 var bannerAdsBottomId: String = "ca-app-pub-3940256099942544/6300978111"
@@ -29,6 +32,7 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
     var loginButton = FBLoginButton()    
     var defaults = UserDefaults()
     var token: String?
+
     
     // Facebook login
         
@@ -92,10 +96,16 @@ class GameViewController: UIViewController, LoginButtonDelegate, GADBannerViewDe
         GameViewController.instance = self
         
         // Firebase start
-        
-        var ref = Database.database().reference()
-        ref.child("someid/name").setValue("Hello world")
-                
+
+		let settings = FirestoreSettings()
+
+		Firestore.firestore().settings = settings
+
+		db = Firestore.firestore()
+
+//        var ref = Database.database().reference()
+//        ref.child("someid/name").setValue("Hello world")
+//
         // firebase end
         
         // Facebook login button

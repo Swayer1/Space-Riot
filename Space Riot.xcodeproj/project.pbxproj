@@ -22,6 +22,7 @@
 		FA2553532496B2B2003B9BEC /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553502496B2B0003B9BEC /* explosion.mp3 */; };
 		FA2553542496B2B2003B9BEC /* font music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553512496B2B1003B9BEC /* font music.mp3 */; };
 		FA2553552496B2B2003B9BEC /* torpedo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA2553522496B2B2003B9BEC /* torpedo.mp3 */; };
+		FA29A6852669780B0045DFE5 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29A6842669780B0045DFE5 /* GlobalVariables.swift */; };
 		FA3775D924E3D31500831DC9 /* LogInScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775D824E3D31500831DC9 /* LogInScene.swift */; };
 		FA3775DB24E3D31D00831DC9 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775DA24E3D31D00831DC9 /* MainMenu.swift */; };
 		FA3775DD24E3D32800831DC9 /* WelcomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3775DC24E3D32800831DC9 /* WelcomeScene.swift */; };
@@ -62,6 +63,7 @@
 		FA2553502496B2B0003B9BEC /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 		FA2553512496B2B1003B9BEC /* font music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "font music.mp3"; sourceTree = "<group>"; };
 		FA2553522496B2B2003B9BEC /* torpedo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = torpedo.mp3; sourceTree = "<group>"; };
+		FA29A6842669780B0045DFE5 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		FA3775D824E3D31500831DC9 /* LogInScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScene.swift; sourceTree = "<group>"; };
 		FA3775DA24E3D31D00831DC9 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		FA3775DC24E3D32800831DC9 /* WelcomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScene.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				FADF7D8224E27BC700FB9527 /* hexConverter.swift */,
 				FADF7D8624E2B11300FB9527 /* PurchaseClass.swift */,
 				FA214C2B24E43E9F005BBFB9 /* Animation.swift */,
+				FA29A6842669780B0045DFE5 /* GlobalVariables.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -278,7 +281,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = alex;
 				TargetAttributes = {
 					FA2553282496AFB2003B9BEC = {
@@ -378,6 +381,7 @@
 				FA3775E324E3D44500831DC9 /* WindowShop.swift in Sources */,
 				FADF7D8324E27BC700FB9527 /* hexConverter.swift in Sources */,
 				FA3775DF24E3D34200831DC9 /* WindowRanking.swift in Sources */,
+				FA29A6852669780B0045DFE5 /* GlobalVariables.swift in Sources */,
 				FA3775D924E3D31500831DC9 /* LogInScene.swift in Sources */,
 				FAF1D51424FBCB47002C390E /* Utulities.swift in Sources */,
 				FA2553492496AFF2003B9BEC /* Menu.swift in Sources */,
@@ -444,6 +448,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -504,6 +509,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

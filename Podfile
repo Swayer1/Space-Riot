@@ -15,6 +15,8 @@ target 'Space Riot' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Analytics'
+	pod 'Firebase/Firestore'
+	pod 'FirebaseFirestoreSwift'
   
   # Facebook dependicies
   pod 'FBSDKCoreKit'

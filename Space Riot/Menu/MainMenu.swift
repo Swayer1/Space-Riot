@@ -17,6 +17,7 @@
 
 import Foundation
 import SpriteKit
+import FirebaseFirestore
 
 class MainMenu: SKScene {
     static var instance: MainMenu?
@@ -48,8 +49,27 @@ class MainMenu: SKScene {
 		return instance!
 	}
 
+	func saveUserDataToFireBase() {
+		var ref: DocumentReference? = nil
+		ref = db.collection("users").addDocument(data: [
+			"FullName" : FacebookLoginData.fullName,
+			"Email" : FacebookLoginData.email,
+		]) {
+			err in if let err = err {
+				print("error adding document")
+			} else {
+				print("document loaded succesfully")
+			}
+		}
+	}
+
     override init(size: CGSize) {
         super.init(size: size)
+
+		// save to google firebase storage
+
+		saveUserDataToFireBase()
+
         MainMenu.instance = self
         background = {
             var item = SKSpriteNode(imageNamed: "Space-Riot-Assets/Main-Menu/Background/background5down")
